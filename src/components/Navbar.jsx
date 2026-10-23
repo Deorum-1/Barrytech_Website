@@ -32,15 +32,10 @@ export default function Navbar() {
             {navLinks.map(({ to, label, end }) => (
               <NavLink key={to} to={to} end={end}
                 className={({ isActive }) =>
-                  `relative h-6 overflow-hidden group text-sm font-medium ${isActive ? 'text-hot' : 'text-slate-200'}`
+                  `text-sm font-medium transition hover:text-white ${isActive ? 'text-hot' : 'text-slate-300'}`
                 }
               >
-                {({ isActive }) => (
-                  <>
-                    <span className={`block transition-transform duration-300 group-hover:-translate-y-full ${isActive ? 'text-hot' : ''}`}>{label}</span>
-                    <span className="absolute left-0 top-full block transition-transform duration-300 group-hover:-translate-y-full">{label}</span>
-                  </>
-                )}
+                {label}
               </NavLink>
             ))}
 
@@ -48,16 +43,10 @@ export default function Navbar() {
             <div className="group relative">
               <NavLink to="/services"
                 className={({ isActive }) =>
-                  `relative h-6 overflow-hidden group/link flex items-center gap-1 text-sm font-medium ${isActive ? 'text-hot' : 'text-slate-200'}`
+                  `inline-flex items-center gap-1 text-sm font-medium transition hover:text-white ${isActive ? 'text-hot' : 'text-slate-300'}`
                 }
               >
-                {({ isActive }) => (
-                  <>
-                    <span className={`block transition-transform duration-300 group-hover:-translate-y-full ${isActive ? 'text-hot' : ''}`}>Services</span>
-                    <span className="absolute left-0 top-full block transition-transform duration-300 group-hover:-translate-y-full">Services</span>
-                    <ChevronDown size={13} className="ml-0.5 mt-0.5 shrink-0 transition-transform duration-200 group-hover:rotate-180" />
-                  </>
-                )}
+                Services <ChevronDown size={13} className="mt-0.5 shrink-0 transition-transform duration-200 group-hover:rotate-180" />
               </NavLink>
               {/* Dropdown panel */}
               <div className="invisible absolute left-1/2 top-full mt-3 w-72 -translate-x-1/2 rounded-2xl border border-slate-700 bg-ink/95 p-2 opacity-0 shadow-xl backdrop-blur transition-all duration-200 group-hover:visible group-hover:opacity-100 group-focus-within:visible group-focus-within:opacity-100">
