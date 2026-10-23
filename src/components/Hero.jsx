@@ -84,7 +84,7 @@ export default function Hero() {
   const s = slides[i]
 
   return (
-    <section className="relative overflow-hidden bg-ink pt-[73px] text-white">
+    <section className="relative overflow-hidden bg-ink pt-[96px] text-white">
       {/* Video layer — crossfades with each slide */}
       <AnimatePresence mode="sync">
         <VideoBackground key={s.video} src={s.video} poster={s.poster} />
