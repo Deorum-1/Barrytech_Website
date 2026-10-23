@@ -1,11 +1,10 @@
-import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
 import { ArrowRight, Check, LifeBuoy, MessageCircle, Phone, Rocket, ShieldCheck } from 'lucide-react'
 import Hero from '../components/Hero.jsx'
 import Reveal from '../components/Reveal.jsx'
 import Icon from '../components/Icon.jsx'
 import LazyVideo from '../components/LazyVideo.jsx'
+import GoalWheel from '../components/GoalWheel.jsx'
 import usePageMeta from '../hooks/usePageMeta.js'
 import { services } from '../data/services.js'
 import { company } from '../data/company.js'
@@ -29,7 +28,6 @@ export default function Home() {
     null,
     'BarryTech delivers cybersecurity, IT infrastructure, managed IT, physical security, software, and AI solutions for businesses in Nigeria.',
   )
-  const [tab, setTab] = useState(0)
 
   return (
     <>
@@ -60,7 +58,7 @@ export default function Home() {
       </section>
 
       {/* enabling digital success */}
-      <section className="container-x py-20 sm:py-24">
+      <section id="enabling-digital-success" data-nav-switch className="container-x py-20 sm:py-24">
         <Reveal className="mx-auto max-w-3xl text-center">
           <p className="eyebrow">Our promise</p>
           <h2 className="mt-3 text-3xl font-bold sm:text-5xl">Enabling digital success</h2>
@@ -87,38 +85,12 @@ export default function Home() {
               <p className="eyebrow">Solutions by goal</p>
               <h2 className="mt-3 text-3xl font-bold sm:text-5xl">I want to&hellip;</h2>
             </div>
-            <p className="max-w-sm">Start from the outcome you need. We will map it to the right mix of services.</p>
+            <p className="max-w-sm">Start from the outcome you need. Choose a goal to see the services that move it forward.</p>
           </Reveal>
 
-          <div className="mt-8 flex flex-wrap gap-3">
-            {wants.map((w, n) => (
-              <button
-                key={w.tab}
-                type="button"
-                aria-pressed={tab === n}
-                onClick={() => setTab(n)}
-                className={`rounded-full px-6 py-3 text-sm font-semibold transition ${tab === n ? 'bg-hot text-white shadow-lg shadow-hot/30' : 'bg-white text-ink hover:bg-brand-100'}`}
-              >
-                {w.tab}
-              </button>
-            ))}
+          <div className="mt-12 lg:mt-16">
+            <GoalWheel goals={wants} />
           </div>
-
-          <motion.div
-            key={tab}
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.35, ease: 'easeOut' }}
-            className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
-          >
-            {wants[tab].items.map(([t, d, slug]) => (
-              <Link key={t} to={`/services/${slug}`} className="group flex flex-col rounded-3xl bg-white p-8 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl">
-                <h3 className="text-xl font-bold">{t}</h3>
-                <p className="mt-3 flex-1">{d}</p>
-                <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-hot">Learn more <ArrowRight size={16} className="transition group-hover:translate-x-1" /></span>
-              </Link>
-            ))}
-          </motion.div>
         </div>
       </section>
 

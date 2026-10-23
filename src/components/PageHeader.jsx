@@ -6,6 +6,7 @@ export default function PageHeader({ title, text, crumb }) {
         <h1 className="max-w-4xl text-4xl font-extrabold leading-[1.05] text-white sm:text-6xl">{title}</h1>
         {text && <p className="mt-6 max-w-2xl text-lg text-slate-200">{text}</p>}
       </div>
+      <div data-nav-switch aria-hidden="true" />
     </section>
   )
 }
