@@ -2,6 +2,20 @@ export const company = {
   name: 'BarryTech',
   full: 'BarryTech Modern IT and Cybersecurity Company',
   tagline: 'Secure Digital Innovations',
+  contact: {
+    email: 'info@sai.com.ng',
+    phone: '+234 816 733 7873',
+    phoneHref: '+2348167337873',
+    whatsapp: '2348167337873',
+    address: '84, Orimerunmi Road, Olowotedo, Mowe, Ogun State',
+    maps: 'https://www.google.com/maps/search/?api=1&query=84%2C+Orimerunmi+Road%2C+Olowotedo%2C+Mowe%2C+Ogun+State',
+  },
+  howWeWork: [
+    ['Assess', 'We review your environment, risks, and business goals before recommending anything.'],
+    ['Design', 'We shape a practical, secure, and cost-aware plan around your priorities.'],
+    ['Deploy', 'Our team implements, configures, and tests the agreed technology.'],
+    ['Support', 'We monitor, maintain, and improve the environment long after handover.'],
+  ],
   slogan: 'Modern Technology. Smarter Solutions. Stronger Security.',
   headline: 'Empowering Businesses Through Technology. Protecting the Digital Future.',
   who: [

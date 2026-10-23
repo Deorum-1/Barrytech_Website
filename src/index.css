@@ -6,15 +6,19 @@
   html { scroll-behavior: smooth; }
   body { @apply bg-white font-sans text-slate-700 antialiased; }
   h1, h2, h3, h4 { @apply font-display text-ink tracking-tight; }
+  ::selection { @apply bg-hot text-white; }
+  [id] { scroll-margin-top: 7rem; }
   :focus-visible { @apply outline-2 outline-offset-2 outline-hot; }
   @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }
 }
 @layer components {
   .container-x { @apply mx-auto w-full max-w-7xl px-5 sm:px-8; }
+  .eyebrow { @apply text-xs font-bold uppercase tracking-[0.2em] text-hot; }
   .btn { @apply inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition duration-300; }
   .btn-red { @apply bg-hot text-white hover:bg-hot-700 hover:shadow-lg hover:shadow-hot/30; }
   .btn-blue { @apply bg-brand text-white hover:bg-brand-700; }
   .btn-ghost { @apply border border-white/40 text-white hover:bg-white hover:text-ink; }
   .btn-outline { @apply border border-brand text-brand hover:bg-brand hover:text-white; }
+  .skip-link { @apply fixed left-4 top-4 z-[100] -translate-y-24 rounded-full bg-white px-5 py-3 text-sm font-semibold text-ink shadow-lg transition focus:translate-y-0; }
   .swoosh-bg { background: radial-gradient(1200px 600px at 85% -10%, rgba(10,90,150,.55), transparent 60%), radial-gradient(900px 500px at -10% 110%, rgba(255,20,20,.35), transparent 60%), #071b30; }
 }

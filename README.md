@@ -9,5 +9,7 @@ npm run build    # production build in dist/
 ```
 
 - Content lives in `src/data/` (company.js, services.js), so copy changes need no component edits.
+- Contact details, WhatsApp number, and map link live in `company.contact` and are used by the navbar, contact page, footer, and structured data.
 - Brand colors (from the logo) are defined in `tailwind.config.js` (`brand`, `hot`, `ink`).
-- Replace the placeholder contact details in `src/pages/Contact.jsx` and `src/components/Footer.jsx`.
+- Page titles/descriptions are set per route with `src/hooks/usePageMeta.js`. Update the placeholder social preview at `public/og-image.png` when branding changes.
+- The contact form currently opens the visitor's email app (mailto). To capture submissions in a backend, replace the handler in `src/pages/Contact.jsx`.
