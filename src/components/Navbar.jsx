@@ -18,10 +18,8 @@ export default function Navbar() {
   return (
     <header className="fixed inset-x-0 top-0 z-50 px-4 pt-4">
       {/* Floating rounded navbar pill */}
-      <div className={`mx-auto max-w-7xl overflow-hidden rounded-2xl border transition duration-300 ${scrolled ? 'border-slate-200 bg-white/95 shadow-xl shadow-slate-200/60 backdrop-blur' : 'border-white/20 bg-white shadow-lg shadow-slate-200/40'}`}>
-        {/* Top accent bar */}
-        <div className="h-1 bg-gradient-to-r from-brand via-brand to-hot" />
-        <div className="flex h-[64px] items-center justify-between px-6 text-ink">
+      <div className={`mx-auto max-w-7xl overflow-hidden rounded-full border transition duration-300 ${scrolled ? 'border-slate-200 bg-white/95 shadow-xl shadow-slate-200/60 backdrop-blur' : 'border-slate-200/60 bg-white shadow-lg shadow-slate-200/40'}`}>
+        <div className="flex h-[64px] items-center justify-between px-8 text-ink">
           <Link to="/" onClick={close} aria-label="BarryTech home"><img src={logo} alt="BarryTech, Secure Digital Innovations" className="h-10 w-auto" /></Link>
           <nav className="hidden items-center gap-8 lg:flex" aria-label="Main">
             <NavLink to="/" end className={link}>Home</NavLink>
