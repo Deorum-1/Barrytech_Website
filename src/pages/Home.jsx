@@ -7,6 +7,7 @@ import Icon from '../components/Icon.jsx'
 import Counter from '../components/Counter.jsx'
 import { services } from '../data/services.js'
 import { company } from '../data/company.js'
+// Kept only as the poster (shown while the video loads, or if it can't play)
 import datacenter from '../assets/images/datacenter.jpg'
 
 const pillars = [
@@ -94,21 +95,30 @@ export default function Home() {
         </div>
       </section>
 
-      {/* feature band */}
-      <section className="swoosh-bg text-white">
-        <div className="container-x grid items-center gap-12 py-24 lg:grid-cols-2">
-          <Reveal>
+      {/* feature band: full-bleed background video */}
+      <section className="swoosh-bg relative isolate overflow-hidden text-white">
+        <video
+          className="absolute inset-0 -z-20 h-full w-full object-cover motion-reduce:hidden"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          poster={datacenter}
+          aria-hidden="true"
+        >
+          <source src="/videos/hero-bg.mp4" type="video/mp4" />
+        </video>
+        {/* dark brand overlay keeps text readable over any footage */}
+        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-ink/90 via-ink/75 to-brand-800/60" />
+
+        <div className="container-x py-28 lg:py-36">
+          <Reveal className="max-w-2xl">
             <h2 className="text-3xl font-bold text-white sm:text-5xl">Why choose BarryTech?</h2>
             <ul className="mt-8 space-y-4">
               {company.whyChoose.map((w) => <li key={w} className="flex gap-3"><Check className="mt-1 shrink-0 text-hot" size={20} /><span className="text-slate-200">{w}</span></li>)}
             </ul>
             <Link to="/about" className="btn btn-red mt-10">About BarryTech</Link>
-          </Reveal>
-          <Reveal delay={0.15}>
-            <div className="relative">
-              <div className="absolute -inset-3 rounded-[2rem] bg-gradient-to-br from-hot to-brand opacity-70 blur-xl animate-drift" />
-              <img src={datacenter} alt="Enterprise data center" className="relative rounded-3xl object-cover shadow-2xl" />
-            </div>
           </Reveal>
         </div>
       </section>

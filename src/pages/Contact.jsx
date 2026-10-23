@@ -4,7 +4,7 @@ import PageHeader from '../components/PageHeader.jsx'
 import { services } from '../data/services.js'
 
 // TODO: replace with the real contact details and connect the form to your backend/email service (e.g. Formspree, EmailJS).
-const CONTACT = { email: 'info@barrytech.com', phone: '+234 000 000 0000', address: 'Lagos, Nigeria' }
+const CONTACT = { email: 'info@sai.com.ng', phone: '+234 816 733 7873', address: '84, Orimerunmi Road, Olowotedo, Mowe, Ogun State' }
 
 export default function Contact() {
   const [sent, setSent] = useState(false)

@@ -27,9 +27,9 @@ export default function Footer() {
         <div>
           <h4 className="mb-4 text-sm font-semibold text-white">Get in touch</h4>
           <ul className="space-y-3 text-sm">
-            <li className="flex gap-2"><Mail size={16} className="mt-0.5 shrink-0 text-hot" /> info@barrytech.com</li>
-            <li className="flex gap-2"><Phone size={16} className="mt-0.5 shrink-0 text-hot" /> +234 000 000 0000</li>
-            <li className="flex gap-2"><MapPin size={16} className="mt-0.5 shrink-0 text-hot" /> Lagos, Nigeria</li>
+            <li className="flex gap-2"><Mail size={16} className="mt-0.5 shrink-0 text-hot" /> info@sai.com.ng</li>
+            <li className="flex gap-2"><Phone size={16} className="mt-0.5 shrink-0 text-hot" /> +234 816 733 7873</li>
+            <li className="flex gap-2"><MapPin size={16} className="mt-0.5 shrink-0 text-hot" /> 84, Orimerunmi Road, Olowotedo, Mowe, Ogun State</li>
           </ul>
         </div>
       </div>
