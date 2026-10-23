@@ -28,6 +28,32 @@ export default function Home() {
     <>
       <Hero />
 
+      {/* marquee ribbon */}
+      <section className="overflow-hidden bg-ink py-5" aria-hidden="true">
+        {/* Row 1 — scrolls left */}
+        <div className="flex w-max animate-marquee gap-0 whitespace-nowrap">
+          {[...Array(2)].flatMap((_, k) =>
+            ['Cybersecurity', 'IT Infrastructure', 'Cloud Computing', 'AI Solutions', 'Managed IT', 'Web Development', 'Network Design', 'Data Protection', 'Project Management', 'Physical Security'].map((t, n) => (
+              <span key={`${k}-${n}`} className="flex items-center font-display text-sm font-bold uppercase tracking-widest text-slate-400">
+                <span className="px-8">{t}</span>
+                <span className="text-hot">✦</span>
+              </span>
+            ))
+          )}
+        </div>
+        {/* Row 2 — scrolls right */}
+        <div className="mt-3 flex w-max animate-[marquee_35s_linear_infinite_reverse] gap-0 whitespace-nowrap">
+          {[...Array(2)].flatMap((_, k) =>
+            ['Digital Transformation', 'Zero Trust Security', 'SOC Services', 'Endpoint Protection', 'Business Continuity', 'Cloud Migration', 'IT Consultancy', 'Firewall Solutions', 'Secure by Design', 'Smart Automation'].map((t, n) => (
+              <span key={`${k}-${n}`} className="flex items-center font-display text-sm font-bold uppercase tracking-widest text-slate-600">
+                <span className="px-8">{t}</span>
+                <span className="text-brand-400">✦</span>
+              </span>
+            ))
+          )}
+        </div>
+      </section>
+
       {/* stats strip */}
       <section className="bg-brand text-white">
         <div className="container-x grid grid-cols-2 gap-6 py-10 text-center md:grid-cols-4">
