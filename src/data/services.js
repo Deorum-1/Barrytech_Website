@@ -1,0 +1,132 @@
+import soc from '../assets/images/soc.jpg'
+import datacenter from '../assets/images/datacenter.jpg'
+import servers from '../assets/images/servers.jpg'
+import cabling from '../assets/images/cabling.jpg'
+import inspection from '../assets/images/inspection.jpg'
+import netSupport from '../assets/images/network-support.jpg'
+import serverRoom from '../assets/images/server-room.jpg'
+import dashboard from '../assets/images/dashboard.jpg'
+import cloud from '../assets/images/cloud-platform.jpg'
+
+// Each offering: [title, description, [bullets]]
+export const services = [
+  {
+    slug: 'it-infrastructure', icon: 'Server', short: 'IT Infrastructure', title: 'IT Infrastructure Services',
+    tagline: 'Building reliable, secure, and scalable IT infrastructure for modern businesses.',
+    intro: 'We help businesses build, manage, and maintain reliable, secure, and high-performing technology environments that support business continuity, operational efficiency, and digital transformation.',
+    images: [[datacenter, 'Data Center Infrastructure'], [servers, 'High-Density Server Environments'], [cabling, 'Network Installation & Cabling'], [inspection, 'Infrastructure Inspection & Optimization']],
+    closing: 'Modern Technology. Smarter Infrastructure. Stronger Security.',
+    offerings: [
+      ['Network Design and Implementation', 'We design, deploy, and optimize reliable business networks that support secure communication and seamless connectivity.', ['LAN and WAN design and deployment', 'Router, switch, and wireless network installation', 'Network performance optimization', 'VLAN configuration and network segmentation']],
+      ['Server and Data Center Solutions', 'We help organizations deploy and manage server environments that support critical business applications and enterprise workloads.', ['Physical and virtual server deployment', 'Server configuration and administration', 'Data center infrastructure setup', 'Storage and backup infrastructure']],
+      ['Cloud and Virtualization Services', 'We support businesses in modernizing their IT environments through cloud adoption, virtualization, and flexible infrastructure solutions.', ['Cloud infrastructure planning and deployment', 'Server and desktop virtualization', 'Hybrid cloud integration', 'Infrastructure migration and optimization']],
+      ['IT Infrastructure Security', 'We integrate security into IT infrastructure to help protect business networks, systems, and information against unauthorized access and cyber threats.', ['Firewall deployment and configuration', 'Network access control', 'Secure remote access and VPN', 'Network segmentation and security monitoring']],
+      ['IT Support and Infrastructure Maintenance', 'We help businesses maintain the reliability and availability of their IT environments through proactive maintenance and technical support.', ['IT infrastructure troubleshooting', 'Hardware and software maintenance', 'Network and server monitoring', 'Preventive maintenance and technical support']],
+      ['Backup, Storage and Disaster Recovery', 'We help organizations protect critical business data and improve resilience against system failures, data loss, and operational disruptions.', ['Data storage and backup solutions', 'Backup scheduling and recovery testing', 'Disaster recovery planning', 'Business continuity infrastructure']],
+    ],
+    why: [['Reliable infrastructure', 'Solutions designed to support business availability and performance.'], ['Security-focused approach', 'Infrastructure designed with appropriate security controls.'], ['Scalable solutions', 'Technology that can evolve as your business grows.'], ['Cost-effective services', 'Practical recommendations aligned with business needs and budgets.'], ['Professional support', 'Assistance with deployment, troubleshooting, maintenance, and optimization.']],
+    approach: [['Assess', 'Understand your existing infrastructure, business requirements, and challenges.'], ['Design', 'Develop a practical, secure, and scalable infrastructure plan.'], ['Deploy', 'Implement and configure the required technologies.'], ['Optimize', 'Improve performance, availability, and security.'], ['Support', 'Provide ongoing maintenance and technical assistance as agreed.']],
+  },
+  {
+    slug: 'physical-security', icon: 'ScanFace', short: 'Physical Security', title: 'Physical Security Solutions',
+    tagline: 'Protecting people, premises, and assets through smart security technology.',
+    intro: 'We provide modern physical security solutions that help businesses, institutions, and individuals protect facilities, monitor activities, control access, and improve overall safety, integrated with modern IT infrastructure.',
+    images: [[soc, 'Security Monitoring']],
+    closing: 'Smarter Surveillance. Controlled Access. Enhanced Protection.',
+    offerings: [
+      ['CCTV and Video Surveillance', 'Video surveillance systems that help organizations monitor premises, deter suspicious activity, and support incident investigations.', ['IP and HD CCTV camera installation', 'Indoor and outdoor surveillance', 'NVR and DVR solutions', 'Remote video monitoring', 'Video storage and retrieval', 'Intelligent video analytics']],
+      ['Access Control Systems', 'We help organizations control who enters their buildings, offices, restricted areas, and critical facilities.', ['Biometric access control', 'Facial recognition and fingerprint readers', 'RFID cards and smart card access', 'Door access control and electronic locks', 'Visitor management systems', 'Access logs and centralized administration']],
+      ['Perimeter and Vehicle Security', 'Technologies that help secure facility boundaries, vehicle entry points, and designated restricted zones.', ['Automatic boom barriers', 'Vehicle access control', 'Gate automation', 'Perimeter intrusion detection', 'Security alarms and detection sensors']],
+      ['Visitor and Identity Management', 'We help businesses improve reception security and maintain visibility over visitors, contractors, and other authorized guests.', ['Visitor registration and check-in', 'Identity verification workflows', 'Visitor badges and access permissions', 'Contractor access management']],
+      ['Intrusion Detection and Alarm Systems', 'Alarm and detection technologies that help identify unauthorized entry and alert designated personnel.', ['Intrusion detection sensors', 'Door and window contact sensors', 'Motion detectors', 'Audible and remote alarm notifications']],
+      ['Integrated Security Management', 'We help organizations bring compatible physical security systems together for more coordinated monitoring and response.', ['CCTV and access control integration', 'Centralized security monitoring', 'Alarm and event management', 'Security system reporting']],
+    ],
+  },
+  {
+    slug: 'cybersecurity', icon: 'ShieldCheck', short: 'Cybersecurity', title: 'Cybersecurity Solutions',
+    tagline: 'Securing your digital world. Protecting what matters.',
+    intro: 'We help businesses, institutions, and individuals protect digital assets, secure IT infrastructure, and manage evolving cyber risks through preventive controls, threat detection, risk management, and incident response.',
+    images: [[soc, 'Security Operations Center: Real-time Threat Detection & Response']],
+    closing: 'Intelligent Security. Proactive Defense. Digital Confidence.',
+    offerings: [
+      ['Network Security', 'Protecting enterprise networks, internet gateways, and connected infrastructure against cyber threats.', ['Next-generation firewalls and IPS', 'Network access control (NAC)', 'Network detection and response (NDR)', 'Secure VPN and Zero Trust Network Access (ZTNA)', 'Network segmentation and DDoS protection']],
+      ['Endpoint and Server Security', 'Securing employee devices, servers, and business endpoints against malware, ransomware, and unauthorized activity.', ['Endpoint Detection and Response (EDR)', 'Extended Detection and Response (XDR)', 'Anti-malware and ransomware protection', 'Endpoint compliance and device control', 'Server security and hardening']],
+      ['Threat Detection and Security Operations', 'Helping organizations identify suspicious activities, investigate threats, and respond to security incidents.', ['SIEM', 'Security Operations Center (SOC) solutions', 'Threat intelligence and threat hunting', 'Managed Detection and Response (MDR)', 'SOAR']],
+      ['Cloud and Application Security', 'Protecting cloud workloads, business applications, APIs, and digital services from cyberattacks and misconfigurations.', ['Cloud security assessment and configuration', 'Web Application Firewall (WAF)', 'API security and protection', 'Application vulnerability assessment', 'Cloud workload protection']],
+      ['Identity Security and Microsegmentation', 'Limiting unauthorized access and reducing the spread of cyber threats across enterprise environments.', ['Identity and Access Management (IAM)', 'Multi-Factor Authentication (MFA)', 'Privileged Access Management (PAM)', 'Zero Trust security architecture', 'Workload microsegmentation']],
+      ['Vulnerability Management and Security Testing', 'Identifying weaknesses in IT environments and helping organizations prioritize remediation.', ['Vulnerability assessment', 'Authorized penetration testing', 'Security configuration reviews', 'Attack surface management', 'Remediation planning and validation']],
+      ['Data Protection and Email Security', 'Helping organizations safeguard sensitive information against data leakage, phishing, and unauthorized disclosure.', ['Data Loss Prevention (DLP)', 'Email security and anti-phishing', 'Data encryption and access controls', 'Sensitive data discovery and classification', 'Backup security and ransomware resilience']],
+      ['Artificial Intelligence (AI) Security', 'Helping organizations adopt AI technologies securely while managing emerging risks.', ['AI application and platform security', 'AI gateway and usage governance', 'LLM security assessments', 'Protection against prompt injection and data leakage', 'AI infrastructure and model risk management']],
+      ['Cybersecurity Consulting and Professional Services', 'Expert advisory and delivery across the full security lifecycle.', ['Cybersecurity risk assessments and security audits', 'Security architecture design and implementation', 'Cybersecurity policy development and governance', 'Security awareness training and phishing simulations', 'Incident response planning and recovery support', 'Regulatory and security compliance readiness', 'Cybersecurity solution deployment, integration, and technical support']],
+    ],
+  },
+  {
+    slug: 'managed-it', icon: 'Headset', short: 'Managed IT', title: 'Managed IT Services',
+    tagline: 'Reliable IT management. Proactive support. Uninterrupted business operations.',
+    intro: 'We help businesses maintain secure, reliable, and efficient technology environments without the complexity of managing every IT function internally: infrastructure, performance monitoring, cybersecurity controls, and technical issues.',
+    images: [[netSupport, 'Hands-on Network Support'], [serverRoom, 'Office Network & Server Room Solutions']],
+    closing: 'We Manage Your Technology. You Focus on Your Business.',
+    offerings: [
+      ['Managed IT Support and Help Desk', 'Ongoing technical support to help employees resolve IT issues and maintain productivity.', ['Remote and on-site technical support', 'End-user and desktop support', 'Hardware and software troubleshooting', 'User account and access administration', 'IT service request and incident management']],
+      ['Managed Network and Infrastructure', 'Proactive management of network and infrastructure environments to improve reliability and availability.', ['Router, switch, firewall, and Wi-Fi management', 'Server and storage administration', 'Network performance monitoring', 'Configuration and firmware management', 'Infrastructure health reporting']],
+      ['Managed Cybersecurity Services', 'Continuous or scheduled security management to help organizations reduce cyber risk and strengthen protection.', ['Managed firewall and endpoint security', 'Security alert monitoring and escalation', 'Vulnerability and patch management', 'Email security and phishing protection', 'Security incident coordination', 'Managed Detection and Response (MDR)']],
+      ['Managed Cloud and Business Applications', 'Management of cloud environments and business productivity platforms to support secure, efficient operations.', ['Cloud infrastructure administration', 'Microsoft 365 and business email management', 'User access and license administration', 'Cloud resource monitoring', 'Cloud configuration and security reviews']],
+      ['Managed Backup and Disaster Recovery', 'Services designed to protect critical business information and support recovery from system failures or cyber incidents.', ['Backup scheduling and monitoring', 'Backup integrity checks', 'Recovery testing', 'Disaster recovery planning', 'Business continuity support']],
+      ['Managed Server and Data Center Services', 'Ongoing administration of server environments and data center infrastructure.', ['Server operating system maintenance', 'Virtual machine administration', 'Storage capacity monitoring', 'Performance and availability management']],
+      ['Managed IT Asset and License Management', 'Improving visibility and control over organizational technology assets, software licenses, and renewals.', ['IT asset inventory and tracking', 'Software license management', 'Hardware lifecycle planning', 'Warranty and renewal tracking', 'Technology procurement coordination']],
+      ['IT Consultancy and Technology Management', 'Helping businesses plan, optimize, and manage technology investments in line with their operational goals.', ['IT environment assessments', 'Technology roadmaps and budgeting', 'IT policy and procedure development', 'Vendor and support coordination', 'Service performance reviews and reporting']],
+    ],
+    delivery: [['Fully Managed IT Services', 'BarryTech takes responsibility for agreed day-to-day IT operations under a defined service agreement.'], ['Co-Managed IT Services', 'We work alongside your internal IT team, providing additional expertise and specialist support.'], ['Managed Cybersecurity Services', 'We manage agreed security technologies, monitoring, vulnerability management, and incident coordination.'], ['On-Site IT Support', 'On-site technical assistance and scheduled maintenance based on agreed service levels.']],
+  },
+  {
+    slug: 'project-management', icon: 'KanbanSquare', short: 'Project Management', title: 'Project Management Services',
+    tagline: 'Delivering projects with precision, efficiency, and excellence.',
+    intro: 'We combine structured methodologies, technical expertise, and stakeholder coordination to help businesses achieve project objectives within agreed timelines, budgets, and quality expectations.',
+    images: [[dashboard, 'Hybrid Infrastructure Monitoring & Deployment Dashboards']],
+    closing: 'Planning Better. Delivering Smarter. Achieving More.',
+    offerings: [
+      ['IT Project Planning and Initiation', 'We help organizations establish clear project objectives, define requirements, and develop structured plans.', ['Project scope and requirements definition', 'Feasibility assessment and planning', 'Project schedules and milestones', 'Resource and budget planning', 'Risk identification and mitigation']],
+      ['IT Infrastructure Project Management', 'We coordinate technology projects involving deployment, upgrade, and optimization of enterprise IT infrastructure.', ['Network and data center deployments', 'Server, storage, and virtualization projects', 'Cloud infrastructure implementation', 'Hardware and software deployment coordination']],
+      ['Cybersecurity Project Management', 'We coordinate cybersecurity projects to implement security solutions efficiently and achieve defined outcomes.', ['Firewall and network security implementation', 'Endpoint security and threat detection deployments', 'Network access control and microsegmentation', 'Security operations and monitoring solution deployment']],
+      ['Project Coordination and Stakeholder Management', 'We facilitate collaboration among clients, technical teams, vendors, and other stakeholders.', ['Project meetings and progress reviews', 'Stakeholder communication and reporting', 'Vendor and partner coordination', 'Action tracking and issue resolution']],
+      ['Project Monitoring, Control, and Reporting', 'We track project performance to maintain visibility over progress, expenditure, risks, and delivery.', ['Project status reports and dashboards', 'Schedule and budget tracking', 'Risk, assumption, issue, and dependency management', 'Change control and scope management']],
+      ['Project Implementation and Delivery Management', 'We coordinate implementation so deliverables meet agreed requirements and are ready for operational use.', ['Implementation planning and coordination', 'Testing and acceptance coordination', 'Quality assurance and deliverable verification', 'User training and knowledge transfer', 'Documentation and handover']],
+      ['Digital Transformation Project Management', 'We help organizations coordinate technology-led business change aligned with strategic priorities.', ['Digital transformation roadmaps', 'Business process improvement initiatives', 'Technology adoption and migration planning', 'Change management coordination', 'Benefits realization reviews']],
+    ],
+  },
+  {
+    slug: 'web-app-development', icon: 'Code2', short: 'Web & App Development', title: 'Website, Application & Web Application Development',
+    tagline: 'Building powerful digital experiences. Transforming ideas into innovative solutions.',
+    intro: 'We provide website design, application development, and web application solutions that help businesses establish a strong digital presence, streamline operations, improve customer engagement, and accelerate growth, using modern design, software engineering, and security-conscious practices.',
+    images: [[cloud, 'Modern Cloud & Infrastructure Management Platforms']],
+    closing: 'Innovative Design. Intelligent Applications. Secure Digital Experiences.',
+    offerings: [
+      ['Website Design and Development', 'Professional websites that communicate your brand, showcase services, and connect with customers.', ['Corporate and business websites', 'Company profile and portfolio websites', 'Landing pages and promotional websites', 'Responsive mobile-friendly designs', 'Content management systems (CMS)', 'Website redesign and modernization']],
+      ['E-commerce Website Development', 'Online shopping platforms for products, orders, and digital customer service.', ['Online stores and product catalogs', 'Shopping carts and checkout workflows', 'Payment gateway integration', 'Inventory and order management', 'Customer accounts and sales reporting']],
+      ['Custom Web Application Development', 'Interactive browser-based applications that automate processes and manage information.', ['CRM and HRMS systems', 'Inventory and asset management', 'Booking and appointment platforms', 'Customer and employee portals', 'Workflow automation and reporting dashboards']],
+      ['Mobile Application Development', 'Mobile apps designed for convenient access and user engagement.', ['Android and iOS application development', 'Cross-platform mobile applications', 'Business and customer service apps', 'API and backend integration', 'Application testing and maintenance']],
+      ['Software Development and Systems Integration', 'Develop and connect digital systems to reduce manual processes and improve information flow.', ['Custom software development', 'API design and integration', 'Third-party platform integration', 'Database design and management', 'Business process automation', 'Legacy application modernization']],
+      ['Web Application Security', 'Security considerations built into application design and development.', ['Secure application design and coding', 'Authentication and access control', 'Web application vulnerability assessments', 'API security reviews', 'Security testing and remediation']],
+      ['Website Maintenance and Digital Optimization', 'Keep digital platforms updated, functional, and aligned with changing business needs.', ['Website updates and content management', 'Bug fixes and performance optimization', 'Website backups and recovery', 'SEO fundamentals', 'Analytics and hosting coordination']],
+    ],
+  },
+  {
+    slug: 'artificial-intelligence', icon: 'BrainCircuit', short: 'AI Solutions', title: 'Artificial Intelligence (AI) Solutions',
+    tagline: 'Transforming businesses with intelligent automation, AI innovation, and secure digital solutions.',
+    intro: 'We help businesses explore and adopt AI to improve productivity, automate repetitive tasks, enhance decision-making, and create new digital opportunities, from AI-powered customer service and workflow automation to enterprise AI integration, data analytics, and AI security.',
+    images: [[dashboard, 'Infrastructure Analytics'], [cloud, 'AI-Ready Cloud Orchestration']],
+    closing: 'Intelligent Solutions. Secure Innovation. Smarter Business.',
+    offerings: [
+      ['AI Consulting and Strategy', 'Identify where AI can deliver measurable business value and develop a practical adoption roadmap.', ['AI readiness assessments', 'AI use-case identification and prioritization', 'AI implementation roadmaps', 'Business process assessment', 'AI investment and ROI planning']],
+      ['Generative AI and Enterprise AI Assistants', 'Use generative AI to access information, create content, support employees, and improve customer experiences.', ['AI-powered chatbots and virtual assistants', 'Enterprise knowledge assistants', 'Intelligent document search and summarization', 'AI-powered customer support', 'Private knowledge assistants connected to approved business documents']],
+      ['AI Automation and Intelligent Agents', 'Apply AI to repetitive business processes and help employees complete tasks more efficiently.', ['AI-assisted workflow automation', 'Document and invoice processing', 'Intelligent email classification and response drafting', 'AI agents connected to approved business systems', 'Human-supervised task automation']],
+      ['AI and Data Analytics', 'Turn business data into useful insights that support planning and decision-making.', ['Business intelligence dashboards', 'Predictive analytics', 'Data visualization and reporting', 'Customer and operational trend analysis', 'AI-assisted business forecasting']],
+      ['AI Cybersecurity', 'Use AI to strengthen cyber defense and protect AI-enabled environments against emerging risks.', ['AI-assisted threat detection and investigation', 'AI security architecture and risk assessments', 'Security for generative AI applications and AI agents', 'Protection against prompt injection and sensitive-data exposure', 'AI security governance and policy development']],
+      ['AI Video Analytics and Intelligent Monitoring', 'AI-powered visual analytics to improve monitoring, operational visibility, and incident detection.', ['Intelligent video analysis', 'Object and activity detection', 'Occupancy and people-counting analytics', 'Alerts for configured events', 'Integration with compatible surveillance systems']],
+      ['AI Infrastructure and Integration', 'Plan the infrastructure and integrations needed to run AI applications securely and reliably.', ['AI workload and infrastructure assessment', 'Cloud-based and on-premises AI deployment planning', 'Integration with existing applications and data sources', 'AI platform configuration and access controls', 'AI application performance and cost monitoring']],
+      ['AI Training and Adoption', 'Equip employees and IT teams with the knowledge to use AI tools effectively and responsibly.', ['AI fundamentals and generative AI', 'AI productivity tools for business users', 'Prompt design and effective AI interaction', 'AI privacy, security, and responsible use', 'AI adoption workshops for management and technical teams']],
+    ],
+  },
+]
+
+export const getService = (slug) => services.find((s) => s.slug === slug)
