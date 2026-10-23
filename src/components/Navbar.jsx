@@ -20,7 +20,7 @@ export default function Navbar() {
       <nav className="relative w-full max-w-7xl">
 
         {/* ── Pill bar ─────────────────────────────────────────── */}
-        <div className="flex items-center justify-between rounded-full border border-slate-700 bg-ink/90 px-6 py-3 text-white backdrop-blur">
+        <div className="flex items-center justify-between rounded-full border border-slate-700 bg-ink/70 px-6 py-3 text-white backdrop-blur-md">
 
           {/* Logo */}
           <Link to="/" onClick={close} aria-label="BarryTech home">
@@ -99,7 +99,7 @@ export default function Navbar() {
 
         {/* ── Mobile dropdown ───────────────────────────────────── */}
         {open && (
-          <div className="absolute left-0 top-[calc(100%+8px)] w-full rounded-3xl border border-slate-700 bg-ink/95 px-6 py-5 text-white shadow-xl backdrop-blur md:hidden">
+          <div className="absolute left-0 top-[calc(100%+8px)] w-full rounded-3xl border border-slate-700 bg-ink/70 px-6 py-5 text-white shadow-xl backdrop-blur-md md:hidden">
             <nav className="flex flex-col gap-1">
               {navLinks.map(({ to, label, end }) => (
                 <NavLink key={to} to={to} end={end} onClick={close}
