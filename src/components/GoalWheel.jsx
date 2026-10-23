@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
-import { ArrowRight, ClipboardCheck, Headphones, MousePointer2, PenTool, Rocket } from 'lucide-react'
+import { ArrowRight, ClipboardCheck, Headphones, MousePointer2, Pause, PenTool, Play, Rocket } from 'lucide-react'
 import logo from '../assets/logo.png'
 
 const CX = 260
@@ -11,7 +11,7 @@ const R_MID = 158
 const R_CENTER = 56
 const SEGMENT = 120
 const GAP = 0.4
-const LABEL_RADIUS = 182
+const LABEL_RADIUS = 172
 
 const fills = [
   ['#2f86c4', '#0a5a96'],
@@ -61,7 +61,9 @@ const pct = (v) => `${(v / 520) * 100}%`
 export default function GoalWheel({ goals }) {
   const [active, setActive] = useState(0)
   const [hovered, setHovered] = useState(null)
+  const [spinning, setSpinning] = useState(true)
   const reduce = useReducedMotion()
+  const paused = !spinning || hovered !== null
   const goal = goals[active]
 
   return (
@@ -75,7 +77,10 @@ export default function GoalWheel({ goals }) {
 
           <svg
             viewBox="0 0 520 520"
-            className="absolute inset-0 h-full w-full drop-shadow-[0_28px_50px_rgba(7,27,48,0.25)]"
+            className={`absolute inset-0 h-full w-full drop-shadow-[0_28px_50px_rgba(7,27,48,0.25)] ${
+              reduce ? '' : 'animate-wheel-spin'
+            }`}
+            style={{ animationPlayState: paused ? 'paused' : 'running' }}
             aria-hidden="true"
           >
             <defs>
@@ -162,36 +167,6 @@ export default function GoalWheel({ goals }) {
             </svg>
           </div>
 
-          {goals.map((g, i) => {
-            const p = labelPoint(i)
-            return (
-              <button
-                key={g.tab}
-                type="button"
-                id={`goal-tab-${i}`}
-                aria-pressed={active === i}
-                aria-controls="goal-solutions"
-                aria-describedby="goal-wheel-hint"
-                onClick={() => setActive(i)}
-                onMouseEnter={() => setHovered(i)}
-                onMouseLeave={() => setHovered(null)}
-                onFocus={() => setHovered(i)}
-                onBlur={() => setHovered(null)}
-                className="absolute w-[34%] max-w-[10rem] -translate-x-1/2 -translate-y-1/2 cursor-pointer rounded-2xl px-2 py-2 text-center font-display text-[clamp(0.8rem,1.6vw,1.05rem)] font-bold leading-snug text-white [text-shadow:0_1px_12px_rgba(0,20,40,0.45)] transition hover:scale-105 hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white motion-reduce:hover:scale-100"
-                style={{ left: pct(p.x), top: pct(p.y) }}
-              >
-                {g.tab}
-                <span
-                  aria-hidden="true"
-                  style={active === i ? undefined : { animationDelay: `${i * 0.4}s` }}
-                  className={`mx-auto mt-2 block h-0.5 rounded-full bg-white transition-all duration-300 ${
-                    active === i ? 'w-8 opacity-80' : 'w-4 animate-underline opacity-20'
-                  }`}
-                />
-              </button>
-            )
-          })}
-
           <div className="pointer-events-none absolute inset-0" aria-hidden="true">
             <div className="absolute left-1/2 top-1/2 aspect-square w-[60.8%] -translate-x-1/2 -translate-y-1/2">
               {journey.map(([I, label], i) => {
@@ -216,9 +191,51 @@ export default function GoalWheel({ goals }) {
               <img src={logo} alt="" className="w-[80%]" />
             </div>
           </div>
+
+          <div
+            className={`pointer-events-none absolute inset-0 ${reduce ? '' : 'animate-wheel-spin'}`}
+            style={{ animationPlayState: paused ? 'paused' : 'running' }}
+          >
+            {goals.map((g, i) => {
+              const p = labelPoint(i)
+              return (
+                <button
+                  key={g.tab}
+                  type="button"
+                  id={`goal-tab-${i}`}
+                  aria-pressed={active === i}
+                  aria-controls="goal-solutions"
+                  aria-describedby="goal-wheel-hint"
+                  onClick={() => setActive(i)}
+                  onMouseEnter={() => setHovered(i)}
+                  onMouseLeave={() => setHovered(null)}
+                  onFocus={() => setHovered(i)}
+                  onBlur={() => setHovered(null)}
+                  className="group/label pointer-events-auto absolute w-[30%] max-w-[8.75rem] -translate-x-1/2 -translate-y-1/2 cursor-pointer rounded-2xl text-center font-display text-[clamp(0.8rem,1.5vw,1rem)] font-bold leading-snug text-white [text-shadow:0_1px_12px_rgba(0,20,40,0.5)] transition hover:scale-105 hover:brightness-110 focus-visible:outline-none motion-reduce:hover:scale-100"
+                  style={{ left: pct(p.x), top: pct(p.y) }}
+                >
+                  <span
+                    className={`inline-flex max-w-full flex-col items-center rounded-xl px-1 py-0.5 group-focus-visible/label:ring-2 group-focus-visible/label:ring-white/80 ${
+                      reduce ? '' : 'animate-wheel-counter'
+                    }`}
+                    style={{ animationPlayState: paused ? 'paused' : 'running' }}
+                  >
+                    {g.tab}
+                    <span
+                      aria-hidden="true"
+                      style={active === i ? undefined : { animationDelay: `${i * 0.4}s` }}
+                      className={`mt-2 block h-0.5 rounded-full bg-white transition-all duration-300 ${
+                        active === i ? 'w-8 opacity-80' : 'w-4 animate-underline opacity-20'
+                      }`}
+                    />
+                  </span>
+                </button>
+              )
+            })}
+          </div>
         </div>
 
-        <div className="mt-6 flex justify-center">
+        <div className="mt-6 flex items-center justify-center gap-2">
           <p
             id="goal-wheel-hint"
             className="inline-flex items-center gap-2 rounded-full border border-brand-200 bg-white/90 px-4 py-2 text-xs font-semibold text-brand-800 shadow-sm backdrop-blur"
@@ -230,6 +247,17 @@ export default function GoalWheel({ goals }) {
             />
             <span>Click or tap a slice to explore</span>
           </p>
+          {!reduce && (
+            <button
+              type="button"
+              onClick={() => setSpinning((value) => !value)}
+              aria-label={spinning ? 'Pause wheel rotation' : 'Resume wheel rotation'}
+              title={spinning ? 'Pause wheel rotation' : 'Resume wheel rotation'}
+              className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-brand-200 bg-white/90 text-brand-800 shadow-sm backdrop-blur transition hover:bg-white hover:text-brand"
+            >
+              {spinning ? <Pause size={14} aria-hidden="true" /> : <Play size={14} aria-hidden="true" />}
+            </button>
+          )}
         </div>
       </div>
 

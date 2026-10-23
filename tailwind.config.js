@@ -17,6 +17,8 @@ export default {
         halo: { '0%,100%': { opacity: '0.35', transform: 'scale(0.97)' }, '50%': { opacity: '0.65', transform: 'scale(1.02)' } },
         tap: { '0%,64%,100%': { transform: 'translateY(0) scale(1)' }, '70%': { transform: 'translateY(2px) scale(0.88)' }, '76%': { transform: 'translateY(0) scale(1)' } },
         underline: { '0%,100%': { opacity: '0.2', transform: 'scaleX(1)' }, '50%': { opacity: '0.6', transform: 'scaleX(1.2)' } },
+        'wheel-spin': { to: { transform: 'rotate(360deg)' } },
+        'wheel-counter': { to: { transform: 'rotate(-360deg)' } },
       },
       animation: {
         marquee: 'marquee 40s linear infinite',
@@ -26,6 +28,8 @@ export default {
         halo: 'halo 7s ease-in-out infinite',
         tap: 'tap 2.4s ease-in-out infinite',
         underline: 'underline 3.2s ease-in-out infinite',
+        'wheel-spin': 'wheel-spin 60s linear infinite',
+        'wheel-counter': 'wheel-counter 60s linear infinite',
       },
     },
   },
