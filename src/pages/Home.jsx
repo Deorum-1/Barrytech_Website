@@ -4,7 +4,6 @@ import { ArrowRight, ShieldCheck, LifeBuoy, Rocket, Check } from 'lucide-react'
 import Hero from '../components/Hero.jsx'
 import Reveal from '../components/Reveal.jsx'
 import Icon from '../components/Icon.jsx'
-import Counter from '../components/Counter.jsx'
 import { services } from '../data/services.js'
 import { company } from '../data/company.js'
 // Kept only as the poster (shown while the video loads, or if it can't play)
@@ -54,14 +53,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* stats strip */}
-      <section className="bg-brand text-white">
-        <div className="container-x grid grid-cols-2 gap-6 py-10 text-center md:grid-cols-4">
-          {[[8, '', 'Service areas'], [50, '+', 'Specialist offerings'], [24, '/7', 'Monitoring options'], [100, '%', 'Security-conscious approach']].map(([n, s, l]) => (
-            <div key={l}><div className="font-display text-4xl font-extrabold"><Counter to={n} suffix={s} /></div><div className="mt-1 text-sm text-brand-100">{l}</div></div>
-          ))}
-        </div>
-      </section>
 
       {/* enabling digital success */}
       <section className="container-x py-24">
