@@ -48,7 +48,8 @@ export default function Home() {
       {/* marquee ribbon */}
       <section className="overflow-hidden bg-ink py-5" aria-hidden="true">
         <div className="flex w-max animate-marquee gap-0 whitespace-nowrap">
-          {[...Array(2)].flatMap((_, k) =>
+          {/* four repeats keep the ribbon seamless even on ultra-wide screens */}
+          {[...Array(4)].flatMap((_, k) =>
             serviceRibbon.map((t, n) => (
               <span key={`${k}-${n}`} className="flex items-center font-display text-sm font-bold uppercase tracking-widest text-slate-400">
                 <span className="px-8">{t}</span>
