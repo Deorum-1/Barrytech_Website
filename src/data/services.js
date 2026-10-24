@@ -5,7 +5,10 @@ import cabling from '../assets/images/cabling.jpg'
 import inspection from '../assets/images/inspection.jpg'
 import netSupport from '../assets/images/network-support.jpg'
 import serverRoom from '../assets/images/server-room.jpg'
-import dashboard from '../assets/images/dashboard.jpg'
+import securityAccess from '../assets/images/security-access.jpg'
+import projectDelivery from '../assets/images/project-delivery.jpg'
+import webProducts from '../assets/images/web-products.jpg'
+import aiAutomation from '../assets/images/ai-automation.jpg'
 import cloud from '../assets/images/cloud-platform.jpg'
 
 // Each offering: [title, description, [bullets]]
@@ -31,7 +34,7 @@ export const services = [
     slug: 'physical-security', icon: 'ScanFace', short: 'Physical Security', title: 'Physical Security Solutions',
     tagline: 'Protecting people, premises, and assets through smart security technology.',
     intro: 'We provide modern physical security solutions that help businesses, institutions, and individuals protect facilities, monitor activities, control access, and improve overall safety, integrated with modern IT infrastructure.',
-    images: [[soc, 'Security Monitoring']],
+    images: [[securityAccess, 'CCTV, Access Control and Integrated Security']],
     closing: 'Smarter Surveillance. Controlled Access. Enhanced Protection.',
     offerings: [
       ['CCTV and Video Surveillance', 'Video surveillance systems that help organizations monitor premises, deter suspicious activity, and support incident investigations.', ['IP and HD CCTV camera installation', 'Indoor and outdoor surveillance', 'NVR and DVR solutions', 'Remote video monitoring', 'Video storage and retrieval', 'Intelligent video analytics']],
@@ -41,6 +44,7 @@ export const services = [
       ['Intrusion Detection and Alarm Systems', 'Alarm and detection technologies that help identify unauthorized entry and alert designated personnel.', ['Intrusion detection sensors', 'Door and window contact sensors', 'Motion detectors', 'Audible and remote alarm notifications']],
       ['Integrated Security Management', 'We help organizations bring compatible physical security systems together for more coordinated monitoring and response.', ['CCTV and access control integration', 'Centralized security monitoring', 'Alarm and event management', 'Security system reporting']],
     ],
+    approach: [['Assess', 'Survey the site, review the risks, and agree what needs protecting.'], ['Design', 'Plan camera coverage, access points, and alarm zones around your operations.'], ['Deploy', 'Install, configure, and commission the security systems with minimal disruption.'], ['Optimize', 'Tune coverage, retention, and alerting as your site and risks change.'], ['Support', 'Maintain, service, and expand the systems with ongoing technical support.']],
   },
   {
     slug: 'cybersecurity', icon: 'ShieldCheck', short: 'Cybersecurity', title: 'Cybersecurity Solutions',
@@ -59,6 +63,7 @@ export const services = [
       ['Artificial Intelligence (AI) Security', 'Helping organizations adopt AI technologies securely while managing emerging risks.', ['AI application and platform security', 'AI gateway and usage governance', 'LLM security assessments', 'Protection against prompt injection and data leakage', 'AI infrastructure and model risk management']],
       ['Cybersecurity Consulting and Professional Services', 'Expert advisory and delivery across the full security lifecycle.', ['Cybersecurity risk assessments and security audits', 'Security architecture design and implementation', 'Cybersecurity policy development and governance', 'Security awareness training and phishing simulations', 'Incident response planning and recovery support', 'Regulatory and security compliance readiness', 'Cybersecurity solution deployment, integration, and technical support']],
     ],
+    approach: [['Assess', 'Review your environment, assets, and current security posture.'], ['Design', 'Define the controls, architecture, and roadmap that reduce your risk.'], ['Deploy', 'Implement, configure, and integrate the agreed security controls.'], ['Optimize', 'Test, monitor, and tune detection, response, and access policies.'], ['Support', 'Run continuous monitoring, response, and security improvement.']],
   },
   {
     slug: 'managed-it', icon: 'Headset', short: 'Managed IT', title: 'Managed IT Services',
@@ -82,7 +87,7 @@ export const services = [
     slug: 'project-management', icon: 'KanbanSquare', short: 'Project Management', title: 'Project Management Services',
     tagline: 'Delivering projects with precision, efficiency, and excellence.',
     intro: 'We combine structured methodologies, technical expertise, and stakeholder coordination to help businesses achieve project objectives within agreed timelines, budgets, and quality expectations.',
-    images: [[dashboard, 'Hybrid Infrastructure Monitoring & Deployment Dashboards']],
+    images: [[projectDelivery, 'Project Planning, Coordination and Delivery']],
     closing: 'Planning Better. Delivering Smarter. Achieving More.',
     offerings: [
       ['IT Project Planning and Initiation', 'We help organizations establish clear project objectives, define requirements, and develop structured plans.', ['Project scope and requirements definition', 'Feasibility assessment and planning', 'Project schedules and milestones', 'Resource and budget planning', 'Risk identification and mitigation']],
@@ -98,7 +103,7 @@ export const services = [
     slug: 'web-app-development', icon: 'Code2', short: 'Web & App Development', title: 'Website, Application & Web Application Development',
     tagline: 'Building powerful digital experiences. Transforming ideas into innovative solutions.',
     intro: 'We provide website design, application development, and web application solutions that help businesses establish a strong digital presence, streamline operations, improve customer engagement, and accelerate growth, using modern design, software engineering, and security-conscious practices.',
-    images: [[cloud, 'Modern Cloud & Infrastructure Management Platforms']],
+    images: [[webProducts, 'Website, E-Commerce and Web Application Development']],
     closing: 'Innovative Design. Intelligent Applications. Secure Digital Experiences.',
     offerings: [
       ['Website Design and Development', 'Professional websites that communicate your brand, showcase services, and connect with customers.', ['Corporate and business websites', 'Company profile and portfolio websites', 'Landing pages and promotional websites', 'Responsive mobile-friendly designs', 'Content management systems (CMS)', 'Website redesign and modernization']],
@@ -109,12 +114,13 @@ export const services = [
       ['Web Application Security', 'Security considerations built into application design and development.', ['Secure application design and coding', 'Authentication and access control', 'Web application vulnerability assessments', 'API security reviews', 'Security testing and remediation']],
       ['Website Maintenance and Digital Optimization', 'Keep digital platforms updated, functional, and aligned with changing business needs.', ['Website updates and content management', 'Bug fixes and performance optimization', 'Website backups and recovery', 'SEO fundamentals', 'Analytics and hosting coordination']],
     ],
+    approach: [['Assess', 'Understand your goals, users, content, and technical requirements.'], ['Design', 'Shape the user experience, architecture, and delivery plan.'], ['Deploy', 'Build, test, and launch the website, store, or application.'], ['Optimize', 'Improve speed, security, SEO, and conversion after launch.'], ['Support', 'Maintain, update, and extend the platform as your business grows.']],
   },
   {
     slug: 'artificial-intelligence', icon: 'BrainCircuit', short: 'AI Solutions', title: 'Artificial Intelligence (AI) Solutions',
     tagline: 'Transforming businesses with intelligent automation, AI innovation, and secure digital solutions.',
     intro: 'We help businesses explore and adopt AI to improve productivity, automate repetitive tasks, enhance decision-making, and create new digital opportunities, from AI-powered customer service and workflow automation to enterprise AI integration, data analytics, and AI security.',
-    images: [[dashboard, 'Infrastructure Analytics'], [cloud, 'AI-Ready Cloud Orchestration']],
+    images: [[aiAutomation, 'AI Automation, Analytics and Secure Adoption'], [cloud, 'AI-Ready Cloud Infrastructure']],
     closing: 'Intelligent Solutions. Secure Innovation. Smarter Business.',
     offerings: [
       ['AI Consulting and Strategy', 'Identify where AI can deliver measurable business value and develop a practical adoption roadmap.', ['AI readiness assessments', 'AI use-case identification and prioritization', 'AI implementation roadmaps', 'Business process assessment', 'AI investment and ROI planning']],

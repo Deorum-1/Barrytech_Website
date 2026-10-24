@@ -124,23 +124,27 @@ export default function ServiceDetail() {
         </section>
       )}
 
-      {s.why && (
-        <section className="container-x grid gap-14 py-16 sm:py-20 lg:grid-cols-2">
-          <div>
-            <h2 className="text-3xl font-bold">Why choose BarryTech?</h2>
-            <ul className="mt-8 space-y-5">{s.why.map(([t, d]) => <li key={t}><strong className="text-ink">{t}.</strong> {d}</li>)}</ul>
-          </div>
-          <div>
-            <h2 className="text-3xl font-bold">Our approach</h2>
-            <ol className="mt-8 space-y-6 border-l-2 border-brand-100 pl-8">
-              {s.approach.map(([t, d]) => (
-                <li key={t} className="relative">
-                  <span className="absolute -left-[41px] top-1 h-4 w-4 rounded-full border-4 border-white bg-hot ring-2 ring-hot/30" />
-                  <strong className="text-ink">{t}.</strong> {d}
-                </li>
-              ))}
-            </ol>
-          </div>
+      {(s.why || s.approach) && (
+        <section className={`container-x grid gap-14 py-16 sm:py-20 ${s.why && s.approach ? 'lg:grid-cols-2' : ''}`}>
+          {s.why && (
+            <div>
+              <h2 className="text-3xl font-bold">Why choose BarryTech?</h2>
+              <ul className="mt-8 space-y-5">{s.why.map(([t, d]) => <li key={t}><strong className="text-ink">{t}.</strong> {d}</li>)}</ul>
+            </div>
+          )}
+          {s.approach && (
+            <div>
+              <h2 className="text-3xl font-bold">Our approach</h2>
+              <ol className="mt-8 space-y-6 border-l-2 border-brand-100 pl-8">
+                {s.approach.map(([t, d]) => (
+                  <li key={t} className="relative">
+                    <span className="absolute -left-[41px] top-1 h-4 w-4 rounded-full border-4 border-white bg-hot ring-2 ring-hot/30" />
+                    <strong className="text-ink">{t}.</strong> {d}
+                  </li>
+                ))}
+              </ol>
+            </div>
+          )}
         </section>
       )}
 
@@ -161,7 +165,7 @@ export default function ServiceDetail() {
             <Link
               key={o.slug}
               to={`/services/${o.slug}`}
-              className="group flex items-center justify-between gap-3 rounded-2xl border border-slate-200 px-5 py-4 text-sm font-semibold text-ink transition hover:border-hot hover:text-hot"
+              className="group flex items-center justify-between gap-3 rounded-2xl border border-slate-200 px-5 py-4 text-sm font-semibold text-ink transition hover:border-hot hover:text-hot-600"
             >
               {o.short}
               <ArrowRight size={15} className="shrink-0 transition group-hover:translate-x-1" />
