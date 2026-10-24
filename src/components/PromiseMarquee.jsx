@@ -1,111 +1,130 @@
 import { useEffect, useRef } from 'react'
 import Icon from './Icon.jsx'
 
-// The key areas run as a marquee: the card nearest the middle of the band grows,
-// the ones moving away from the middle shrink, so the band reads as a carousel.
-const COPIES = 4
+// The key areas sit on a ring that turns slowly like a carousel: the card facing
+// the front of the ring is the one in view, so it carries the weight of the section.
+const TURN_MS = 34000 // one full turn
+const LIFT = 34 // how far the cards at the back ride up, so the ring reads as a circle
 
-export default function PromiseMarquee({ areas, id }) {
+export default function PromiseMarquee({ areas }) {
   const bandRef = useRef(null)
-  const trackRef = useRef(null)
+  const stageRef = useRef(null)
   const cardRefs = useRef([])
+  const count = areas.length
+  const step = 360 / count
 
   useEffect(() => {
     const band = bandRef.current
-    const track = trackRef.current
-    if (!band || !track) return
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const stage = stageRef.current
+    const cards = cardRefs.current.slice(0, count).filter(Boolean)
+    if (!band || !stage || !cards.length) return
 
-    // Card centres relative to the track — only change when the layout changes.
-    let centres = []
-    const measure = () => {
-      const trackLeft = track.getBoundingClientRect().left
-      centres = cardRefs.current.map((el) => {
-        if (!el) return null
-        const box = el.getBoundingClientRect()
-        return box.left + box.width / 2 - trackLeft
+    let angle = 0
+    let radius = 300
+
+    const place = () => {
+      cards.forEach((el, i) => {
+        const phi = i * step + angle
+        const rad = (phi * Math.PI) / 180
+        const facing = Math.cos(rad) // 1 when the card is at the front of the ring
+        const near = Math.pow((facing + 1) / 2, 1.6) // curved falloff towards the back
+        const lift = (1 - Math.cos(rad)) * LIFT
+        el.style.transform =
+          `translate(-50%, -50%) translateY(${(-lift).toFixed(1)}px) ` +
+          `rotateY(${phi.toFixed(2)}deg) translateZ(${radius}px) ` +
+          `scale(${(0.82 + near * 0.3).toFixed(3)})`
+        const card = el.firstElementChild
+        card.style.opacity = (0.06 + near * 0.94).toFixed(3)
+        card.classList.toggle('is-active', facing > 0.9)
       })
     }
 
-    let frame
-    const tick = () => {
-      const bandBox = band.getBoundingClientRect()
-      const bandCentre = bandBox.left + bandBox.width / 2
-      const reach = bandBox.width * 0.3
-      const trackLeft = track.getBoundingClientRect().left
-      cardRefs.current.forEach((el, i) => {
-        if (!el || centres[i] == null) return
-        const distance = Math.abs(trackLeft + centres[i] - bandCentre)
-        const near = Math.max(0, 1 - distance / reach)
-        // The card at the middle is pushed forward: bigger, fully opaque and lifted
-        el.style.transform = `scale(${(0.78 + near * 0.42).toFixed(3)})`
-        el.style.opacity = (0.45 + near * 0.55).toFixed(3)
-        el.style.zIndex = String(1 + Math.round(near * 20))
-        el.classList.toggle('is-active', near > 0.85)
-      })
-      frame = requestAnimationFrame(tick)
+    // The radius follows the card width so the ring stays a circle on any screen.
+    // Pushing the stage back puts the front card on the perspective plane, so it
+    // renders at its natural size while the cards behind it recede.
+    const layout = () => {
+      const width = band.getBoundingClientRect().width
+      radius = Math.round(Math.min(cards[0].offsetWidth * 0.86, width / 2 - 8))
+      stage.style.transform = `translateZ(${-radius}px)`
+      place()
     }
 
-    // Only animate while the band is on screen.
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          measure()
-          if (!frame) frame = requestAnimationFrame(tick)
-        } else if (frame) {
-          cancelAnimationFrame(frame)
-          frame = undefined
-        }
-      },
-      { rootMargin: '150px' },
-    )
-    observer.observe(band)
+    layout()
 
-    const onResize = () => measure()
+    let resizeFrame
+    const onResize = () => {
+      cancelAnimationFrame(resizeFrame)
+      resizeFrame = requestAnimationFrame(layout)
+    }
     window.addEventListener('resize', onResize)
 
-    return () => {
-      observer.disconnect()
-      window.removeEventListener('resize', onResize)
-      if (frame) cancelAnimationFrame(frame)
+    // Reduced motion: hold the ring still with the first card facing the viewer.
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      return () => {
+        cancelAnimationFrame(resizeFrame)
+        window.removeEventListener('resize', onResize)
+      }
     }
-  }, [])
+
+    let last = performance.now()
+    let paused = false
+    let frame
+
+    const tick = (now) => {
+      const dt = Math.min(64, now - last) // ignore long gaps, e.g. a backgrounded tab
+      last = now
+      if (!paused) {
+        angle = (angle + (dt / TURN_MS) * 360) % 360
+        place()
+      }
+      frame = requestAnimationFrame(tick)
+    }
+    frame = requestAnimationFrame(tick)
+
+    const hold = () => { paused = true }
+    const release = () => { paused = false }
+    band.addEventListener('pointerenter', hold)
+    band.addEventListener('pointerleave', release)
+    band.addEventListener('focusin', hold)
+    band.addEventListener('focusout', release)
+
+    return () => {
+      cancelAnimationFrame(frame)
+      cancelAnimationFrame(resizeFrame)
+      band.removeEventListener('pointerenter', hold)
+      band.removeEventListener('pointerleave', release)
+      band.removeEventListener('focusin', hold)
+      band.removeEventListener('focusout', release)
+      window.removeEventListener('resize', onResize)
+    }
+  }, [count, step])
 
   return (
     <div
       ref={bandRef}
-      className="group/band relative mt-14 overflow-hidden py-10"
+      className="relative mt-14 overflow-hidden py-20 [perspective:1400px]"
       aria-label="Our promise: five key areas"
-      id={id}
     >
-      <div
-        ref={trackRef}
-        className="flex w-max animate-[marquee_110s_linear_infinite] items-stretch group-hover/band:[animation-play-state:paused] group-focus-within/band:[animation-play-state:paused]"
-      >
-        {[...Array(COPIES)].flatMap((_, copy) =>
-          areas.map(([icon, title, description], n) => (
-            <div
-              key={`${copy}-${n}`}
-              className="w-[19rem] shrink-0 px-3 sm:w-[22rem]"
-              aria-hidden={copy > 0 || undefined}
-            >
-              <div
-                ref={(el) => { cardRefs.current[copy * areas.length + n] = el }}
-                className="promise-card relative flex h-full flex-col rounded-3xl border border-slate-200 bg-white p-8"
-              >
-                <span className="promise-card-icon grid h-14 w-14 place-items-center rounded-2xl bg-brand-50 text-brand">
-                  <Icon name={icon} size={26} />
-                </span>
-                <h3 className="mt-6 text-xl font-bold">{title}</h3>
-                <p className="mt-3">{description}</p>
-              </div>
+      <div ref={stageRef} className="relative mx-auto h-[25rem] w-full [transform-style:preserve-3d] sm:h-[23rem]">
+        {areas.map(([icon, title, description], i) => (
+          <div
+            key={title}
+            ref={(el) => { cardRefs.current[i] = el }}
+            className="absolute left-1/2 top-1/2 h-full w-72 will-change-transform sm:w-96"
+          >
+            <div className="promise-card relative flex h-full flex-col rounded-3xl border border-slate-200 bg-white p-6 sm:p-8">
+              <span className="promise-card-icon grid h-12 w-12 place-items-center rounded-2xl bg-brand-50 text-brand sm:h-14 sm:w-14">
+                <Icon name={icon} size={26} />
+              </span>
+              <h3 className="mt-5 text-lg font-bold sm:mt-6 sm:text-xl">{title}</h3>
+              <p className="mt-3">{description}</p>
             </div>
-          )),
-        )}
+          </div>
+        ))}
       </div>
 
-      <span className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-white via-white/80 to-transparent sm:w-28" aria-hidden="true" />
-      <span className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-white via-white/80 to-transparent sm:w-28" aria-hidden="true" />
+      <span className="pointer-events-none absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-white via-white/70 to-transparent sm:w-32" aria-hidden="true" />
+      <span className="pointer-events-none absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-white via-white/70 to-transparent sm:w-32" aria-hidden="true" />
     </div>
   )
 }
