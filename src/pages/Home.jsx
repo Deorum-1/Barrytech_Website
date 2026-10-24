@@ -58,7 +58,7 @@ export default function Home() {
             ))
           )}
         </div>
-        <div className="mt-3 flex w-max animate-[marquee_35s_linear_infinite_reverse] gap-0 whitespace-nowrap">
+        <div className="mt-3 flex w-max animate-[marquee_240s_linear_infinite_reverse] gap-0 whitespace-nowrap">
           {[...Array(2)].flatMap((_, k) =>
             subServiceRibbon.map((t, n) => (
               <span key={`${k}-${n}`} className="flex items-center font-display text-sm font-bold uppercase tracking-widest text-slate-600">

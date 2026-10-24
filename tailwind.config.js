@@ -5,7 +5,7 @@ export default {
     extend: {
       colors: {
         brand: { DEFAULT: '#0a5a96', 50: '#eef6fc', 100: '#d6e9f7', 200: '#a9cfec', 300: '#6faedd', 400: '#2f86c4', 500: '#0a5a96', 600: '#084a7d', 700: '#073b64', 800: '#062c4b', 900: '#071b30' },
-        hot: { DEFAULT: '#ff1414', 600: '#e00c0c', 700: '#b80808', 100: '#ffe3e3' },
+        hot: { DEFAULT: '#ff1414', 100: '#ffe3e3', 400: '#ff4d4d', 600: '#e00c0c', 700: '#b80808' },
         ink: '#071b30',
       },
       fontFamily: { display: ['Sora', 'system-ui', 'sans-serif'], sans: ['Figtree', 'system-ui', 'sans-serif'] },
@@ -21,8 +21,8 @@ export default {
         'wheel-counter': { to: { transform: 'rotate(-360deg)' } },
       },
       animation: {
-        marquee: 'marquee 40s linear infinite',
-        'marquee-cards': 'marquee 75s linear infinite',
+        marquee: 'marquee 90s linear infinite',
+        'marquee-cards': 'marquee 120s linear infinite',
         drift: 'drift 12s ease-in-out infinite',
         dash: 'dash 2.4s ease-out forwards',
         orbit: 'orbit 22s linear infinite',
