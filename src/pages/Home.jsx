@@ -144,7 +144,7 @@ export default function Home() {
         <div className="container-x">
           <Reveal className="max-w-2xl">
             <p className="eyebrow">How we work</p>
-            <h2 className="mt-3 text-3xl font-bold sm:text-5xl">A clear path from assessment to support.</h2>
+            <h2 className="mt-3 text-3xl font-bold sm:text-5xl">A clear path of our approach from assessment to support.</h2>
             <p className="mt-5 text-lg">No jargon and no surprises. You always know what we are doing, why it matters, and what happens next.</p>
           </Reveal>
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
