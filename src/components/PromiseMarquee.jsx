@@ -31,14 +31,17 @@ export default function PromiseMarquee({ areas, id }) {
     const tick = () => {
       const bandBox = band.getBoundingClientRect()
       const bandCentre = bandBox.left + bandBox.width / 2
-      const reach = bandBox.width * 0.32
+      const reach = bandBox.width * 0.3
       const trackLeft = track.getBoundingClientRect().left
       cardRefs.current.forEach((el, i) => {
         if (!el || centres[i] == null) return
         const distance = Math.abs(trackLeft + centres[i] - bandCentre)
         const near = Math.max(0, 1 - distance / reach)
-        el.style.transform = `scale(${(0.86 + near * 0.26).toFixed(3)})`
-        el.style.opacity = (0.55 + near * 0.45).toFixed(3)
+        // The card at the middle is pushed forward: bigger, fully opaque and lifted
+        el.style.transform = `scale(${(0.78 + near * 0.42).toFixed(3)})`
+        el.style.opacity = (0.45 + near * 0.55).toFixed(3)
+        el.style.zIndex = String(1 + Math.round(near * 20))
+        el.classList.toggle('is-active', near > 0.85)
       })
       frame = requestAnimationFrame(tick)
     }
@@ -88,9 +91,9 @@ export default function PromiseMarquee({ areas, id }) {
             >
               <div
                 ref={(el) => { cardRefs.current[copy * areas.length + n] = el }}
-                className="flex h-full flex-col rounded-3xl border border-slate-200 bg-white p-8"
+                className="promise-card relative flex h-full flex-col rounded-3xl border border-slate-200 bg-white p-8"
               >
-                <span className="grid h-14 w-14 place-items-center rounded-2xl bg-brand-50 text-brand">
+                <span className="promise-card-icon grid h-14 w-14 place-items-center rounded-2xl bg-brand-50 text-brand">
                   <Icon name={icon} size={26} />
                 </span>
                 <h3 className="mt-6 text-xl font-bold">{title}</h3>
