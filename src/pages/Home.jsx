@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { ArrowRight, Check, LifeBuoy, MessageCircle, Phone, Rocket, ShieldCheck } from 'lucide-react'
+import { ArrowRight, Check, MessageCircle, Phone } from 'lucide-react'
 import Hero from '../components/Hero.jsx'
 import Reveal from '../components/Reveal.jsx'
 import Icon from '../components/Icon.jsx'
@@ -19,10 +19,13 @@ import projectDelivery from '../assets/images/project-delivery.jpg'
 import aiAutomation from '../assets/images/ai-automation.jpg'
 import itRoadmap from '../assets/images/it-roadmap.jpg'
 
-const pillars = [
-  [ShieldCheck, 'Digital Protection', "Safeguard your organization's critical assets with layered network, endpoint, cloud, and identity security."],
-  [LifeBuoy, 'Service Assurance', 'Drive your business forward without worrying about potential threats or disruptions, backed by proactive monitoring and support.'],
-  [Rocket, 'Service Delivery', 'Empowering businesses to navigate the digital landscape with confidence and uninterrupted operations.'],
+// The five key areas that enable digital success (our promise section)
+const keyAreas = [
+  ['Server', 'IT Infrastructure and Cloud Solutions', 'Build a reliable, scalable, and high-performance technology foundation through enterprise networking, data centers, cloud computing, and IT systems management.'],
+  ['ShieldCheck', 'Cybersecurity and Digital Trust', 'Protect organizational systems, data, applications, and users through network security, endpoint protection, identity management, threat detection, and risk management.'],
+  ['BrainCircuit', 'Artificial Intelligence and Digital Innovation', 'Accelerate business growth through AI adoption, intelligent automation, AI security, and innovative digital technologies.'],
+  ['Code2', 'Digital Transformation and Business Applications', 'Modernize business operations through application development, system integration, process automation, data analytics, and digital platforms.'],
+  ['Headset', 'Managed Services, Consulting and Digital Skills', 'Ensure operational excellence and sustainable digital growth through IT support, technology consulting, project management, and professional training.'],
 ]
 
 const wants = [
@@ -78,10 +81,12 @@ export default function Home() {
           <p className="mt-5 text-lg">Organizations move to BarryTech for world-class security and optimization, delivered with a customer-focused, affordable approach.</p>
         </Reveal>
         <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {pillars.map(([I, t, d], n) => (
-            <Reveal key={t} delay={n * 0.1} className="h-full">
+          {keyAreas.map(([icon, t, d], n) => (
+            <Reveal key={t} delay={n * 0.08} className="h-full">
               <div className="group h-full rounded-3xl border border-slate-200 p-8 transition duration-300 hover:-translate-y-1 hover:border-hot hover:shadow-xl">
-                <span className="grid h-14 w-14 place-items-center rounded-2xl bg-brand-50 text-brand transition group-hover:bg-hot group-hover:text-white"><I size={26} /></span>
+                <span className="grid h-14 w-14 place-items-center rounded-2xl bg-brand-50 text-brand transition group-hover:bg-hot group-hover:text-white">
+                  <Icon name={icon} size={26} />
+                </span>
                 <h3 className="mt-6 text-xl font-bold">{t}</h3>
                 <p className="mt-3">{d}</p>
               </div>
