@@ -10,6 +10,14 @@ import { services } from '../data/services.js'
 import { company } from '../data/company.js'
 // Used as the poster and the reduced-motion fallback for the feature band video
 import datacenter from '../assets/images/datacenter.jpg'
+import soc from '../assets/images/soc.jpg'
+import networkSupport from '../assets/images/network-support.jpg'
+import securityAccess from '../assets/images/security-access.jpg'
+import backupRecovery from '../assets/images/backup-recovery.jpg'
+import webProducts from '../assets/images/web-products.jpg'
+import projectDelivery from '../assets/images/project-delivery.jpg'
+import aiAutomation from '../assets/images/ai-automation.jpg'
+import itRoadmap from '../assets/images/it-roadmap.jpg'
 
 const pillars = [
   [ShieldCheck, 'Digital Protection', "Safeguard your organization's critical assets with layered network, endpoint, cloud, and identity security."],
@@ -18,9 +26,9 @@ const pillars = [
 ]
 
 const wants = [
-  { tab: 'Protect my business', items: [['Protect your network end-to-end', 'Next-generation firewalls, ZTNA, EDR/XDR, and DDoS protection.', 'cybersecurity'], ['Watch every door', 'CCTV, biometric access control, and integrated security management.', 'physical-security'], ['Prepare for the worst', 'Backup, disaster recovery, and incident response planning.', 'it-infrastructure']] },
-  { tab: 'Build and modernize', items: [['Build solid infrastructure', 'Networks, servers, data centers, cloud, and virtualization.', 'it-infrastructure'], ['Launch digital products', 'Websites, e-commerce, web apps, and mobile apps.', 'web-app-development'], ['Deliver on time', 'Structured project management from planning to handover.', 'project-management']] },
-  { tab: 'Run and grow smarter', items: [['Hand off daily IT', 'Help desk, managed network, cloud, and cybersecurity services.', 'managed-it'], ['Put AI to work', 'Assistants, automation, analytics, and AI security.', 'artificial-intelligence'], ['Plan your technology', 'IT roadmaps, budgets, asset and license management.', 'managed-it']] },
+  { tab: 'Protect my business', items: [['Protect your network end-to-end', 'Next-generation firewalls, ZTNA, EDR/XDR, and DDoS protection.', 'cybersecurity', soc], ['Watch every door', 'CCTV, biometric access control, and integrated security management.', 'physical-security', securityAccess], ['Prepare for the worst', 'Backup, disaster recovery, and incident response planning.', 'it-infrastructure', backupRecovery]] },
+  { tab: 'Build and modernize', items: [['Build solid infrastructure', 'Networks, servers, data centers, cloud, and virtualization.', 'it-infrastructure', datacenter], ['Launch digital products', 'Websites, e-commerce, web apps, and mobile apps.', 'web-app-development', webProducts], ['Deliver on time', 'Structured project management from planning to handover.', 'project-management', projectDelivery]] },
+  { tab: 'Run and grow smarter', items: [['Hand off daily IT', 'Help desk, managed network, cloud, and cybersecurity services.', 'managed-it', networkSupport], ['Put AI to work', 'Assistants, automation, analytics, and AI security.', 'artificial-intelligence', aiAutomation], ['Plan your technology', 'IT roadmaps, budgets, asset and license management.', 'managed-it', itRoadmap]] },
 ]
 
 export default function Home() {

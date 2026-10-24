@@ -89,7 +89,7 @@ export default function GoalMarquee({ goals }) {
   const reduce = useReducedMotion()
 
   const cards = goals.flatMap((goal, goalIndex) =>
-    goal.items.map(([title, desc, slug], itemIndex) => {
+    goal.items.map(([title, desc, slug, image], itemIndex) => {
       const service = serviceBySlug.get(slug)
       return {
         tab: goal.tab,
@@ -101,7 +101,7 @@ export default function GoalMarquee({ goals }) {
         accent: accents[goalIndex % accents.length],
         icon: service?.icon ?? 'ShieldCheck',
         service: service ?? { short: 'Explore service' },
-        image: service?.images[0]?.[0],
+        image: image ?? service?.images[0]?.[0],
       }
     })
   )
