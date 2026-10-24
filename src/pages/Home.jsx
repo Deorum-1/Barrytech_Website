@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { ArrowRight, Check, MessageCircle, Phone } from 'lucide-react'
+import { ArrowRight, Award, BadgeCheck, Check, HeartHandshake, Lightbulb, MessageCircle, Phone, Scale, ShieldCheck } from 'lucide-react'
 import Hero from '../components/Hero.jsx'
 import Reveal from '../components/Reveal.jsx'
 import Icon from '../components/Icon.jsx'
@@ -24,6 +24,16 @@ const keyAreas = [
   ['Code2', 'Digital Transformation and Business Applications', 'Modernize business operations through application development, system integration, process automation, data analytics, and digital platforms.'],
   ['Headset', 'Managed Services, Consulting and Digital Skills', 'Ensure operational excellence and sustainable digital growth through IT support, technology consulting, project management, and professional training.'],
 ]
+
+// Icon for each core value in company.values
+const valueIcons = {
+  Innovation: Lightbulb,
+  Integrity: Scale,
+  Security: ShieldCheck,
+  'Customer Satisfaction': HeartHandshake,
+  Excellence: Award,
+  Reliability: BadgeCheck,
+}
 
 // Solutions by use case — one card per outcome a business actually asks for
 const wants = [
@@ -190,6 +200,33 @@ export default function Home() {
             </ul>
             <Link to="/about" className="btn btn-red mt-10">About BarryTech</Link>
           </Reveal>
+        </div>
+      </section>
+
+      {/* core values */}
+      <section className="border-t border-slate-100 bg-white py-20 sm:py-24">
+        <div className="container-x">
+          <Reveal className="max-w-2xl">
+            <p className="eyebrow">What guides us</p>
+            <h2 className="mt-3 text-3xl font-bold sm:text-5xl">Our core values</h2>
+            <p className="mt-5 text-lg">The principles behind every recommendation we make and every system we protect.</p>
+          </Reveal>
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {company.values.map(([t, d], n) => {
+              const I = valueIcons[t] || BadgeCheck
+              return (
+                <Reveal key={t} delay={n * 0.06} className="h-full">
+                  <div className="h-full rounded-3xl border border-slate-200 p-7 transition duration-300 hover:border-brand-200 hover:shadow-lg">
+                    <span className="grid h-12 w-12 place-items-center rounded-2xl bg-brand-50 text-brand">
+                      <I size={24} />
+                    </span>
+                    <h3 className="mt-5 text-lg font-bold">{t}</h3>
+                    <p className="mt-2 text-sm">{d}</p>
+                  </div>
+                </Reveal>
+              )
+            })}
+          </div>
         </div>
       </section>
 
