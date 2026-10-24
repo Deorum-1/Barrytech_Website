@@ -12,12 +12,8 @@ import { company } from '../data/company.js'
 import datacenter from '../assets/images/datacenter.jpg'
 import soc from '../assets/images/soc.jpg'
 import networkSupport from '../assets/images/network-support.jpg'
-import securityAccess from '../assets/images/security-access.jpg'
-import backupRecovery from '../assets/images/backup-recovery.jpg'
 import webProducts from '../assets/images/web-products.jpg'
 import projectDelivery from '../assets/images/project-delivery.jpg'
-import aiAutomation from '../assets/images/ai-automation.jpg'
-import itRoadmap from '../assets/images/it-roadmap.jpg'
 
 // The five key areas that enable digital success (our promise section)
 const keyAreas = [
@@ -28,10 +24,13 @@ const keyAreas = [
   ['Headset', 'Managed Services, Consulting and Digital Skills', 'Ensure operational excellence and sustainable digital growth through IT support, technology consulting, project management, and professional training.'],
 ]
 
+// Solutions by use case — one card per outcome a business actually asks for
 const wants = [
-  { tab: 'Protect my business', items: [['Protect your network end-to-end', 'Next-generation firewalls, ZTNA, EDR/XDR, and DDoS protection.', 'cybersecurity', soc], ['Watch every door', 'CCTV, biometric access control, and integrated security management.', 'physical-security', securityAccess], ['Prepare for the worst', 'Backup, disaster recovery, and incident response planning.', 'it-infrastructure', backupRecovery]] },
-  { tab: 'Build and modernize', items: [['Build solid infrastructure', 'Networks, servers, data centers, cloud, and virtualization.', 'it-infrastructure', datacenter], ['Launch digital products', 'Websites, e-commerce, web apps, and mobile apps.', 'web-app-development', webProducts], ['Deliver on time', 'Structured project management from planning to handover.', 'project-management', projectDelivery]] },
-  { tab: 'Run and grow smarter', items: [['Hand off daily IT', 'Help desk, managed network, cloud, and cybersecurity services.', 'managed-it', networkSupport], ['Put AI to work', 'Assistants, automation, analytics, and AI security.', 'artificial-intelligence', aiAutomation], ['Plan your technology', 'IT roadmaps, budgets, asset and license management.', 'managed-it', itRoadmap]] },
+  { tab: 'Digital products', items: [['Launch digital products', 'Websites, e-commerce, web apps, and mobile apps built for growth.', 'web-app-development', webProducts]] },
+  { tab: 'Project delivery', items: [['Deliver on time', 'Structured project management from planning through handover.', 'project-management', projectDelivery]] },
+  { tab: 'Managed IT', items: [['Hand off daily IT', 'Help desk, managed network, cloud, and cybersecurity services.', 'managed-it', networkSupport]] },
+  { tab: 'Cybersecurity', items: [['Protect your organization end to end', 'Next-generation firewalls, ZTNA, EDR/XDR, and DDoS protection.', 'cybersecurity', soc]] },
+  { tab: 'IT infrastructure', items: [['Build solid infrastructure', 'Networks, servers, data centers, cloud, and virtualization.', 'it-infrastructure', datacenter]] },
 ]
 
 // Ribbon content: top row lists our services, bottom row lists the sub-services behind them
@@ -100,10 +99,10 @@ export default function Home() {
         <div className="container-x">
           <Reveal className="flex flex-wrap items-end justify-between gap-4">
             <div>
-              <p className="eyebrow">Solutions by goal</p>
+              <p className="eyebrow">Solutions by use case</p>
               <h2 className="mt-3 text-3xl font-bold sm:text-5xl">I want to&hellip;</h2>
             </div>
-            <p className="max-w-sm">Explore the services that move each goal forward, organized by the outcome you need.</p>
+            <p className="max-w-sm">Explore the services behind each use case, organized by the outcome you need.</p>
           </Reveal>
         </div>
 

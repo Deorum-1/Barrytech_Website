@@ -109,7 +109,7 @@ export default function GoalMarquee({ goals }) {
   return (
     <>
       <div className="container-x mt-8 hidden items-center justify-between gap-4 sm:mt-10 md:flex">
-        <ul className="flex flex-wrap items-center gap-x-6 gap-y-2" aria-label="Goals">
+        <ul className="flex flex-wrap items-center gap-x-6 gap-y-2" aria-label="Use cases">
           {goals.map((goal, i) => (
             <li key={goal.tab} className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.14em] text-slate-500">
               <span className={`h-1.5 w-1.5 rounded-full ${accents[i % accents.length].dot}`} aria-hidden="true" />
@@ -148,7 +148,8 @@ export default function GoalMarquee({ goals }) {
             style={paused ? { animationPlayState: 'paused' } : undefined}
           >
             <CardSet cards={cards} />
-            <CardSet cards={cards} clone />
+            {/* three repeats keep the loop seamless even with a short card list */}
+            {[1, 2, 3].map((n) => <CardSet key={n} cards={cards} clone />)}
           </div>
           <span
             className="pointer-events-none absolute inset-y-0 left-0 hidden w-20 bg-gradient-to-r from-brand-50 via-brand-50/80 to-transparent md:block"
@@ -164,7 +165,7 @@ export default function GoalMarquee({ goals }) {
       <div className="container-x mt-8 flex justify-center">
         <Link
           to="/contact"
-          className="inline-flex items-center gap-2 text-sm font-semibold text-brand transition hover:text-hot"
+          className="inline-flex items-center gap-2 text-sm font-semibold text-brand transition hover:text-hot-600"
         >
           Not sure where to start? Talk to our team
           <ArrowRight size={16} aria-hidden="true" />
