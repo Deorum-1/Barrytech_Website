@@ -94,17 +94,33 @@
     transform: rotateY(180deg);
   }
 
-  /* Promise marquee: the card nearest the middle is the prominent one */
+  /* Promise ring: a dark cinema band lit by a projector glow */
+  .cinema-band {
+    background: radial-gradient(60% 55% at 50% 45%, rgba(10, 90, 150, .55), transparent 72%), radial-gradient(50% 45% at 50% 100%, rgba(255, 20, 20, .18), transparent 75%);
+  }
+
+  .cinema-vignette {
+    background: radial-gradient(ellipse at center, transparent 45%, rgba(2, 8, 16, .92));
+  }
+
+  .cinema-grain {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23g)'/%3E%3C/svg%3E");
+    opacity: .1;
+    mix-blend-mode: overlay;
+  }
+
+  /* The promise cards read as posters: the one facing the front is the lit one */
   .promise-card {
-    transition: box-shadow .35s ease, border-color .35s ease;
+    transition: box-shadow .45s ease, border-color .45s ease;
   }
 
   .promise-card.is-active {
-    border-color: transparent;
-    box-shadow: 0 0 0 2px rgba(10, 90, 150, .45), 0 34px 70px -30px rgba(7, 27, 48, .6);
+    border-color: rgba(255, 77, 77, .6);
+    box-shadow: 0 0 0 1px rgba(255, 77, 77, .35), 0 0 100px -12px rgba(255, 20, 20, .55), 0 44px 90px -34px rgba(0, 0, 0, 1);
   }
 
   .promise-card.is-active .promise-card-icon {
-    @apply bg-brand text-white;
+    @apply bg-hot-600 text-white;
+    box-shadow: 0 0 34px -6px rgba(255, 20, 20, .8);
   }
 }

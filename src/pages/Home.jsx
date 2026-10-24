@@ -74,11 +74,11 @@ export default function Home() {
       </section>
 
       {/* enabling digital success */}
-      <section id="enabling-digital-success" data-nav-switch className="py-20 sm:py-24">
+      <section id="enabling-digital-success" data-nav-switch className="bg-ink py-20 text-slate-300 sm:py-24">
         <div className="container-x">
           <Reveal className="mx-auto max-w-3xl text-center">
-            <p className="eyebrow">Our promise</p>
-            <h2 className="mt-3 text-3xl font-bold sm:text-5xl">Enabling digital success</h2>
+            <p className="eyebrow text-hot-400">Our promise</p>
+            <h2 className="mt-3 text-3xl font-bold text-white sm:text-5xl">Enabling digital success</h2>
             <p className="mt-5 text-lg">Organizations move to BarryTech for world-class security and optimization, delivered with a customer-focused, affordable approach.</p>
           </Reveal>
         </div>

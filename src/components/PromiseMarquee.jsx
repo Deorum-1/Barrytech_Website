@@ -3,7 +3,7 @@ import Icon from './Icon.jsx'
 
 // The key areas sit on a ring that turns slowly like a carousel: the card facing
 // the front of the ring is the one in view, so it carries the weight of the section.
-const TURN_MS = 34000 // one full turn
+const TURN_MS = 46000 // one full turn
 const LIFT = 34 // how far the cards at the back ride up, so the ring reads as a circle
 
 export default function PromiseMarquee({ areas }) {
@@ -102,29 +102,35 @@ export default function PromiseMarquee({ areas }) {
   return (
     <div
       ref={bandRef}
-      className="relative mt-14 overflow-hidden py-20 [perspective:1400px]"
+      className="cinema-band relative mt-14 overflow-hidden py-24 [perspective:1400px]"
       aria-label="Our promise: five key areas"
     >
-      <div ref={stageRef} className="relative mx-auto h-[25rem] w-full [transform-style:preserve-3d] sm:h-[23rem]">
+      <div ref={stageRef} className="relative mx-auto h-[26rem] w-full [transform-style:preserve-3d] sm:h-[24rem]">
         {areas.map(([icon, title, description], i) => (
           <div
             key={title}
             ref={(el) => { cardRefs.current[i] = el }}
-            className="absolute left-1/2 top-1/2 h-full w-72 will-change-transform sm:w-96"
+            className="absolute left-1/2 top-1/2 h-full w-72 will-change-transform sm:w-80"
           >
-            <div className="promise-card relative flex h-full flex-col rounded-3xl border border-slate-200 bg-white p-6 sm:p-8">
-              <span className="promise-card-icon grid h-12 w-12 place-items-center rounded-2xl bg-brand-50 text-brand sm:h-14 sm:w-14">
+            <div className="promise-card relative flex h-full flex-col overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-b from-brand-800/70 via-ink to-ink p-6 shadow-[0_30px_70px_-34px_rgba(0,0,0,0.95)] sm:p-8">
+              {/* a beam of light along the top edge, like projector spill */}
+              <span aria-hidden="true" className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-hot/70 to-transparent" />
+              <span className="promise-card-icon grid h-12 w-12 place-items-center rounded-2xl bg-white/10 text-hot-400 backdrop-blur transition-colors duration-500 sm:h-14 sm:w-14">
                 <Icon name={icon} size={26} />
               </span>
-              <h3 className="mt-5 text-lg font-bold sm:mt-6 sm:text-xl">{title}</h3>
-              <p className="mt-3">{description}</p>
+              <h3 className="mt-5 text-lg font-bold text-white sm:mt-6 sm:text-xl">{title}</h3>
+              <p className="mt-3 text-sm leading-relaxed text-slate-400">{description}</p>
+              <span className="mt-auto pt-6 font-display text-[0.65rem] font-bold uppercase tracking-[0.35em] text-white/35">
+                {String(i + 1).padStart(2, '0')} / {String(count).padStart(2, '0')}
+              </span>
             </div>
           </div>
         ))}
       </div>
 
-      <span className="pointer-events-none absolute inset-y-0 left-0 w-12 bg-gradient-to-r from-white via-white/70 to-transparent sm:w-32" aria-hidden="true" />
-      <span className="pointer-events-none absolute inset-y-0 right-0 w-12 bg-gradient-to-l from-white via-white/70 to-transparent sm:w-32" aria-hidden="true" />
+      {/* cinema framing: the ring fades into darkness inside the vignette */}
+      <span aria-hidden="true" className="cinema-vignette pointer-events-none absolute inset-0 z-10" />
+      <span aria-hidden="true" className="cinema-grain pointer-events-none absolute inset-0 z-10" />
     </div>
   )
 }
