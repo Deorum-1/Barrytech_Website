@@ -4,7 +4,7 @@ import Hero from '../components/Hero.jsx'
 import Reveal from '../components/Reveal.jsx'
 import Icon from '../components/Icon.jsx'
 import LazyVideo from '../components/LazyVideo.jsx'
-import GoalWheel from '../components/GoalWheel.jsx'
+import GoalMarquee from '../components/GoalMarquee.jsx'
 import usePageMeta from '../hooks/usePageMeta.js'
 import { services } from '../data/services.js'
 import { company } from '../data/company.js'
@@ -85,13 +85,11 @@ export default function Home() {
               <p className="eyebrow">Solutions by goal</p>
               <h2 className="mt-3 text-3xl font-bold sm:text-5xl">I want to&hellip;</h2>
             </div>
-            <p className="max-w-sm">Start from the outcome you need. Choose a goal to see the services that move it forward.</p>
+            <p className="max-w-sm">Explore the services that move each goal forward, organized by the outcome you need.</p>
           </Reveal>
-
-          <div className="mt-12 lg:mt-16">
-            <GoalWheel goals={wants} />
-          </div>
         </div>
+
+        <GoalMarquee goals={wants} />
       </section>
 
       {/* services grid */}

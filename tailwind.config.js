@@ -22,6 +22,7 @@ export default {
       },
       animation: {
         marquee: 'marquee 40s linear infinite',
+        'marquee-cards': 'marquee 75s linear infinite',
         drift: 'drift 12s ease-in-out infinite',
         dash: 'dash 2.4s ease-out forwards',
         orbit: 'orbit 22s linear infinite',
