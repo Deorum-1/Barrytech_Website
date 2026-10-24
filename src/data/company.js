@@ -14,6 +14,7 @@ export const company = {
     ['Assess', 'We review your environment, risks, and business goals before recommending anything.'],
     ['Design', 'We shape a practical, secure, and cost-aware plan around your priorities.'],
     ['Deploy', 'Our team implements, configures, and tests the agreed technology.'],
+    ['Optimize', 'We tune performance, security, and cost so the environment keeps improving.'],
     ['Support', 'We monitor, maintain, and improve the environment long after handover.'],
   ],
   slogan: 'Modern Technology. Smarter Solutions. Stronger Security.',

@@ -31,6 +31,10 @@ const wants = [
   { tab: 'Run and grow smarter', items: [['Hand off daily IT', 'Help desk, managed network, cloud, and cybersecurity services.', 'managed-it', networkSupport], ['Put AI to work', 'Assistants, automation, analytics, and AI security.', 'artificial-intelligence', aiAutomation], ['Plan your technology', 'IT roadmaps, budgets, asset and license management.', 'managed-it', itRoadmap]] },
 ]
 
+// Ribbon content: top row lists our services, bottom row lists the sub-services behind them
+const serviceRibbon = services.map((s) => s.short)
+const subServiceRibbon = services.flatMap((s) => s.offerings.slice(0, 4).map(([title]) => title))
+
 export default function Home() {
   usePageMeta(
     null,
@@ -45,7 +49,7 @@ export default function Home() {
       <section className="overflow-hidden bg-ink py-5" aria-hidden="true">
         <div className="flex w-max animate-marquee gap-0 whitespace-nowrap">
           {[...Array(2)].flatMap((_, k) =>
-            ['Cybersecurity', 'IT Infrastructure', 'Cloud Computing', 'AI Solutions', 'Managed IT', 'Web Development', 'Network Design', 'Data Protection', 'Project Management', 'Physical Security'].map((t, n) => (
+            serviceRibbon.map((t, n) => (
               <span key={`${k}-${n}`} className="flex items-center font-display text-sm font-bold uppercase tracking-widest text-slate-400">
                 <span className="px-8">{t}</span>
                 <span className="text-hot">✦</span>
@@ -55,7 +59,7 @@ export default function Home() {
         </div>
         <div className="mt-3 flex w-max animate-[marquee_35s_linear_infinite_reverse] gap-0 whitespace-nowrap">
           {[...Array(2)].flatMap((_, k) =>
-            ['Digital Transformation', 'Zero Trust Security', 'SOC Services', 'Endpoint Protection', 'Business Continuity', 'Cloud Migration', 'IT Consultancy', 'Firewall Solutions', 'Secure by Design', 'Smart Automation'].map((t, n) => (
+            subServiceRibbon.map((t, n) => (
               <span key={`${k}-${n}`} className="flex items-center font-display text-sm font-bold uppercase tracking-widest text-slate-600">
                 <span className="px-8">{t}</span>
                 <span className="text-brand-400">✦</span>
@@ -123,7 +127,7 @@ export default function Home() {
               <h3 className="mt-5 text-lg font-bold text-white">Not sure where to start?</h3>
               <p className="mt-2 text-sm text-slate-300">Tell us what is slowing you down. We will point you to the right service.</p>
             </div>
-            <span className="inline-flex items-center gap-2 text-sm font-semibold text-hot">
+            <span className="inline-flex items-center gap-2 text-sm font-semibold text-hot-400">
               Talk to our team <ArrowRight size={16} className="transition group-hover:translate-x-1" />
             </span>
           </Link>
@@ -138,11 +142,11 @@ export default function Home() {
             <h2 className="mt-3 text-3xl font-bold sm:text-5xl">A clear path from assessment to support.</h2>
             <p className="mt-5 text-lg">No jargon and no surprises. You always know what we are doing, why it matters, and what happens next.</p>
           </Reveal>
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
             {company.howWeWork.map(([t, d], n) => (
               <Reveal key={t} delay={n * 0.08} className="h-full">
                 <div className="relative h-full rounded-3xl border border-slate-200 p-7 transition duration-300 hover:border-brand-200 hover:shadow-lg">
-                  <span className="grid h-10 w-10 place-items-center rounded-full bg-hot font-display text-sm font-bold text-white">{n + 1}</span>
+                  <span className="grid h-10 w-10 place-items-center rounded-full bg-hot-600 font-display text-sm font-bold text-white">{n + 1}</span>
                   <h3 className="mt-5 text-lg font-bold">{t}</h3>
                   <p className="mt-2 text-sm">{d}</p>
                 </div>
