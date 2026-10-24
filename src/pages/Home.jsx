@@ -5,6 +5,7 @@ import Reveal from '../components/Reveal.jsx'
 import Icon from '../components/Icon.jsx'
 import LazyVideo from '../components/LazyVideo.jsx'
 import GoalMarquee from '../components/GoalMarquee.jsx'
+import PromiseMarquee from '../components/PromiseMarquee.jsx'
 import usePageMeta from '../hooks/usePageMeta.js'
 import { services } from '../data/services.js'
 import { company } from '../data/company.js'
@@ -73,25 +74,15 @@ export default function Home() {
       </section>
 
       {/* enabling digital success */}
-      <section id="enabling-digital-success" data-nav-switch className="container-x py-20 sm:py-24">
-        <Reveal className="mx-auto max-w-3xl text-center">
-          <p className="eyebrow">Our promise</p>
-          <h2 className="mt-3 text-3xl font-bold sm:text-5xl">Enabling digital success</h2>
-          <p className="mt-5 text-lg">Organizations move to BarryTech for world-class security and optimization, delivered with a customer-focused, affordable approach.</p>
-        </Reveal>
-        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {keyAreas.map(([icon, t, d], n) => (
-            <Reveal key={t} delay={n * 0.08} className="h-full">
-              <div className="group h-full rounded-3xl border border-slate-200 p-8 transition duration-300 hover:-translate-y-1 hover:border-hot hover:shadow-xl">
-                <span className="grid h-14 w-14 place-items-center rounded-2xl bg-brand-50 text-brand transition group-hover:bg-hot group-hover:text-white">
-                  <Icon name={icon} size={26} />
-                </span>
-                <h3 className="mt-6 text-xl font-bold">{t}</h3>
-                <p className="mt-3">{d}</p>
-              </div>
-            </Reveal>
-          ))}
+      <section id="enabling-digital-success" data-nav-switch className="py-20 sm:py-24">
+        <div className="container-x">
+          <Reveal className="mx-auto max-w-3xl text-center">
+            <p className="eyebrow">Our promise</p>
+            <h2 className="mt-3 text-3xl font-bold sm:text-5xl">Enabling digital success</h2>
+            <p className="mt-5 text-lg">Organizations move to BarryTech for world-class security and optimization, delivered with a customer-focused, affordable approach.</p>
+          </Reveal>
         </div>
+        <PromiseMarquee areas={keyAreas} />
       </section>
 
       {/* I want to... */}
