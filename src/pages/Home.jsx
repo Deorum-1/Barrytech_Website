@@ -188,10 +188,15 @@ export default function Home() {
         </div>
       </section>
 
-      {/* marquee */}
+      {/* marquee — our vision */}
       <section className="overflow-hidden border-b border-slate-100 bg-white py-8" aria-hidden="true">
-        <div className="flex w-max animate-marquee gap-12 whitespace-nowrap font-display text-2xl font-bold text-brand-200">
-          {[...Array(2)].flatMap((_, k) => company.whatWeDo.concat(company.values).map(([t], n) => <span key={`${k}-${n}`}>{t}<span className="ml-12 text-hot">/</span></span>))}
+        <div className="flex w-max animate-marquee items-center gap-12 whitespace-nowrap font-display text-2xl font-bold text-brand-200">
+          {[...Array(2)].flatMap((_, k) => (
+            <span key={k} className="flex items-center">
+              {company.vision}
+              <span className="ml-12 text-hot">/</span>
+            </span>
+          ))}
         </div>
       </section>
 
