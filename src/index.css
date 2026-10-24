@@ -13,12 +13,17 @@
 }
 @layer components {
   .container-x { @apply mx-auto w-full max-w-7xl px-5 sm:px-8; }
-  .eyebrow { @apply text-xs font-bold uppercase tracking-[0.2em] text-hot; }
+  .eyebrow { @apply text-xs font-bold uppercase tracking-[0.2em] text-hot-600; }
+  .swoosh-bg .eyebrow { @apply text-hot-400; }
   .btn { @apply inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition duration-300; }
-  .btn-red { @apply bg-hot text-white hover:bg-hot-700 hover:shadow-lg hover:shadow-hot/30; }
+  .btn-red { @apply bg-hot-600 text-white hover:bg-hot-700 hover:shadow-lg hover:shadow-hot/30; }
   .btn-blue { @apply bg-brand text-white hover:bg-brand-700; }
   .btn-ghost { @apply border border-white/40 text-white hover:bg-white hover:text-ink; }
   .btn-outline { @apply border border-brand text-brand hover:bg-brand hover:text-white; }
   .skip-link { @apply fixed left-4 top-4 z-[100] -translate-y-24 rounded-full bg-white px-5 py-3 text-sm font-semibold text-ink shadow-lg transition focus:translate-y-0; }
   .swoosh-bg { background: radial-gradient(1200px 600px at 85% -10%, rgba(10,90,150,.55), transparent 60%), radial-gradient(900px 500px at -10% 110%, rgba(255,20,20,.35), transparent 60%), #071b30; }
+  /* Cards that flip on hover/focus (What we do grid) */
+  .flip-inner { transform-style: preserve-3d; }
+  .flip-face { backface-visibility: hidden; -webkit-backface-visibility: hidden; }
+  .flip-face-back { transform: rotateY(180deg); }
 }

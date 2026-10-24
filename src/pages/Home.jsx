@@ -120,10 +120,22 @@ export default function Home() {
         </Reveal>
         <div className="mt-12 grid gap-px overflow-hidden rounded-3xl border border-slate-200 bg-slate-200 sm:grid-cols-2 lg:grid-cols-4">
           {services.map((s) => (
-            <Link key={s.slug} to={`/services/${s.slug}`} className="group relative bg-white p-7 transition duration-300 hover:bg-ink">
-              <Icon name={s.icon} size={30} className="text-brand transition group-hover:text-hot" />
-              <h3 className="mt-5 text-lg font-bold transition group-hover:text-white">{s.short}</h3>
-              <p className="mt-2 line-clamp-3 text-sm transition group-hover:text-slate-300">{s.tagline}</p>
+            <Link key={s.slug} to={`/services/${s.slug}`} className="group relative block bg-white [perspective:1200px]">
+              <div className="flip-inner relative h-full w-full transition-transform duration-700 ease-out group-hover:[transform:rotateY(180deg)] group-focus-visible:[transform:rotateY(180deg)]">
+                <div className="flip-face h-full p-7">
+                  <Icon name={s.icon} size={30} className="text-brand" />
+                  <h3 className="mt-5 text-lg font-bold">{s.short}</h3>
+                  <p className="mt-2 line-clamp-3 text-sm">{s.tagline}</p>
+                </div>
+                <div className="flip-face flip-face-back absolute inset-0 flex h-full flex-col bg-ink p-7 text-white">
+                  <Icon name={s.icon} size={30} className="text-hot" />
+                  <h3 className="mt-5 text-lg font-bold text-white">{s.short}</h3>
+                  <p className="mt-2 line-clamp-3 text-sm text-slate-300">{s.tagline}</p>
+                  <span className="mt-auto inline-flex items-center gap-2 pt-6 text-sm font-semibold text-hot-400">
+                    Explore service <ArrowRight size={16} />
+                  </span>
+                </div>
+              </div>
             </Link>
           ))}
           <Link to="/contact" className="group relative flex flex-col justify-between gap-6 bg-ink p-7 text-white transition duration-300 hover:bg-brand-800">
