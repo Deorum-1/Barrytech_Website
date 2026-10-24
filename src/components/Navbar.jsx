@@ -3,6 +3,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { ArrowRight, ArrowUpRight, ChevronDown, ChevronRight, Mail, Menu, X } from 'lucide-react'
 import logo from '../assets/logo.png'
+import logoOnLight from '../assets/logo-on-light.png'
 import Icon from './Icon.jsx'
 import { services } from '../data/services.js'
 import { company } from '../data/company.js'
@@ -116,15 +117,9 @@ export default function Navbar() {
               aria-label="BarryTech home"
               className="group shrink-0 rounded-2xl focus-visible:outline-offset-4"
             >
-              <span
-                className={`flex h-11 items-center rounded-2xl px-2.5 transition-all duration-500 ${
-                  light
-                    ? 'bg-transparent'
-                    : 'bg-white shadow-[0_0_30px_-10px_rgba(255,255,255,0.55)]'
-                }`}
-              >
+              <span>
                 <img
-                  src={logo}
+                  src={light ? logoOnLight : logo}
                   alt="BarryTech — Secure Digital Innovations"
                   width="931"
                   height="268"
@@ -264,7 +259,7 @@ export default function Navbar() {
                   : 'bg-hot-600 shadow-[0_12px_32px_-12px_rgba(255,20,20,0.8)] hover:bg-hot-700'
               }`}
             >
-              Work with us
+              Speak to an Expert
               <ArrowUpRight
                 size={15}
                 className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
@@ -422,7 +417,7 @@ export default function Navbar() {
                 onClick={close}
                 className="group mt-3 flex items-center justify-center gap-2 rounded-full bg-hot-600 px-4 py-3 text-sm font-semibold text-white shadow-lg shadow-hot/25 transition-colors duration-300 hover:bg-hot-700"
               >
-                Work with us
+                Speak to an Expert
                 <ArrowUpRight
                   size={15}
                   className="transition-transform duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
