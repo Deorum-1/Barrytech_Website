@@ -19,6 +19,7 @@ export const services = [
     intro: 'We help businesses build, manage, and maintain reliable, secure, and high-performing technology environments that support business continuity, operational efficiency, and digital transformation.',
     images: [[datacenter, 'Data Center Infrastructure'], [servers, 'High-Density Server Environments'], [cabling, 'Network Installation & Cabling'], [inspection, 'Infrastructure Inspection & Optimization']],
     closing: 'Modern Technology. Smarter Infrastructure. Stronger Security.',
+    cta: 'Have an infrastructure project, or a network you want reviewed?',
     offerings: [
       ['Network Design and Implementation', 'We design, deploy, and optimize reliable business networks that support secure communication and seamless connectivity.', ['LAN and WAN design and deployment', 'Router, switch, and wireless network installation', 'Network performance optimization', 'VLAN configuration and network segmentation']],
       ['Server and Data Center Solutions', 'We help organizations deploy and manage server environments that support critical business applications and enterprise workloads.', ['Physical and virtual server deployment', 'Server configuration and administration', 'Data center infrastructure setup', 'Storage and backup infrastructure']],
@@ -36,6 +37,7 @@ export const services = [
     intro: 'We provide modern physical security solutions that help businesses, institutions, and individuals protect facilities, monitor activities, control access, and improve overall safety, integrated with modern IT infrastructure.',
     images: [[securityAccess, 'CCTV, Access Control and Integrated Security']],
     closing: 'Smarter Surveillance. Controlled Access. Enhanced Protection.',
+    cta: 'Need to protect a site, or a security system you want checked?',
     offerings: [
       ['CCTV and Video Surveillance', 'Video surveillance systems that help organizations monitor premises, deter suspicious activity, and support incident investigations.', ['IP and HD CCTV camera installation', 'Indoor and outdoor surveillance', 'NVR and DVR solutions', 'Remote video monitoring', 'Video storage and retrieval', 'Intelligent video analytics']],
       ['Access Control Systems', 'We help organizations control who enters their buildings, offices, restricted areas, and critical facilities.', ['Biometric access control', 'Facial recognition and fingerprint readers', 'RFID cards and smart card access', 'Door access control and electronic locks', 'Visitor management systems', 'Access logs and centralized administration']],
@@ -52,6 +54,7 @@ export const services = [
     intro: 'We help businesses, institutions, and individuals protect digital assets, secure IT infrastructure, and manage evolving cyber risks through preventive controls, threat detection, risk management, and incident response.',
     images: [[soc, 'Security Operations Center: Real-time Threat Detection & Response']],
     closing: 'Intelligent Security. Proactive Defense. Digital Confidence.',
+    cta: 'Have a security concern, or an environment you want checked?',
     offerings: [
       ['Network Security', 'Protecting enterprise networks, internet gateways, and connected infrastructure against cyber threats.', ['Next-generation firewalls and IPS', 'Network access control (NAC)', 'Network detection and response (NDR)', 'Secure VPN and Zero Trust Network Access (ZTNA)', 'Network segmentation and DDoS protection']],
       ['Endpoint and Server Security', 'Securing employee devices, servers, and business endpoints against malware, ransomware, and unauthorized activity.', ['Endpoint Detection and Response (EDR)', 'Extended Detection and Response (XDR)', 'Anti-malware and ransomware protection', 'Endpoint compliance and device control', 'Server security and hardening']],
@@ -71,6 +74,7 @@ export const services = [
     intro: 'We help businesses maintain secure, reliable, and efficient technology environments without the complexity of managing every IT function internally: infrastructure, performance monitoring, cybersecurity controls, and technical issues.',
     images: [[netSupport, 'Hands-on Network Support'], [serverRoom, 'Office Network & Server Room Solutions']],
     closing: 'We Manage Your Technology. You Focus on Your Business.',
+    cta: 'Want to hand off daily IT, or a support gap you want closed?',
     offerings: [
       ['Managed IT Support and Help Desk', 'Ongoing technical support to help employees resolve IT issues and maintain productivity.', ['Remote and on-site technical support', 'End-user and desktop support', 'Hardware and software troubleshooting', 'User account and access administration', 'IT service request and incident management']],
       ['Managed Network and Infrastructure', 'Proactive management of network and infrastructure environments to improve reliability and availability.', ['Router, switch, firewall, and Wi-Fi management', 'Server and storage administration', 'Network performance monitoring', 'Configuration and firmware management', 'Infrastructure health reporting']],
@@ -89,6 +93,7 @@ export const services = [
     intro: 'We combine structured methodologies, technical expertise, and stakeholder coordination to help businesses achieve project objectives within agreed timelines, budgets, and quality expectations.',
     images: [[projectDelivery, 'Project Planning, Coordination and Delivery']],
     closing: 'Planning Better. Delivering Smarter. Achieving More.',
+    cta: 'Have a project to deliver, or a plan you want reviewed?',
     offerings: [
       ['IT Project Planning and Initiation', 'We help organizations establish clear project objectives, define requirements, and develop structured plans.', ['Project scope and requirements definition', 'Feasibility assessment and planning', 'Project schedules and milestones', 'Resource and budget planning', 'Risk identification and mitigation']],
       ['IT Infrastructure Project Management', 'We coordinate technology projects involving deployment, upgrade, and optimization of enterprise IT infrastructure.', ['Network and data center deployments', 'Server, storage, and virtualization projects', 'Cloud infrastructure implementation', 'Hardware and software deployment coordination']],
@@ -105,6 +110,7 @@ export const services = [
     intro: 'We provide website design, application development, and web application solutions that help businesses establish a strong digital presence, streamline operations, improve customer engagement, and accelerate growth, using modern design, software engineering, and security-conscious practices.',
     images: [[webProducts, 'Website, E-Commerce and Web Application Development']],
     closing: 'Innovative Design. Intelligent Applications. Secure Digital Experiences.',
+    cta: 'Have a digital product in mind, or a platform you want improved?',
     offerings: [
       ['Website Design and Development', 'Professional websites that communicate your brand, showcase services, and connect with customers.', ['Corporate and business websites', 'Company profile and portfolio websites', 'Landing pages and promotional websites', 'Responsive mobile-friendly designs', 'Content management systems (CMS)', 'Website redesign and modernization']],
       ['E-commerce Website Development', 'Online shopping platforms for products, orders, and digital customer service.', ['Online stores and product catalogs', 'Shopping carts and checkout workflows', 'Payment gateway integration', 'Inventory and order management', 'Customer accounts and sales reporting']],
@@ -122,6 +128,7 @@ export const services = [
     intro: 'We help businesses explore and adopt AI to improve productivity, automate repetitive tasks, enhance decision-making, and create new digital opportunities, from AI-powered customer service and workflow automation to enterprise AI integration, data analytics, and AI security.',
     images: [[aiAutomation, 'AI Automation, Analytics and Secure Adoption'], [cloud, 'AI-Ready Cloud Infrastructure']],
     closing: 'Intelligent Solutions. Secure Innovation. Smarter Business.',
+    cta: 'Have an AI use case, or an automation you want to explore?',
     offerings: [
       ['AI Consulting and Strategy', 'Identify where AI can deliver measurable business value and develop a practical adoption roadmap.', ['AI readiness assessments', 'AI use-case identification and prioritization', 'AI implementation roadmaps', 'Business process assessment', 'AI investment and ROI planning']],
       ['Generative AI and Enterprise AI Assistants', 'Use generative AI to access information, create content, support employees, and improve customer experiences.', ['AI-powered chatbots and virtual assistants', 'Enterprise knowledge assistants', 'Intelligent document search and summarization', 'AI-powered customer support', 'Private knowledge assistants connected to approved business documents']],

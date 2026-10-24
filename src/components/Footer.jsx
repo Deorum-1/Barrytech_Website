@@ -8,6 +8,8 @@ const { contact } = company
 
 export default function Footer() {
   const { pathname } = useLocation()
+  // On a service page the band speaks to that service; elsewhere it stays generic
+  const service = services.find((s) => `/services/${s.slug}` === pathname)
 
   return (
     <footer className="swoosh-bg text-slate-300">
@@ -16,9 +18,9 @@ export default function Footer() {
         <div className="border-b border-white/10">
           <div className="container-x flex flex-col gap-6 py-12 md:flex-row md:items-center md:justify-between">
             <div>
-              <p className="text-xs font-bold uppercase tracking-[0.2em] text-hot">Let&rsquo;s talk</p>
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-hot-400">Let&rsquo;s talk</p>
               <h2 className="mt-2 max-w-xl text-2xl font-bold text-white sm:text-3xl">
-                Have a project, or a security concern you want checked?
+                {service?.cta || 'Have a project, or a security concern you want checked?'}
               </h2>
             </div>
             <div className="flex flex-wrap gap-3">
@@ -36,7 +38,7 @@ export default function Footer() {
 
       <div className="container-x grid gap-10 py-14 sm:grid-cols-2 md:grid-cols-4">
         <div>
-          <span className="inline-block rounded-xl bg-white p-3"><img src={logo} alt="BarryTech" className="h-10 w-auto" /></span>
+          <span ><img src={logo} alt="BarryTech" width="931" height="268" className="h-10 w-auto" /></span>
           <p className="mt-5 max-w-xs text-sm leading-relaxed">{company.slogan}</p>
           <a
             href={`https://wa.me/${contact.whatsapp}`}
