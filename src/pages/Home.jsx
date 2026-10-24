@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { ArrowRight, Award, BadgeCheck, Check, HeartHandshake, Lightbulb, MessageCircle, Phone, Scale, ShieldCheck } from 'lucide-react'
+import { ArrowRight, Check, MessageCircle, Phone } from 'lucide-react'
 import Hero from '../components/Hero.jsx'
 import Reveal from '../components/Reveal.jsx'
 import Icon from '../components/Icon.jsx'
@@ -24,16 +24,6 @@ const keyAreas = [
   ['Code2', 'Digital Transformation and Business Applications', 'Modernize business operations through application development, system integration, process automation, data analytics, and digital platforms.'],
   ['Headset', 'Managed Services, Consulting and Digital Skills', 'Ensure operational excellence and sustainable digital growth through IT support, technology consulting, project management, and professional training.'],
 ]
-
-// Icon for each core value in company.values
-const valueIcons = {
-  Innovation: Lightbulb,
-  Integrity: Scale,
-  Security: ShieldCheck,
-  'Customer Satisfaction': HeartHandshake,
-  Excellence: Award,
-  Reliability: BadgeCheck,
-}
 
 // Solutions by use case — one card per outcome a business actually asks for
 const wants = [
@@ -203,42 +193,18 @@ export default function Home() {
         </div>
       </section>
 
-      {/* core values */}
-      <section className="border-t border-slate-100 bg-white py-20 sm:py-24">
-        <div className="container-x">
-          <Reveal className="max-w-2xl">
-            <p className="eyebrow">What guides us</p>
-            <h2 className="mt-3 text-3xl font-bold sm:text-5xl">Our core values</h2>
-            <p className="mt-5 text-lg">The principles behind every recommendation we make and every system we protect.</p>
-          </Reveal>
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {company.values.map(([t, d], n) => {
-              const I = valueIcons[t] || BadgeCheck
-              return (
-                <Reveal key={t} delay={n * 0.06} className="h-full">
-                  <div className="h-full rounded-3xl border border-slate-200 p-7 transition duration-300 hover:border-brand-200 hover:shadow-lg">
-                    <span className="grid h-12 w-12 place-items-center rounded-2xl bg-brand-50 text-brand">
-                      <I size={24} />
-                    </span>
-                    <h3 className="mt-5 text-lg font-bold">{t}</h3>
-                    <p className="mt-2 text-sm">{d}</p>
-                  </div>
-                </Reveal>
-              )
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* marquee — our vision */}
+      {/* marquee — our core values */}
       <section className="overflow-hidden border-b border-slate-100 bg-white py-8" aria-hidden="true">
         <div className="flex w-max animate-marquee items-center gap-12 whitespace-nowrap font-display text-2xl font-bold text-brand-200">
-          {[...Array(2)].flatMap((_, k) => (
-            <span key={k} className="flex items-center">
-              {company.vision}
-              <span className="ml-12 text-hot">/</span>
-            </span>
-          ))}
+          {/* four repeats keep one loop half wider than an ultra-wide screen */}
+          {[...Array(4)].flatMap((_, k) =>
+            company.values.map(([t], n) => (
+              <span key={`${k}-${n}`} className="flex items-center">
+                {t}
+                <span className="ml-12 text-hot">/</span>
+              </span>
+            ))
+          )}
         </div>
       </section>
 
