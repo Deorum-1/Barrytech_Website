@@ -17,5 +17,14 @@ These locally stored Unsplash photographs are cropped to 1200 × 675 for the ser
 | `project-board.jpg` | Paymo | [Whiteboard with sticky notes](https://unsplash.com/photos/a-white-board-with-sticky-notes-attached-to-it-JXyY3jRV9oI) |
 | `perimeter-security.jpg` | Tuaans | [Barrier gate at an entrance](https://unsplash.com/photos/barrier-gate-with-red-and-yellow-bollards-at-entrance-ADG3IxGHeqY) |
 | `business-dashboard.jpg` | Vagaro | [Laptop and smartphone displaying analytics dashboards](https://unsplash.com/photos/laptop-and-smartphone-analytics-workspace-vlILZQL3sV0) |
+| `mobile-app-development.jpg` | Andrey Matveev | [Smartphone displaying code](https://unsplash.com/photos/hand-holding-smartphone-displaying-lines-of-code-CmodNbBxFXc) |
+| `security-monitoring.jpg` | Jakub Żerdzicki | [Smartphone beside a security camera](https://unsplash.com/photos/a-smart-phone-sitting-next-to-a-security-camera-caEbYI9b9iA) |
+| `network-router.jpg` | dlxmedia.hu | [Close-up of a wireless router](https://unsplash.com/photos/a-close-up-of-a-wireless-router-43ak6tfF4Ss) |
+| `mobile-access-control.jpg` | Jakub Żerdzicki | [Phone used at a security door](https://unsplash.com/photos/phone-being-used-at-a-security-door-UyWuiljE25w) |
+| `ai-integration.jpg` | Jo Lin | [Laptop displaying an AI integration logo](https://unsplash.com/photos/laptop-displaying-ai-integration-logo-on-desk-qQrQcKqLhvs) |
+| `software-project-files.jpg` | Bernd Dittrich | [Code and project files on a computer screen](https://unsplash.com/photos/computer-screen-displaying-code-and-project-files-A9jp72Owzvs) |
+| `ecommerce-checkout.jpg` | Ze Vieira | [Online checkout screen with payment details and shopping cart](https://unsplash.com/photos/online-checkout-screen-with-payment-details-and-shopping-cart-sr927_EVdqk) |
+| `network-switch.jpg` | User_Pascal | [Network switch with Ethernet cables connected](https://unsplash.com/photos/a-network-switch-with-ethernet-cables-connected-vE5AKQRUs7c) |
+| `tech-learning.jpg` | Compagnons | [Woman working on a laptop with code on screen](https://unsplash.com/photos/woman-working-on-a-laptop-with-code-on-screen-Zi0GmYPm88M) |
 
 The photographs are used under the [Unsplash License](https://unsplash.com/license).
