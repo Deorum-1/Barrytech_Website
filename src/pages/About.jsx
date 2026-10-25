@@ -1,5 +1,4 @@
-import { Link } from 'react-router-dom'
-import { ArrowRight, Target, Telescope } from 'lucide-react'
+import { Target, Telescope } from 'lucide-react'
 import PageHeader from '../components/PageHeader.jsx'
 import Reveal from '../components/Reveal.jsx'
 import usePageMeta from '../hooks/usePageMeta.js'
@@ -25,7 +24,7 @@ export default function About() {
         <Reveal delay={0.1}>
           <img
             src={soc}
-            alt="BarryTech security operations and threat monitoring team"
+            alt="Analysts monitoring security dashboards in a security operations center"
             loading="lazy"
             decoding="async"
             className="aspect-[4/3] w-full rounded-3xl object-cover shadow-xl"
@@ -80,7 +79,6 @@ export default function About() {
               </Reveal>
             ))}
           </div>
-          <Link to="/contact" className="btn btn-red mt-12">Work with us <ArrowRight size={16} /></Link>
         </div>
       </section>
     </>

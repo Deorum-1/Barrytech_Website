@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { ArrowRight } from 'lucide-react'
+import { ArrowRight, MessageCircle } from 'lucide-react'
 import PageHeader from '../components/PageHeader.jsx'
 import Reveal from '../components/Reveal.jsx'
 import Icon from '../components/Icon.jsx'
@@ -15,7 +15,7 @@ export default function Services() {
   return (
     <>
       <PageHeader
-        crumb={<Link to="/services" className="transition hover:text-white">Services</Link>}
+        crumb="Services"
         title="IT, security, and AI services under one roof."
         text="Seven service areas, each designed to be reliable, secure, and cost-effective."
       />
@@ -52,13 +52,30 @@ export default function Services() {
                       <li key={t} className="rounded-full bg-brand-50 px-3 py-1 text-xs font-medium text-brand">{t}</li>
                     ))}
                   </ul>
-                  <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-hot">
+                  <span className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-hot-600">
                     Explore {s.short} <ArrowRight size={16} className="transition group-hover:translate-x-1" />
                   </span>
                 </div>
               </Link>
             </Reveal>
           ))}
+          <Reveal delay={0.08} className="h-full">
+            <Link
+              to="/contact"
+              className="group flex h-full flex-col justify-center gap-6 rounded-3xl bg-gradient-to-br from-ink via-brand-900 to-brand-800 p-7 text-white transition duration-300 hover:-translate-y-1 hover:shadow-xl"
+            >
+              <div>
+                <span className="grid h-11 w-11 place-items-center rounded-xl bg-white/10 text-hot-400"><MessageCircle size={22} /></span>
+                <h2 className="mt-5 text-xl font-bold text-white">Not sure which service fits?</h2>
+                <p className="mt-3 text-sm leading-relaxed text-slate-300">
+                  Tell us what you need to protect, build, or run. We will point you to the right team and next step.
+                </p>
+              </div>
+              <span className="inline-flex items-center gap-2 text-sm font-semibold text-hot-400">
+                Talk to our team <ArrowRight size={16} className="transition group-hover:translate-x-1" />
+              </span>
+            </Link>
+          </Reveal>
         </div>
       </section>
     </>

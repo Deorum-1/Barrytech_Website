@@ -25,7 +25,7 @@ export default function NotFound() {
             <Link
               key={s.slug}
               to={`/services/${s.slug}`}
-              className="group flex items-center justify-between gap-3 rounded-2xl border border-slate-200 px-5 py-4 text-sm font-semibold text-ink transition hover:border-hot hover:text-hot"
+              className="group flex items-center justify-between gap-3 rounded-2xl border border-slate-200 px-5 py-4 text-sm font-semibold text-ink transition hover:border-hot hover:text-hot-600"
             >
               {s.short}
               <ArrowRight size={15} className="shrink-0 transition group-hover:translate-x-1" />

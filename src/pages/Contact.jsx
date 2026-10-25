@@ -14,7 +14,7 @@ export default function Contact() {
   )
 
   const [sent, setSent] = useState(false)
-  const field = 'mt-2 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-ink outline-none transition placeholder:text-slate-400 focus:border-brand focus:ring-2 focus:ring-brand/30'
+  const field = 'mt-2 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-ink outline-none transition placeholder:text-slate-500 focus:border-brand focus:ring-2 focus:ring-brand/30'
 
   const submit = (e) => {
     e.preventDefault()
@@ -28,7 +28,7 @@ export default function Contact() {
       '',
       d.message,
     ].join('\n')
-    window.location.href = `mailto:${contact.email}?subject=${encodeURIComponent(`Enquiry: ${d.service}`)}&body=${encodeURIComponent(body)}`
+    window.location.href = `mailto:${contact.email}?subject=${encodeURIComponent(`Inquiry: ${d.service}`)}&body=${encodeURIComponent(body)}`
     setSent(true)
   }
 
@@ -48,6 +48,7 @@ export default function Contact() {
 
       <section className="container-x grid gap-10 py-16 sm:py-24 lg:grid-cols-5 lg:gap-14">
         <div className="space-y-4 lg:col-span-2">
+          <h2 className="sr-only">Contact details</h2>
           {details.map(({ icon: I, label, value, href, external }) => (
             <a
               key={label}
@@ -80,15 +81,15 @@ export default function Contact() {
           </a>
 
           <p className="px-1 pt-2 text-sm text-slate-500">
-            Share as much detail as you can — your current setup, the problem, and any deadlines. We will reply with a practical next step.
+            Share as much detail as you can, your current setup, the problem, and any deadlines. We will reply with a practical next step.
           </p>
         </div>
 
-        <form onSubmit={submit} className="rounded-3xl bg-brand-50 p-6 sm:p-8 lg:col-span-3">
+        <form onSubmit={submit} aria-labelledby="contact-form-title" className="rounded-3xl bg-brand-50 p-6 sm:p-8 lg:col-span-3">
           {sent ? (
             <div className="py-10 text-center" role="status" aria-live="polite">
               <CheckCircle2 className="mx-auto text-brand" size={48} />
-              <h2 className="mt-4 text-2xl font-bold">Your email app should open now</h2>
+              <h2 id="contact-form-title" className="mt-4 text-2xl font-bold">Your email app should open now</h2>
               <p className="mt-2">Send the drafted message and our team will get back to you.</p>
               <p className="mt-2 text-sm">
                 Email app did not open? Write to{' '}
@@ -98,6 +99,7 @@ export default function Contact() {
             </div>
           ) : (
             <div className="grid gap-5 sm:grid-cols-2">
+              <h2 id="contact-form-title" className="sr-only">Send us a message</h2>
               <label className="text-sm font-semibold text-ink">
                 Full name
                 <input name="name" required autoComplete="name" className={field} placeholder="Your name" />

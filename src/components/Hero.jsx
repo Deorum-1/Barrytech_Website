@@ -8,6 +8,9 @@ import dashboard from '../assets/images/dashboard.jpg'
 import webProducts from '../assets/images/web-products.jpg'
 import aiAutomation from '../assets/images/ai-automation.jpg'
 
+const SLIDE_MAX_MS = 8000 // a video longer than this is cut off and the next slide starts
+const SLIDE_STATIC_MS = 5000 // used when there is no video (reduced motion or a failed video)
+
 const slides = [
   {
     id: 'overview',
@@ -59,95 +62,126 @@ const slides = [
 const ease = [0.22, 1, 0.36, 1]
 
 const copy = {
-  initial: { opacity: 0, y: 28 },
-  animate: { opacity: 1, y: 0 },
-  exit: { opacity: 0, y: -20 },
+  initial: { opacity: 0, y: 20 },
+  animate: (delay = 0) => ({ opacity: 1, y: 0, transition: { duration: 0.45, ease, delay } }),
+  exit: { opacity: 0, y: -12, transition: { duration: 0.2, ease: 'easeIn' } },
 }
 
-const videoVariants = {
-  initial: { opacity: 0 },
-  animate: { opacity: 1, transition: { duration: 1.2, ease: 'easeInOut' } },
-  exit: { opacity: 0, transition: { duration: 0.8, ease: 'easeInOut' } },
-}
-
-function VideoBackground({ src, poster }) {
+function VideoBackground({ src, onEnded, onFail, onProgress }) {
   const ref = useRef(null)
+  const [ready, setReady] = useState(false)
+
   useEffect(() => {
-    if (ref.current) {
-      ref.current.load()
-      ref.current.play().catch(() => {})
-    }
+    ref.current?.play().catch(() => {})
   }, [src])
+
   return (
     <motion.video
       ref={ref}
-      key={src}
-      variants={videoVariants}
-      initial="initial"
-      animate="animate"
-      exit="exit"
-      className="absolute inset-0 h-full w-full scale-105 object-cover motion-reduce:hidden"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: ready ? 1 : 0 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.6, ease: 'easeInOut' }}
+      onPlaying={() => setReady(true)}
+      onTimeUpdate={(e) => {
+        const v = e.currentTarget
+        if (!v.duration) return
+        // match the cap so the bar is full exactly when the cut-off hits
+        const total = Math.min(v.duration, SLIDE_MAX_MS / 1000)
+        onProgress?.(src, Math.min(v.currentTime / total, 1))
+      }}
+      onEnded={onEnded}
+      onError={onFail}
+      className="absolute inset-0 z-[2] h-full w-full object-cover motion-reduce:hidden"
       autoPlay
       muted
-      loop
       playsInline
-      preload="metadata"
-      poster={poster}
+      preload="auto"
       aria-hidden="true"
       tabIndex={-1}
     >
-      <source src={src} type="video/mp4" />
+      <source src={src} type="video/mp4" onError={onFail} />
     </motion.video>
   )
 }
 
 export default function Hero() {
   const [i, setI] = useState(0)
+  const [failed, setFailed] = useState(false) // current slide's video could not play
   const reducedMotion = useReducedMotion()
+  const noVideo = reducedMotion || failed
+
+  // Progress is tagged with its video, so a fading-out video can't move the new slide's bar
+  const [progress, setProgress] = useState({ src: null, p: 0 })
+  const currentVideo = useRef(slides[i].video)
+  currentVideo.current = slides[i].video
+  const handleProgress = (src, p) => {
+    if (src === currentVideo.current) setProgress({ src, p })
+  }
+
+  // Start every slide with an empty bar (prevents a full-bar flash when the carousel loops)
+  useEffect(() => {
+    setProgress({ src: null, p: 0 })
+  }, [i])
+
+  const next = () => setI((n) => (n + 1) % slides.length)
+  const goTo = (n) => { setFailed(false); setI(n) }
+
+  // Fallback timer: guarantees the hero always advances, even if "ended" never fires.
+  useEffect(() => {
+    const t = setTimeout(() => { setFailed(false); next() }, noVideo ? SLIDE_STATIC_MS : SLIDE_MAX_MS)
+    return () => clearTimeout(t)
+  }, [i, noVideo])
+
+  const handleEnded = () => { setFailed(false); next() }
 
   const s = slides[i]
   const centered = s.align === 'center'
 
   return (
     <section
-      className="relative overflow-hidden bg-ink pt-[72px] text-white sm:pt-[80px]"
+      className="relative isolate overflow-hidden bg-ink pt-[72px] text-white sm:pt-[80px]"
       aria-roledescription="carousel"
       aria-label="BarryTech highlights"
     >
-      {/* Poster layer — base image, also the fallback when a slide video is missing */}
-      <AnimatePresence>
-        <motion.img
-          key={s.id}
-          src={s.poster}
+      {/* Poster layers: all mounted, so there is never an empty frame */}
+      {slides.map((sl, n) => (
+        <img
+          key={sl.id}
+          src={sl.poster}
           alt=""
-          variants={videoVariants}
-          initial="initial"
-          animate="animate"
-          exit="exit"
-          className="absolute inset-0 h-full w-full object-cover"
           aria-hidden="true"
+          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ease-in-out ${
+            n === i ? 'z-[1] opacity-100 delay-0' : 'z-0 opacity-0 delay-500'
+          }`}
         />
-      </AnimatePresence>
+      ))}
 
-      {/* Video layer — crossfades with each slide */}
+      {/* Video layer: plays once, then the hero moves to the next slide */}
       {!reducedMotion && (
-        <AnimatePresence mode="sync">
-          <VideoBackground key={s.id} src={s.video} poster={s.poster} />
+        <AnimatePresence>
+          <VideoBackground
+            key={s.id}
+            src={s.video}
+            onEnded={handleEnded}
+            onFail={() => setFailed(true)}
+            onProgress={handleProgress}
+          />
         </AnimatePresence>
       )}
 
       {/* Gradient overlays */}
-      <div className={`absolute inset-0 ${centered ? 'bg-ink/60' : 'bg-gradient-to-r from-ink/80 via-ink/40 to-ink/10'}`} />
-      <div className="absolute inset-0 bg-gradient-to-t from-ink/60 via-transparent to-ink/25" />
+      <div className={`absolute inset-0 z-[3] ${centered ? 'bg-ink/65' : 'bg-gradient-to-r from-ink/85 via-ink/55 to-ink/20'}`} />
+      <div className="absolute inset-0 z-[3] bg-gradient-to-t from-ink/70 via-transparent to-ink/35" />
 
-      <div className="container-x relative flex min-h-[600px] flex-col justify-center py-20 sm:min-h-[640px] sm:py-24">
+      <div className="container-x relative z-[4] flex min-h-[600px] flex-col justify-center py-20 sm:min-h-[640px] sm:py-24">
         <div className={`relative min-h-[350px] max-w-3xl sm:min-h-[330px] ${centered ? 'mx-auto' : ''}`}>
           <AnimatePresence mode="wait">
-            <motion.div key={i} initial="initial" animate="animate" exit="exit" className={`max-w-3xl ${centered ? 'mx-auto text-center' : ''}`}>
+            <motion.div key={i} initial="initial" animate="animate" exit="exit" className={`max-w-3xl p-6 sm:p-8 ${centered ? 'mx-auto text-center' : ''}`}>
               {s.eyebrow && (
                 <motion.p
                   variants={copy}
-                  transition={{ duration: 0.5, ease, delay: 0.02 }}
+                  custom={0}
                   className="flex items-center gap-3 text-xs font-bold uppercase tracking-[0.2em] text-slate-200"
                 >
                   <span className="h-px w-8 bg-hot" aria-hidden="true" />
@@ -156,21 +190,21 @@ export default function Hero() {
               )}
               <motion.h1
                 variants={copy}
-                transition={{ duration: 0.65, ease, delay: 0.08 }}
+                custom={0.05}
                 className="mt-5 font-display text-4xl font-extrabold leading-[1.05] text-white drop-shadow-[0_2px_18px_rgba(0,0,0,0.45)] sm:text-6xl"
               >
                 {s.title}
               </motion.h1>
               <motion.p
                 variants={copy}
-                transition={{ duration: 0.65, ease, delay: 0.18 }}
+                custom={0.1}
                 className={`mt-6 max-w-xl text-lg text-slate-100 drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)] ${centered ? 'mx-auto' : ''}`}
               >
                 {s.text}
               </motion.p>
               <motion.div
                 variants={copy}
-                transition={{ duration: 0.65, ease, delay: 0.28 }}
+                custom={0.15}
                 className={`mt-9 flex flex-wrap gap-4 ${centered ? 'justify-center' : ''}`}
               >
                 <Link to={s.cta[1]} className="btn btn-red">{s.cta[0]} <ArrowRight size={16} /></Link>
@@ -180,7 +214,7 @@ export default function Hero() {
           </AnimatePresence>
         </div>
 
-        {/* Slide controls */}
+        {/* Slide controls: the active dot doubles as a progress bar */}
         <div className="absolute bottom-7 flex items-center gap-4">
           <div className="flex items-center gap-2">
             {slides.map((_, n) => (
@@ -189,14 +223,32 @@ export default function Hero() {
                 type="button"
                 aria-label={`Go to slide ${n + 1}`}
                 aria-current={n === i}
-                onClick={() => setI(n)}
+                onClick={() => goTo(n)}
                 className="group/dot flex h-8 items-center"
               >
                 <span
-                  className={`block h-1.5 rounded-full transition-all duration-500 ${
-                    n === i ? 'w-12 bg-hot' : 'w-6 bg-white/40 group-hover/dot:bg-white/70'
+                  className={`relative block h-1.5 overflow-hidden rounded-full transition-all duration-300 ${
+                    n === i ? 'w-12 bg-white/30' : 'w-6 bg-white/40 group-hover/dot:bg-white/70'
                   }`}
-                />
+                >
+                  {n === i && (
+                    noVideo ? (
+                      <motion.span
+                        key={`static-${i}`}
+                        className="absolute inset-0 origin-left rounded-full bg-hot"
+                        initial={{ scaleX: 0 }}
+                        animate={{ scaleX: 1 }}
+                        transition={{ duration: SLIDE_STATIC_MS / 1000, ease: 'linear' }}
+                      />
+                    ) : (
+                      <span
+                        key={`video-${i}`}
+                        className="absolute inset-0 origin-left rounded-full bg-hot transition-transform duration-300 ease-linear"
+                        style={{ transform: `scaleX(${progress.src === s.video ? progress.p : 0})` }}
+                      />
+                    )
+                  )}
+                </span>
               </button>
             ))}
           </div>

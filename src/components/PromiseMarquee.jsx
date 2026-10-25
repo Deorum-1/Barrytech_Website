@@ -1,54 +1,66 @@
+import { useEffect, useState } from 'react'
 import Icon from './Icon.jsx'
 
-// The key areas run as a marquee on pure CSS. The band is padded by half a card,
-// which cancels the band width out of the maths: card "k" is then centred at
-// t = 11k − 55s. Every card shares one "grow at the middle" keyframe, delayed by
-// its own slot, so the prominent card stays locked to the middle of the band
-// without any JS timing.
-const COPIES = 4
-const DURATION = 110 // seconds — must match the marquee duration below
-const TRACK_DELAY = -DURATION / 2
-
 export default function PromiseMarquee({ areas, id }) {
-  const slot = DURATION / (2 * areas.length)
+  const [active, setActive] = useState(0)
+  const [reduceMotion, setReduceMotion] = useState(false)
+
+  useEffect(() => {
+    const query = window.matchMedia('(prefers-reduced-motion: reduce)')
+    const update = () => setReduceMotion(query.matches)
+    update()
+    query.addEventListener?.('change', update)
+    return () => query.removeEventListener?.('change', update)
+  }, [])
+
+  useEffect(() => {
+    if (reduceMotion || areas.length < 2) return undefined
+    const timer = window.setInterval(() => setActive((current) => (current + 1) % areas.length), 4500)
+    return () => window.clearInterval(timer)
+  }, [active, areas.length, reduceMotion])
+
+  const midpoint = Math.floor(areas.length / 2)
 
   return (
-    <div
-      className="promise-band relative mt-14 overflow-hidden py-10 pl-[calc(50%_-_9.5rem)] sm:pl-[calc(50%_-_11rem)]"
-      aria-label="Our promise: five key areas"
-      id={id}
-    >
+    <div className="mt-12" id={id}>
       <div
-        className="flex w-max animate-[marquee_110s_linear_infinite] items-stretch"
-        style={{ animationDelay: `${TRACK_DELAY}s` }}
+        className="relative mx-auto h-[520px] max-w-7xl overflow-hidden sm:h-[480px]"
+        role="region"
+        aria-label="Our promise: five key areas"
+        aria-roledescription="carousel"
       >
-        {[...Array(COPIES)].flatMap((_, copy) =>
-          areas.map(([icon, title, description], n) => {
-            const slotIndex = copy * areas.length + n
-            return (
-              <div
-                key={`${copy}-${n}`}
-                className="w-[19rem] shrink-0 px-3 sm:w-[22rem]"
-                aria-hidden={copy > 0 || undefined}
-              >
-                <div
-                  className="promise-card relative flex h-full flex-col rounded-3xl border border-slate-200 bg-white p-8"
-                  style={{ '--promise-delay': `${((slot * slotIndex) % DURATION) - DURATION}s` }}
-                >
-                  <span className="promise-card-icon grid h-14 w-14 place-items-center rounded-2xl bg-brand-50 text-brand">
-                    <Icon name={icon} size={26} />
-                  </span>
-                  <h3 className="mt-6 text-xl font-bold">{title}</h3>
-                  <p className="mt-3">{description}</p>
-                </div>
-              </div>
-            )
-          }),
-        )}
+        {areas.map(([icon, title, description], index) => {
+          const offset = ((index - active + areas.length + midpoint) % areas.length) - midpoint
+          const distance = Math.abs(offset)
+          const y = 74 - distance * 34
+          const scale = distance === 0 ? 1 : distance === 1 ? 0.82 : 0.66
+          const opacity = distance === 0 ? 1 : distance === 1 ? 0.62 : 0.32
+          const x = offset === 0 ? '+ 0px' : `${offset > 0 ? '+' : '-'} min(${distance * 38}vw, ${distance * 17}rem)`
+
+          return (
+            <article
+              key={title}
+              aria-hidden={distance > 1}
+              aria-label={`${index + 1} of ${areas.length}: ${title}`}
+              className="absolute left-1/2 top-7 flex h-[390px] w-[min(82vw,24rem)] flex-col rounded-3xl border border-slate-200 bg-white p-7 shadow-xl shadow-ink/10 transition-[transform,opacity,box-shadow,border-color] duration-700 ease-in-out sm:h-[360px] sm:p-8"
+              style={{
+                transform: `translateX(calc(-50% ${x})) translateY(${y}px) scale(${scale})`,
+                opacity,
+                zIndex: 10 - distance,
+                borderColor: distance === 0 ? 'rgba(10, 90, 150, .35)' : undefined,
+                boxShadow: distance === 0 ? '0 24px 60px -24px rgba(7, 27, 48, .35)' : undefined,
+              }}
+            >
+              <span className={`grid h-14 w-14 place-items-center rounded-2xl transition-colors duration-500 ${distance === 0 ? 'bg-brand text-white' : 'bg-brand-50 text-brand'}`}>
+                <Icon name={icon} size={26} />
+              </span>
+              <h3 className="mt-6 text-xl font-bold text-ink">{title}</h3>
+              <p className="mt-3 leading-relaxed text-slate-600">{description}</p>
+            </article>
+          )
+        })}
       </div>
 
-      <span className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-white via-white/80 to-transparent sm:w-28" aria-hidden="true" />
-      <span className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-white via-white/80 to-transparent sm:w-28" aria-hidden="true" />
     </div>
   )
 }
