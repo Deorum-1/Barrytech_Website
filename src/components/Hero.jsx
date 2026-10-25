@@ -46,6 +46,7 @@ const slides = [
     text: 'Digital experiences built for speed, security, and results, from company websites and e-commerce to custom web applications.',
     cta: ['Explore web development', '/services/web-app-development'],
     video: '/videos/hero-bg2.mp4',
+    maxDurationMs: 22000,
     poster: webProducts,
   },
   {
@@ -67,7 +68,7 @@ const copy = {
   exit: { opacity: 0, y: -12, transition: { duration: 0.2, ease: 'easeIn' } },
 }
 
-function VideoBackground({ src, onEnded, onFail, onStart, onProgress }) {
+function VideoBackground({ src, maxDurationMs = SLIDE_MAX_MS, onEnded, onFail, onStart, onProgress }) {
   const ref = useRef(null)
   const [ready, setReady] = useState(false)
 
@@ -90,7 +91,7 @@ function VideoBackground({ src, onEnded, onFail, onStart, onProgress }) {
         const v = e.currentTarget
         if (!v.duration) return
         // match the cap so the bar is full exactly when the cut-off hits
-        const total = Math.min(v.duration, SLIDE_MAX_MS / 1000)
+        const total = Math.min(v.duration, maxDurationMs / 1000)
         onProgress?.(src, Math.min(v.currentTime / total, 1))
       }}
       onEnded={onEnded}
@@ -119,6 +120,7 @@ export default function Hero() {
   const [progress, setProgress] = useState({ src: null, p: 0 })
   const s = slides[i]
   const centered = s.align === 'center'
+  const slideMaxDurationMs = s.maxDurationMs ?? SLIDE_MAX_MS
   const currentVideo = useRef(slides[i].video)
   currentVideo.current = slides[i].video
   const handleVideoStart = (src) => {
@@ -149,9 +151,9 @@ export default function Hero() {
     }
 
     // Fallback timer: guarantees the hero advances if "ended" never fires.
-    const t = setTimeout(() => { setFailed(false); next() }, noVideo ? SLIDE_STATIC_MS : SLIDE_MAX_MS)
+    const t = setTimeout(() => { setFailed(false); next() }, noVideo ? SLIDE_STATIC_MS : slideMaxDurationMs)
     return () => clearTimeout(t)
-  }, [i, noVideo, s.video, startedVideo])
+  }, [i, noVideo, s.video, slideMaxDurationMs, startedVideo])
 
   const handleEnded = (src) => {
     if (src !== currentVideo.current) return
@@ -184,6 +186,7 @@ export default function Hero() {
           <VideoBackground
             key={s.id}
             src={s.video}
+            maxDurationMs={slideMaxDurationMs}
             onEnded={() => handleEnded(s.video)}
             onFail={handleVideoFail}
             onStart={handleVideoStart}
