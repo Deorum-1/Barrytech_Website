@@ -23,8 +23,22 @@ export default function PromiseMarquee({ areas, id }) {
 
   return (
     <div className="mt-12" id={id}>
+      <div className="container-x grid gap-3 md:hidden">
+        {areas.map(([icon, title, description]) => (
+          <article key={title} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+            <div className="flex items-center gap-3">
+              <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-brand-50 text-brand">
+                <Icon name={icon} size={22} />
+              </span>
+              <h3 className="text-base font-bold text-ink">{title}</h3>
+            </div>
+            <p className="mt-3 text-sm leading-relaxed text-slate-600">{description}</p>
+          </article>
+        ))}
+      </div>
+
       <div
-        className="relative mx-auto h-[520px] max-w-7xl overflow-hidden sm:h-[480px]"
+        className="relative mx-auto hidden h-[480px] max-w-7xl overflow-hidden md:block"
         role="region"
         aria-label="Our promise: five key areas"
         aria-roledescription="carousel"

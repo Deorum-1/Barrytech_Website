@@ -80,18 +80,24 @@
     background: radial-gradient(1200px 600px at 85% -10%, rgba(10, 90, 150, .55), transparent 60%), radial-gradient(900px 500px at -10% 110%, rgba(255, 20, 20, .35), transparent 60%), #071b30;
   }
 
-  /* Cards that flip on hover/focus (What we do grid) */
-  .flip-inner {
-    transform-style: preserve-3d;
-  }
-
-  .flip-face {
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-  }
-
+  /* What we do cards stay as visible blocks on mobile. */
   .flip-face-back {
-    transform: rotateY(180deg);
+    transform: none;
+  }
+
+  @media (min-width: 768px) {
+    .flip-inner {
+      transform-style: preserve-3d;
+    }
+
+    .flip-face {
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+    }
+
+    .flip-face-back {
+      transform: rotateY(180deg);
+    }
   }
 
   .service-offer-inner {

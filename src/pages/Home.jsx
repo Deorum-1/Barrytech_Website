@@ -109,19 +109,19 @@ export default function Home() {
           </div>
           <Link to="/services" className="btn btn-outline">View all services</Link>
         </Reveal>
-        <div className="mt-12 grid auto-rows-fr gap-px overflow-hidden rounded-3xl border border-slate-200 bg-slate-200 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="mt-12 grid auto-rows-fr gap-px overflow-hidden rounded-3xl border border-slate-200 bg-slate-200 md:grid-cols-2 lg:grid-cols-4">
           {services.map((s) => (
             <Link key={s.slug} to={`/services/${s.slug}`} className="group relative block h-full min-h-[13rem] bg-white [perspective:1200px] sm:min-h-[14rem]">
-              <div className="flip-inner relative h-full w-full transition-transform duration-700 ease-out group-hover:[transform:rotateY(180deg)] group-focus-visible:[transform:rotateY(180deg)]">
+              <div className="flip-inner relative flex h-auto w-full flex-col transition-transform duration-700 ease-out md:h-full md:group-hover:[transform:rotateY(180deg)] md:group-focus-visible:[transform:rotateY(180deg)]">
                 {/* front — the service name */}
-                <div className="flip-face flex h-full flex-col items-start justify-center gap-4 p-7">
-                  <span className="grid h-12 w-12 place-items-center rounded-2xl bg-brand-50 text-brand transition group-hover:bg-hot group-hover:text-white">
+                <div className="flip-face flex h-auto flex-col items-start justify-center gap-4 p-7 md:h-full">
+                  <span className="grid h-12 w-12 place-items-center rounded-2xl bg-brand-50 text-brand transition md:group-hover:bg-hot md:group-hover:text-white">
                     <Icon name={s.icon} size={26} />
                   </span>
                   <h3 className="text-xl font-bold leading-tight">{s.short}</h3>
                 </div>
                 {/* back — what the service covers */}
-                <div className="flip-face flip-face-back absolute inset-0 flex flex-col bg-ink p-7 text-white">
+                <div className="flip-face flip-face-back relative flex flex-col bg-ink p-7 text-white md:absolute md:inset-0">
                   <p className="text-xs font-bold uppercase tracking-[0.16em] text-hot-400">{s.short}</p>
                   <p className="mt-3 line-clamp-3 text-sm text-slate-300">{s.tagline}</p>
                   <span className="mt-auto inline-flex items-center gap-2 pt-6 text-sm font-semibold text-hot-400">
