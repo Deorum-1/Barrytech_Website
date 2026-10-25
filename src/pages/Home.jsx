@@ -14,7 +14,9 @@ import datacenter from '../assets/images/datacenter.jpg'
 import soc from '../assets/images/cloud-platform.jpg'
 import networkSupport from '../assets/images/network-support.jpg'
 import webProducts from '../assets/images/dashboard.png'
-import projectDelivery from '../assets/images/datacenter.jpg'
+import projectDelivery from '../assets/images/product.jpg'
+const aiSolutionsImage = 'https://www.openskykft.com/ai-neural-net.jpg'
+const physicalSecurityImage = 'https://i.pinimg.com/736x/30/1a/85/301a8524422b76d00fcd02af67367388.jpg'
 
 // The five key areas that enable digital success (our promise section)
 const keyAreas = [
@@ -27,11 +29,13 @@ const keyAreas = [
 
 // Solutions by use case — one card per outcome a business actually asks for
 const wants = [
-  { tab: 'Digital products', items: [['Launch digital products', 'Websites, e-commerce, web apps, and mobile apps built for growth.', 'web-app-development', webProducts]] },
+  { tab: 'Digital products', items: [['Launch digital products', 'Websites, e-commerce, web apps, and mobile apps built for growth.', 'web-app-development', webProducts, 'blue']] },
   { tab: 'Project delivery', items: [['Deliver on time', 'Structured project management from planning through handover.', 'project-management', projectDelivery]] },
   { tab: 'Managed IT', items: [['Hand off daily IT', 'Help desk, managed network, cloud, and cybersecurity services.', 'managed-it', networkSupport]] },
   { tab: 'Cybersecurity', items: [['Protect your organization end to end', 'Next-generation firewalls, ZTNA, EDR/XDR, and DDoS protection.', 'cybersecurity', soc]] },
   { tab: 'IT infrastructure', items: [['Build solid infrastructure', 'Networks, servers, data centers, cloud, and virtualization.', 'it-infrastructure', datacenter]] },
+  { tab: 'AI solutions', items: [['Put AI to work safely', 'Adopt practical AI assistants, automation, and analytics with secure governance.', 'artificial-intelligence', aiSolutionsImage]] },
+  { tab: 'Physical security', items: [['Protect facilities and access', 'Connect surveillance, access control, and security monitoring for safer facilities.', 'physical-security', physicalSecurityImage]] },
 ]
 
 // Ribbon content: top row lists our services, bottom row lists the sub-services behind them

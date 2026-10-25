@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 import Icon from './Icon.jsx'
 
 export default function PromiseMarquee({ areas, id }) {
@@ -20,6 +21,8 @@ export default function PromiseMarquee({ areas, id }) {
   }, [active, areas.length, reduceMotion])
 
   const midpoint = Math.floor(areas.length / 2)
+  const previous = () => setActive((current) => (current - 1 + areas.length) % areas.length)
+  const next = () => setActive((current) => (current + 1) % areas.length)
 
   return (
     <div className="mt-12" id={id}>
@@ -73,6 +76,24 @@ export default function PromiseMarquee({ areas, id }) {
             </article>
           )
         })}
+        <div className="pointer-events-none absolute inset-x-3 inset-y-0 z-30 flex items-center justify-between sm:inset-x-6">
+          <button
+            type="button"
+            aria-label="Previous promise"
+            onClick={previous}
+            className="pointer-events-auto grid h-11 w-11 place-items-center rounded-full border border-slate-300 bg-white text-ink shadow-md transition hover:border-brand hover:bg-brand hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand"
+          >
+            <ChevronLeft size={20} aria-hidden="true" />
+          </button>
+          <button
+            type="button"
+            aria-label="Next promise"
+            onClick={next}
+            className="pointer-events-auto grid h-11 w-11 place-items-center rounded-full border border-slate-300 bg-white text-ink shadow-md transition hover:border-brand hover:bg-brand hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand"
+          >
+            <ChevronRight size={20} aria-hidden="true" />
+          </button>
+        </div>
       </div>
 
     </div>

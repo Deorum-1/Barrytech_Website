@@ -114,12 +114,12 @@ export default function Contact() {
               </label>
               <label className="text-sm font-semibold text-ink">
                 Phone
-                <input name="phone" type="tel" autoComplete="tel" className={field} placeholder="Optional" />
+                <input name="phone" type="tel" required autoComplete="tel" className={field} placeholder="Your phone number" />
               </label>
               <label className="text-sm font-semibold text-ink sm:col-span-2">
                 Service
-                <select name="service" required defaultValue="" className={field}>
-                  <option value="" disabled>Select a service</option>
+                <select name="service" required defaultValue="All services" className={field}>
+                  <option>All services</option>
                   {services.map((s) => <option key={s.slug}>{s.short}</option>)}
                   <option>Other / not sure</option>
                 </select>

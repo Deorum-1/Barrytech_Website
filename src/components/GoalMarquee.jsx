@@ -13,7 +13,7 @@ const accents = [
 const serviceBySlug = new Map(services.map((service) => [service.slug, service]))
 
 function GoalCard({ card, clone = false, fluid = false }) {
-  const { tab, title, desc, slug, accent } = card
+  const { tab, title, desc, slug, accent, imageOverlay } = card
 
   return (
     <Link
@@ -35,6 +35,9 @@ function GoalCard({ card, clone = false, fluid = false }) {
           className="absolute inset-0 hidden bg-gradient-to-t from-ink/55 via-ink/5 to-transparent md:block"
           aria-hidden="true"
         />
+        {imageOverlay === 'blue' && (
+          <span className="absolute inset-0 bg-brand/40" aria-hidden="true" />
+        )}
       </div>
 
       <div className="flex min-w-0 flex-1 flex-col md:p-7">
@@ -87,7 +90,7 @@ export default function GoalMarquee({ goals }) {
   const reduce = useReducedMotion()
 
   const cards = goals.flatMap((goal, goalIndex) =>
-    goal.items.map(([title, desc, slug, image], itemIndex) => {
+    goal.items.map(([title, desc, slug, image, imageOverlay], itemIndex) => {
       const service = serviceBySlug.get(slug)
       return {
         tab: goal.tab,
@@ -100,6 +103,7 @@ export default function GoalMarquee({ goals }) {
         icon: service?.icon ?? 'ShieldCheck',
         service: service ?? { short: 'Explore service' },
         image: image ?? service?.images[0]?.[0],
+        imageOverlay,
       }
     })
   )

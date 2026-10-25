@@ -2,10 +2,6 @@ import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react'
-import soc from '../assets/images/cloud-platform.jpg'
-import datacenter from '../assets/images/datacenter.jpg'
-import webProducts from '../assets/images/dashboard.png'
-import aiAutomation from '../assets/images/cloud-platform.jpg'
 
 const SLIDE_MAX_MS = 5000 // every hero slide stays visible for the same duration
 const SLIDE_LOAD_TIMEOUT_MS = 15000 // allow larger videos time to load before falling back
@@ -18,7 +14,6 @@ const slides = [
     text: 'Modern IT and cybersecurity solutions that improve efficiency, strengthen security, and support digital transformation.',
     cta: ['What we do', '/services'],
     video: '/videos/file.mp4',
-    poster: soc,
     align: 'center',
   },
   {
@@ -28,7 +23,6 @@ const slides = [
     text: 'Networks, servers, data centers, cloud, and virtualization designed, deployed, and maintained for performance, availability, and growth.',
     cta: ['Explore IT infrastructure', '/services/it-infrastructure'],
     video: '/videos/video1.mp4',
-    poster: datacenter,
   },
   {
     id: 'cybersecurity',
@@ -37,7 +31,6 @@ const slides = [
     text: 'From next-generation firewalls to a Security Operations Center, we help you detect, respond to, and recover from cyber threats.',
     cta: ['Explore cybersecurity', '/services/cybersecurity'],
     video: '/videos/video2.mp4',
-    poster: soc,
   },
   {
     id: 'web-development',
@@ -46,7 +39,6 @@ const slides = [
     text: 'Digital experiences built for speed, security, and results, from company websites and e-commerce to custom web applications.',
     cta: ['Explore web development', '/services/web-app-development'],
     video: '/videos/hero-bg2.mp4',
-    poster: webProducts,
   },
   {
     id: 'ai-solutions',
@@ -55,7 +47,6 @@ const slides = [
     text: 'Practical AI assistants, automation, and analytics, with the governance to keep your data safe.',
     cta: ['See AI solutions', '/services/artificial-intelligence'],
     video: '/videos/video3.mp4',
-    poster: aiAutomation,
   },
 ]
 
@@ -166,32 +157,17 @@ export default function Hero() {
       aria-roledescription="carousel"
       aria-label="BarryTech highlights"
     >
-      {/* Poster layers: all mounted, so there is never an empty frame */}
-      {slides.map((sl, n) => (
-        <img
-          key={sl.id}
-          src={sl.poster}
-          alt=""
-          aria-hidden="true"
-          className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-500 ease-in-out ${
-            n === i ? 'z-[1] opacity-100 delay-0' : 'z-0 opacity-0 delay-500'
-          }`}
-        />
-      ))}
-
-      {/* Video layer: plays once, then the hero moves to the next slide */}
+      {/* Keep only the active slide's video mounted so an exiting video cannot flash through. */}
       {!reducedMotion && (
-        <AnimatePresence>
-          <VideoBackground
-            key={s.id}
-            src={s.video}
-            maxDurationMs={slideMaxDurationMs}
-            onEnded={() => handleEnded(s.video)}
-            onFail={handleVideoFail}
-            onStart={handleVideoStart}
-            onProgress={handleProgress}
-          />
-        </AnimatePresence>
+        <VideoBackground
+          key={s.id}
+          src={s.video}
+          maxDurationMs={slideMaxDurationMs}
+          onEnded={() => handleEnded(s.video)}
+          onFail={handleVideoFail}
+          onStart={handleVideoStart}
+          onProgress={handleProgress}
+        />
       )}
 
       {/* Gradient overlays */}
