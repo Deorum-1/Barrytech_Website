@@ -129,7 +129,7 @@ export default function GoalMarquee({ goals }) {
         </div>
       ) : (
         <div className="relative mt-8 px-5 sm:px-8 md:mt-6 md:overflow-hidden md:px-0 md:py-3">
-          <div className="goal-track flex flex-col gap-4 md:ml-8 md:w-max md:animate-marquee-cards md:flex-row md:gap-0">
+          <div className="goal-track flex flex-col gap-4 md:ml-8 md:w-max md:animate-marquee-cards md:flex-row md:gap-0 md:hover:[animation-play-state:paused]">
             <CardSet cards={cards} />
             {/* three repeats keep the loop seamless even with a short card list */}
             {[1, 2, 3].map((n) => <CardSet key={n} cards={cards} clone />)}
