@@ -1,15 +1,22 @@
-import soc from '../assets/images/dashboard.jpg'
 import datacenter from '../assets/images/datacenter.jpg'
-import servers from '../assets/images/servers.jpg'
-import cabling from '../assets/images/network-support.jpg'
-import inspection from '../assets/images/servers.jpg'
 import netSupport from '../assets/images/network-support.jpg'
 import serverRoom from '../assets/images/server-room.jpg'
-import securityAccess from '../assets/images/server-room.jpg'
-import projectDelivery from '../assets/images/datacenter.jpg'
-import webProducts from '../assets/images/cloud-platform.jpg'
+import physical from '../assets/images/physical.jpg'
 import cloud from '../assets/images/cloud-platform.jpg'
-import dashboard from '../assets/images/dashboard.jpg'
+import webDashboard from '../assets/images/dashboard.png'
+import infrastructureOfferImage from '../assets/images/offerings/infrastructure.jpg'
+import physicalOfferImage from '../assets/images/offerings/physical-security.jpg'
+import cybersecurityOfferImage from '../assets/images/offerings/cybersecurity.jpg'
+import managedItOfferImage from '../assets/images/offerings/managed-it.jpg'
+import projectOfferImage from '../assets/images/offerings/project-management.jpg'
+import webOfferImage from '../assets/images/offerings/web-development.jpg'
+import aiOfferImage from '../assets/images/offerings/artificial-intelligence.jpg'
+import accessControlOfferImage from '../assets/images/offerings/access-control.jpg'
+import mobileAppOfferImage from '../assets/images/offerings/mobile-app.jpg'
+import analyticsOfferImage from '../assets/images/offerings/analytics-dashboard.jpg'
+import projectBoardOfferImage from '../assets/images/offerings/project-board.jpg'
+import perimeterSecurityOfferImage from '../assets/images/offerings/perimeter-security.jpg'
+import businessDashboardOfferImage from '../assets/images/offerings/business-dashboard.jpg'
 
 // Each offering: [title, description, [bullets]]
 export const services = [
@@ -17,7 +24,8 @@ export const services = [
     slug: 'it-infrastructure', icon: 'Server', short: 'IT Infrastructure', title: 'IT Infrastructure Services',
     tagline: 'Building reliable, secure, and scalable IT infrastructure for modern businesses.',
     intro: 'We help businesses build, manage, and maintain reliable, secure, and high-performing technology environments that support business continuity, operational efficiency, and digital transformation.',
-    images: [[datacenter, 'Data Center Infrastructure'], [servers, 'High-Density Server Environments'], [cabling, 'Network Installation & Cabling'], [inspection, 'Infrastructure Inspection & Optimization']],
+    offerImages: [netSupport, infrastructureOfferImage, cloud, cybersecurityOfferImage, managedItOfferImage, serverRoom],
+    images: [[datacenter, 'Data Center Infrastructure']],
     closing: 'Modern Technology. Smarter Infrastructure. Stronger Security.',
     cta: 'Have an infrastructure project, or a network you want reviewed?',
     offerings: [
@@ -35,7 +43,8 @@ export const services = [
     slug: 'physical-security', icon: 'ScanFace', short: 'Physical Security', title: 'Physical Security Solutions',
     tagline: 'Protecting people, premises, and assets through smart security technology.',
     intro: 'We provide modern physical security solutions that help businesses, institutions, and individuals protect facilities, monitor activities, control access, and improve overall safety, integrated with modern IT infrastructure.',
-    images: [[securityAccess, 'CCTV, Access Control and Integrated Security']],
+    offerImages: [physicalOfferImage, accessControlOfferImage, perimeterSecurityOfferImage, mobileAppOfferImage, physical, analyticsOfferImage],
+    images: [[serverRoom, 'CCTV, Access Control and Integrated Security', physical]],
     closing: 'Smarter Surveillance. Controlled Access. Enhanced Protection.',
     cta: 'Need to protect a site, or a security system you want checked?',
     offerings: [
@@ -52,7 +61,8 @@ export const services = [
     slug: 'cybersecurity', icon: 'ShieldCheck', short: 'Cybersecurity', title: 'Cybersecurity Solutions',
     tagline: 'Securing your digital world. Protecting what matters.',
     intro: 'We help businesses, institutions, and individuals protect digital assets, secure IT infrastructure, and manage evolving cyber risks through preventive controls, threat detection, risk management, and incident response.',
-    images: [[soc, 'Security Operations Center: Real-time Threat Detection & Response']],
+    offerImages: [infrastructureOfferImage, cybersecurityOfferImage, analyticsOfferImage, webOfferImage, accessControlOfferImage, projectBoardOfferImage, mobileAppOfferImage, aiOfferImage, projectOfferImage],
+    images: [[cloud, 'Security Operations Center: Real-time Threat Detection & Response']],
     closing: 'Intelligent Security. Proactive Defense. Digital Confidence.',
     cta: 'Have a security concern, or an environment you want checked?',
     offerings: [
@@ -72,7 +82,8 @@ export const services = [
     slug: 'managed-it', icon: 'Headset', short: 'Managed IT', title: 'Managed IT Services',
     tagline: 'Reliable IT management. Proactive support. Uninterrupted business operations.',
     intro: 'We help businesses maintain secure, reliable, and efficient technology environments without the complexity of managing every IT function internally: infrastructure, performance monitoring, cybersecurity controls, and technical issues.',
-    images: [[netSupport, 'Hands-on Network Support'], [serverRoom, 'Office Network & Server Room Solutions']],
+    offerImages: [netSupport, infrastructureOfferImage, cybersecurityOfferImage, cloud, serverRoom, managedItOfferImage, analyticsOfferImage, projectBoardOfferImage],
+    images: [[netSupport, 'Hands-on Network Support']],
     closing: 'We Manage Your Technology. You Focus on Your Business.',
     cta: 'Want to hand off daily IT, or a support gap you want closed?',
     offerings: [
@@ -91,7 +102,8 @@ export const services = [
     slug: 'project-management', icon: 'KanbanSquare', short: 'Project Management', title: 'Project Management Services',
     tagline: 'Delivering projects with precision, efficiency, and excellence.',
     intro: 'We combine structured methodologies, technical expertise, and stakeholder coordination to help businesses achieve project objectives within agreed timelines, budgets, and quality expectations.',
-    images: [[projectDelivery, 'Project Planning, Coordination and Delivery']],
+    offerImages: [projectBoardOfferImage, infrastructureOfferImage, cybersecurityOfferImage, projectOfferImage, analyticsOfferImage, managedItOfferImage, aiOfferImage],
+    images: [[datacenter, 'Project Planning, Coordination and Delivery']],
     closing: 'Planning Better. Delivering Smarter. Achieving More.',
     cta: 'Have a project to deliver, or a plan you want reviewed?',
     offerings: [
@@ -108,7 +120,8 @@ export const services = [
     slug: 'web-app-development', icon: 'Code2', short: 'Web & App Development', title: 'Website, Application & Web Application Development',
     tagline: 'Building powerful digital experiences. Transforming ideas into innovative solutions.',
     intro: 'We provide website design, application development, and web application solutions that help businesses establish a strong digital presence, streamline operations, improve customer engagement, and accelerate growth, using modern design, software engineering, and security-conscious practices.',
-    images: [[webProducts, 'Website, E-Commerce and Web Application Development']],
+    offerImages: [webOfferImage, mobileAppOfferImage, webDashboard, businessDashboardOfferImage, aiOfferImage, cybersecurityOfferImage, cloud],
+    images: [[webDashboard, 'Website, E-Commerce and Web Application Development']],
     closing: 'Innovative Design. Intelligent Applications. Secure Digital Experiences.',
     cta: 'Have a digital product in mind, or a platform you want improved?',
     offerings: [
@@ -126,7 +139,8 @@ export const services = [
     slug: 'artificial-intelligence', icon: 'BrainCircuit', short: 'AI Solutions', title: 'Artificial Intelligence (AI) Solutions',
     tagline: 'Transforming businesses with intelligent automation, AI innovation, and secure digital solutions.',
     intro: 'We help businesses explore and adopt AI to improve productivity, automate repetitive tasks, enhance decision-making, and create new digital opportunities, from AI-powered customer service and workflow automation to enterprise AI integration, data analytics, and AI security.',
-    images: [[dashboard, 'AI Automation, Analytics and Secure Adoption'], [cloud, 'AI-Ready Cloud Infrastructure']],
+    offerImages: [projectBoardOfferImage, aiOfferImage, projectOfferImage, analyticsOfferImage, cybersecurityOfferImage, physicalOfferImage, infrastructureOfferImage, mobileAppOfferImage],
+    images: [[cloud, 'AI-Ready Cloud Infrastructure']],
     closing: 'Intelligent Solutions. Secure Innovation. Smarter Business.',
     cta: 'Have an AI use case, or an automation you want to explore?',
     offerings: [

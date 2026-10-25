@@ -3,7 +3,7 @@ import PageHeader from '../components/PageHeader.jsx'
 import Reveal from '../components/Reveal.jsx'
 import usePageMeta from '../hooks/usePageMeta.js'
 import { company } from '../data/company.js'
-import soc from '../assets/images/dashboard.jpg'
+import soc from '../assets/images/cloud-platform.jpg'
 
 export default function About() {
   usePageMeta(

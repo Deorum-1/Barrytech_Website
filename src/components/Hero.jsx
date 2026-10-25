@@ -1,11 +1,10 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
-import { ArrowRight } from 'lucide-react'
-import soc from '../assets/images/dashboard.jpg'
+import { ArrowRight, ChevronLeft, ChevronRight } from 'lucide-react'
+import soc from '../assets/images/cloud-platform.jpg'
 import datacenter from '../assets/images/datacenter.jpg'
-import dashboard from '../assets/images/dashboard.jpg'
-import webProducts from '../assets/images/cloud-platform.jpg'
+import webProducts from '../assets/images/dashboard.png'
 import aiAutomation from '../assets/images/cloud-platform.jpg'
 
 const SLIDE_MAX_MS = 8000 // a video longer than this is cut off and the next slide starts
@@ -37,7 +36,7 @@ const slides = [
     text: 'From next-generation firewalls to a Security Operations Center, we help you detect, respond to, and recover from cyber threats.',
     cta: ['Explore cybersecurity', '/services/cybersecurity'],
     video: '/videos/video2.mp4',
-    poster: dashboard,
+    poster: soc,
   },
   {
     id: 'web-development',
@@ -125,6 +124,7 @@ export default function Hero() {
   }, [i])
 
   const next = () => setI((n) => (n + 1) % slides.length)
+  const previous = () => { setFailed(false); setI((n) => (n - 1 + slides.length) % slides.length) }
   const goTo = (n) => { setFailed(false); setI(n) }
 
   // Fallback timer: guarantees the hero always advances, even if "ended" never fires.
@@ -137,7 +137,6 @@ export default function Hero() {
 
   const s = slides[i]
   const centered = s.align === 'center'
-
   return (
     <section
       className="relative isolate min-h-[80vh] overflow-hidden bg-ink pt-[72px] text-white sm:pt-[80px]"
@@ -183,7 +182,7 @@ export default function Hero() {
                 <motion.p
                   variants={copy}
                   custom={0}
-                  className="flex items-center gap-3 text-xs font-bold uppercase tracking-[0.2em] text-slate-200"
+                  className={`flex items-center gap-3 text-xs font-bold uppercase tracking-[0.2em] text-slate-200 ${centered ? 'justify-center' : ''}`}
                 >
                   <span className="h-px w-8 bg-hot" aria-hidden="true" />
                   {s.eyebrow}
@@ -215,9 +214,17 @@ export default function Hero() {
           </AnimatePresence>
         </div>
 
-        {/* Slide controls: the active dot doubles as a progress bar */}
-        <div className="absolute bottom-7 flex items-center gap-4">
-          <div className="flex items-center gap-2">
+        {/* Manual navigation with per-slide progress indicators */}
+        <div className="absolute bottom-7 left-1/2 flex -translate-x-1/2 items-center gap-3 sm:gap-5">
+          <button
+            type="button"
+            aria-label="Previous slide"
+            onClick={previous}
+            className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-white/35 bg-ink/25 text-white transition hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-hot"
+          >
+            <ChevronLeft size={20} aria-hidden="true" />
+          </button>
+          <div className="flex items-center gap-1.5 sm:gap-2">
             {slides.map((_, n) => (
               <button
                 key={n}
@@ -225,11 +232,11 @@ export default function Hero() {
                 aria-label={`Go to slide ${n + 1}`}
                 aria-current={n === i}
                 onClick={() => goTo(n)}
-                className="group/dot flex h-8 items-center"
+                className="group/dot flex h-8 items-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-hot"
               >
                 <span
                   className={`relative block h-1.5 overflow-hidden rounded-full transition-all duration-300 ${
-                    n === i ? 'w-12 bg-white/30' : 'w-6 bg-white/40 group-hover/dot:bg-white/70'
+                    n === i ? 'w-10 bg-white/30 sm:w-12' : 'w-3 bg-white/40 group-hover/dot:bg-white/70 sm:w-6'
                   }`}
                 >
                   {n === i && (
@@ -253,9 +260,14 @@ export default function Hero() {
               </button>
             ))}
           </div>
-          <span className="font-display text-xs font-semibold tracking-widest text-slate-300">
-            {String(i + 1).padStart(2, '0')} / {String(slides.length).padStart(2, '0')}
-          </span>
+          <button
+            type="button"
+            aria-label="Next slide"
+            onClick={() => { setFailed(false); next() }}
+            className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-white/35 bg-ink/25 text-white transition hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-hot"
+          >
+            <ChevronRight size={20} aria-hidden="true" />
+          </button>
         </div>
       </div>
     </section>

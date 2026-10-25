@@ -1,7 +1,5 @@
-import { useEffect, useState } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
-import { AnimatePresence, motion } from 'framer-motion'
-import { ArrowRight, Check, ChevronDown, Phone } from 'lucide-react'
+import { ArrowRight, Check, Phone } from 'lucide-react'
 import PageHeader from '../components/PageHeader.jsx'
 import Reveal from '../components/Reveal.jsx'
 import usePageMeta from '../hooks/usePageMeta.js'
@@ -11,11 +9,8 @@ import { company } from '../data/company.js'
 export default function ServiceDetail() {
   const { slug } = useParams()
   const s = getService(slug)
-  const [open, setOpen] = useState(0)
 
   usePageMeta(s ? s.title : 'Service not found', s ? s.tagline : undefined)
-
-  useEffect(() => { setOpen(0) }, [slug])
 
   if (!s) return <Navigate to="/services" replace />
   const others = services.filter((x) => x.slug !== s.slug)
@@ -45,16 +40,19 @@ export default function ServiceDetail() {
           </Reveal>
         </div>
 
-        <div className={`mt-12 grid gap-5 ${s.images.length > 1 ? 'sm:grid-cols-2' : ''}`}>
-          {s.images.map(([src, cap]) => (
-            <figure key={cap} className="overflow-hidden rounded-3xl">
-              <img
-                src={src}
-                alt={cap}
-                loading="lazy"
-                decoding="async"
-                className="h-64 w-full object-cover transition duration-700 hover:scale-105 sm:h-96"
-              />
+        <div className="mt-12 grid gap-5">
+          {s.images.map(([src, cap, desktopSrc]) => (
+            <figure key={cap} className="mx-auto w-full max-w-5xl overflow-hidden rounded-3xl">
+              <picture className="block">
+                {desktopSrc && <source media="(min-width: 1024px)" srcSet={desktopSrc} />}
+                <img
+                  src={src}
+                  alt={cap}
+                  loading="lazy"
+                  decoding="async"
+                  className="aspect-[16/9] w-full object-cover transition duration-700 hover:scale-105"
+                />
+              </picture>
               <figcaption className="bg-brand-50 px-5 py-3 text-sm text-slate-600">{cap}</figcaption>
             </figure>
           ))}
@@ -65,44 +63,29 @@ export default function ServiceDetail() {
         <div className="container-x">
           <p className="eyebrow">Capabilities</p>
           <h2 className="mt-3 text-3xl font-bold sm:text-4xl">What we offer</h2>
-          <div className="mt-10 space-y-3">
-            {s.offerings.map(([t, d, bullets], n) => {
-              const isOpen = open === n
-              return (
-                <div key={t} className={`overflow-hidden rounded-2xl bg-white transition ${isOpen ? 'shadow-lg ring-2 ring-hot/40' : 'shadow-sm'}`}>
-                  <button
-                    type="button"
-                    className="flex w-full items-center justify-between gap-4 p-6 text-left"
-                    aria-expanded={isOpen}
-                    aria-controls={`offering-${n}`}
-                    onClick={() => setOpen(isOpen ? -1 : n)}
-                  >
-                    <span className="font-display text-lg font-bold text-ink">{t}</span>
-                    <ChevronDown className={`shrink-0 text-hot transition ${isOpen ? 'rotate-180' : ''}`} />
-                  </button>
-                  <AnimatePresence initial={false}>
-                    {isOpen && (
-                      <motion.div
-                        key="content"
-                        id={`offering-${n}`}
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: 'auto', opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.25, ease: 'easeOut' }}
-                        className="overflow-hidden"
-                      >
-                        <div className="px-6 pb-7">
-                          <p className="max-w-3xl">{d}</p>
-                          <ul className="mt-5 grid gap-x-8 gap-y-2 sm:grid-cols-2">
-                            {bullets.map((b) => <li key={b} className="flex gap-2"><Check size={18} className="mt-0.5 shrink-0 text-brand" />{b}</li>)}
-                          </ul>
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+          <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+            {s.offerings.map(([t, d, bullets], index) => (
+              <article key={t} tabIndex={0} className="group rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-hot focus-visible:ring-offset-2">
+                <div className="service-offer-inner md:h-[30rem]">
+                  <div className="service-offer-face flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+                    <img src={s.offerImages[index]} alt="" loading="lazy" decoding="async" className="aspect-[16/9] w-full shrink-0 object-cover" />
+                    <div className="flex flex-1 flex-col justify-center p-6 md:p-7">
+                      <span className="mb-4 grid h-11 w-11 place-items-center rounded-xl bg-brand-50 text-brand">
+                        <Check size={21} aria-hidden="true" />
+                      </span>
+                      <h3 className="text-xl font-bold text-ink">{t}</h3>
+                    </div>
+                  </div>
+                  <div className="service-offer-back border-t border-slate-100 bg-white p-6 md:rounded-2xl md:border md:border-brand-700 md:bg-ink md:p-7 md:text-white">
+                    <h3 className="hidden text-lg font-bold text-white md:block">{t}</h3>
+                    <p className="max-w-3xl text-sm leading-relaxed md:mt-3 md:text-slate-200">{d}</p>
+                    <ul className="mt-4 grid gap-x-5 gap-y-2 text-sm sm:grid-cols-2 md:grid-cols-1 md:text-slate-100">
+                      {bullets.map((b) => <li key={b} className="flex gap-2"><Check size={17} className="mt-0.5 shrink-0 text-brand-300" />{b}</li>)}
+                    </ul>
+                  </div>
                 </div>
-              )
-            })}
+              </article>
+            ))}
           </div>
         </div>
       </section>

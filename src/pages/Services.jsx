@@ -28,13 +28,16 @@ export default function Services() {
                 className="group flex h-full flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white transition duration-300 hover:-translate-y-1 hover:border-hot hover:shadow-xl"
               >
                 <div className="relative h-48 overflow-hidden">
-                  <img
-                    src={s.images[0][0]}
-                    alt=""
-                    loading="lazy"
-                    decoding="async"
-                    className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
-                  />
+                  <picture className="block h-full">
+                    {s.images[0][2] && <source media="(min-width: 1024px)" srcSet={s.images[0][2]} />}
+                    <img
+                      src={s.images[0][0]}
+                      alt=""
+                      loading="lazy"
+                      decoding="async"
+                      className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+                    />
+                  </picture>
                   <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/10 to-transparent" />
                   <span className="absolute left-5 top-5 grid h-11 w-11 place-items-center rounded-xl bg-white text-brand shadow-lg transition group-hover:bg-hot group-hover:text-white">
                     <Icon name={s.icon} size={22} />
