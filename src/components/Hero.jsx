@@ -8,6 +8,7 @@ import webProducts from '../assets/images/dashboard.png'
 import aiAutomation from '../assets/images/cloud-platform.jpg'
 
 const SLIDE_MAX_MS = 8000 // a video longer than this is cut off and the next slide starts
+const SLIDE_LOAD_TIMEOUT_MS = 15000 // allow larger videos time to load before falling back
 const SLIDE_STATIC_MS = 5000 // used when there is no video (reduced motion or a failed video)
 
 const slides = [
@@ -66,12 +67,12 @@ const copy = {
   exit: { opacity: 0, y: -12, transition: { duration: 0.2, ease: 'easeIn' } },
 }
 
-function VideoBackground({ src, onEnded, onFail, onProgress }) {
+function VideoBackground({ src, onEnded, onFail, onStart, onProgress }) {
   const ref = useRef(null)
   const [ready, setReady] = useState(false)
 
   useEffect(() => {
-    ref.current?.play().catch(() => {})
+    ref.current?.play().catch(() => onFail?.(src))
   }, [src])
 
   return (
@@ -81,7 +82,10 @@ function VideoBackground({ src, onEnded, onFail, onProgress }) {
       animate={{ opacity: ready ? 1 : 0 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.6, ease: 'easeInOut' }}
-      onPlaying={() => setReady(true)}
+      onPlaying={() => {
+        setReady(true)
+        onStart?.(src)
+      }}
       onTimeUpdate={(e) => {
         const v = e.currentTarget
         if (!v.duration) return
@@ -90,7 +94,7 @@ function VideoBackground({ src, onEnded, onFail, onProgress }) {
         onProgress?.(src, Math.min(v.currentTime / total, 1))
       }}
       onEnded={onEnded}
-      onError={onFail}
+      onError={() => onFail?.(src)}
       className="absolute inset-0 z-[2] h-full w-full object-cover motion-reduce:hidden"
       autoPlay
       muted
@@ -99,7 +103,7 @@ function VideoBackground({ src, onEnded, onFail, onProgress }) {
       aria-hidden="true"
       tabIndex={-1}
     >
-      <source src={src} type="video/mp4" onError={onFail} />
+      <source src={src} type="video/mp4" onError={() => onFail?.(src)} />
     </motion.video>
   )
 }
@@ -107,13 +111,22 @@ function VideoBackground({ src, onEnded, onFail, onProgress }) {
 export default function Hero() {
   const [i, setI] = useState(0)
   const [failed, setFailed] = useState(false) // current slide's video could not play
+  const [startedVideo, setStartedVideo] = useState(null)
   const reducedMotion = useReducedMotion()
   const noVideo = reducedMotion || failed
 
   // Progress is tagged with its video, so a fading-out video can't move the new slide's bar
   const [progress, setProgress] = useState({ src: null, p: 0 })
+  const s = slides[i]
+  const centered = s.align === 'center'
   const currentVideo = useRef(slides[i].video)
   currentVideo.current = slides[i].video
+  const handleVideoStart = (src) => {
+    if (src === currentVideo.current) setStartedVideo(src)
+  }
+  const handleVideoFail = (src) => {
+    if (src === currentVideo.current) setFailed(true)
+  }
   const handleProgress = (src, p) => {
     if (src === currentVideo.current) setProgress({ src, p })
   }
@@ -121,22 +134,31 @@ export default function Hero() {
   // Start every slide with an empty bar (prevents a full-bar flash when the carousel loops)
   useEffect(() => {
     setProgress({ src: null, p: 0 })
+    setStartedVideo(null)
   }, [i])
 
   const next = () => setI((n) => (n + 1) % slides.length)
   const previous = () => { setFailed(false); setI((n) => (n - 1 + slides.length) % slides.length) }
   const goTo = (n) => { setFailed(false); setI(n) }
 
-  // Fallback timer: guarantees the hero always advances, even if "ended" never fires.
+  // Don't spend a slide's playback time while its video is still loading.
   useEffect(() => {
+    if (!noVideo && startedVideo !== s.video) {
+      const loadTimer = setTimeout(() => setFailed(true), SLIDE_LOAD_TIMEOUT_MS)
+      return () => clearTimeout(loadTimer)
+    }
+
+    // Fallback timer: guarantees the hero advances if "ended" never fires.
     const t = setTimeout(() => { setFailed(false); next() }, noVideo ? SLIDE_STATIC_MS : SLIDE_MAX_MS)
     return () => clearTimeout(t)
-  }, [i, noVideo])
+  }, [i, noVideo, s.video, startedVideo])
 
-  const handleEnded = () => { setFailed(false); next() }
+  const handleEnded = (src) => {
+    if (src !== currentVideo.current) return
+    setFailed(false)
+    next()
+  }
 
-  const s = slides[i]
-  const centered = s.align === 'center'
   return (
     <section
       className="relative isolate min-h-[80vh] overflow-hidden bg-ink pt-[72px] text-white sm:pt-[80px]"
@@ -162,8 +184,9 @@ export default function Hero() {
           <VideoBackground
             key={s.id}
             src={s.video}
-            onEnded={handleEnded}
-            onFail={() => setFailed(true)}
+            onEnded={() => handleEnded(s.video)}
+            onFail={handleVideoFail}
+            onStart={handleVideoStart}
             onProgress={handleProgress}
           />
         </AnimatePresence>
