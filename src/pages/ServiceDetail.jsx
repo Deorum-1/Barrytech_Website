@@ -1,5 +1,6 @@
 import { Link, Navigate, useParams } from 'react-router-dom'
 import { ArrowRight, Check, Phone } from 'lucide-react'
+import Icon from '../components/Icon.jsx'
 import PageHeader from '../components/PageHeader.jsx'
 import Reveal from '../components/Reveal.jsx'
 import usePageMeta from '../hooks/usePageMeta.js'
@@ -59,30 +60,28 @@ export default function ServiceDetail() {
         </div>
       </section>
 
-      <section className="bg-brand-50 py-16 sm:py-20">
+      <section id="what-we-offer" aria-labelledby="what-we-offer-title" className="bg-brand-50 py-16 sm:py-20">
         <div className="container-x">
-          <p className="eyebrow">Capabilities</p>
-          <h2 className="mt-3 text-3xl font-bold sm:text-4xl">What we offer</h2>
-          <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
+          <header className="max-w-3xl">
+            <p className="eyebrow">Service capabilities</p>
+            <h2 id="what-we-offer-title" className="mt-3 text-3xl font-bold sm:text-4xl">What we offer</h2>
+            <p className="mt-4 leading-relaxed text-slate-600">Explore the specific services, tools, and support available in this area.</p>
+          </header>
+          <div className="mt-10 grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
             {s.offerings.map(([t, d, bullets], index) => (
-              <article key={t} tabIndex={0} className="group rounded-2xl outline-none focus-visible:ring-2 focus-visible:ring-hot focus-visible:ring-offset-2">
-                <div className="service-offer-inner md:h-[30rem]">
-                  <div className="service-offer-face flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
-                    <img src={s.offerImages[index]} alt="" loading="lazy" decoding="async" className="aspect-[16/9] w-full shrink-0 object-cover" />
-                    <div className="flex flex-1 flex-col justify-center p-6 md:p-7">
-                      <span className="mb-4 grid h-11 w-11 place-items-center rounded-xl bg-brand-50 text-brand">
-                        <Check size={21} aria-hidden="true" />
-                      </span>
-                      <h3 className="text-xl font-bold text-ink">{t}</h3>
-                    </div>
-                  </div>
-                  <div className="service-offer-back border-t border-slate-100 bg-white p-6 md:rounded-2xl md:border md:border-brand-700 md:bg-ink md:p-7 md:text-white">
-                    <h3 className="hidden text-lg font-bold text-white md:block">{t}</h3>
-                    <p className="max-w-3xl text-sm leading-relaxed md:mt-3 md:text-slate-200">{d}</p>
-                    <ul className="mt-4 grid gap-x-5 gap-y-2 text-sm sm:grid-cols-2 md:grid-cols-1 md:text-slate-100">
-                      {bullets.map((b) => <li key={b} className="flex gap-2"><Check size={17} className="mt-0.5 shrink-0 text-brand-300" />{b}</li>)}
-                    </ul>
-                  </div>
+              <article key={t} className="group flex h-full flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 shadow-sm transition-all duration-300 ease-out hover:-translate-y-1 hover:border-hot-400 hover:shadow-xl motion-reduce:transform-none motion-reduce:transition-none sm:p-7">
+                <div className="flex items-start gap-3">
+                  <span aria-hidden="true" className="mt-0.5 grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand-50 text-brand transition-all duration-300 ease-out group-hover:rotate-3 group-hover:scale-110 group-hover:bg-hot/10 group-hover:text-hot-600 motion-reduce:transform-none motion-reduce:transition-none">
+                    <Icon name={s.offerIcons[index]} size={21} strokeWidth={1.8} />
+                  </span>
+                  <h3 className="pt-1 text-lg font-bold leading-snug text-ink sm:text-xl">{t}</h3>
+                </div>
+                <p className="mt-3 text-sm leading-relaxed text-slate-600">{d}</p>
+                <div className="mt-5 border-t border-slate-100 pt-4">
+                  <p className="text-xs font-bold uppercase tracking-[0.14em] text-brand">Included</p>
+                  <ul className="mt-3 grid gap-2 text-sm leading-relaxed text-slate-700">
+                    {bullets.map((b) => <li key={b} className="flex gap-2"><Check size={17} className="mt-0.5 shrink-0 text-brand" />{b}</li>)}
+                  </ul>
                 </div>
               </article>
             ))}

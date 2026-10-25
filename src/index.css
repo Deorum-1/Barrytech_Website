@@ -100,33 +100,4 @@
     }
   }
 
-  .service-offer-inner {
-    position: relative;
-  }
-
-  @media (min-width: 768px) {
-    .service-offer-inner {
-      transform-style: preserve-3d;
-      transition: transform 700ms ease;
-    }
-
-    .service-offer-face,
-    .service-offer-back {
-      position: absolute;
-      inset: 0;
-      overflow-y: auto;
-      backface-visibility: hidden;
-      -webkit-backface-visibility: hidden;
-    }
-
-    .service-offer-back {
-      transform: rotateY(180deg);
-    }
-
-    .group:hover .service-offer-inner,
-    .group:focus .service-offer-inner {
-      transform: rotateY(180deg);
-    }
-  }
-
 }

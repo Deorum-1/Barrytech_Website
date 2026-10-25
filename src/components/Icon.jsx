@@ -1,7 +1,54 @@
-import { Server, ScanFace, ShieldCheck, Headset, KanbanSquare, Code2, BrainCircuit, Circle } from 'lucide-react'
+import {
+  Activity,
+  BarChart3,
+  BellRing,
+  BrainCircuit,
+  Camera,
+  Car,
+  Circle,
+  ClipboardCheck,
+  ClipboardList,
+  CloudCog,
+  Code2,
+  Compass,
+  ContactRound,
+  DatabaseBackup,
+  Fingerprint,
+  Gauge,
+  Globe,
+  GraduationCap,
+  Headset,
+  KanbanSquare,
+  KeyRound,
+  LaptopMinimalCheck,
+  MailCheck,
+  Map,
+  Network,
+  PanelsTopLeft,
+  Router,
+  ScanEye,
+  ScanFace,
+  ScanSearch,
+  Server,
+  ServerCog,
+  ShieldCheck,
+  ShoppingCart,
+  Smartphone,
+  UsersRound,
+  Webhook,
+  Workflow,
+  Wrench,
+} from 'lucide-react'
 
 // Only the icons referenced in src/data/services.js are bundled
-const icons = { Server, ScanFace, ShieldCheck, Headset, KanbanSquare, Code2, BrainCircuit }
+const icons = {
+  Server, ScanFace, ShieldCheck, Headset, KanbanSquare, Code2, BrainCircuit,
+  Activity, BarChart3, BellRing, Camera, Car, ClipboardCheck, ClipboardList,
+  CloudCog, Compass, ContactRound, DatabaseBackup, Fingerprint, Gauge, Globe,
+  GraduationCap, KeyRound, LaptopMinimalCheck, MailCheck, Map, Network,
+  PanelsTopLeft, Router, ScanEye, ScanSearch, ServerCog, ShoppingCart,
+  Smartphone, UsersRound, Webhook, Workflow, Wrench,
+}
 export default function Icon({ name, ...props }) {
   const C = icons[name] || Circle
   return <C {...props} />
