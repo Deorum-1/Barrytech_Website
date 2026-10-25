@@ -1,15 +1,15 @@
 import soc from '../assets/images/dashboard.jpg'
 import datacenter from '../assets/images/datacenter.jpg'
 import servers from '../assets/images/servers.jpg'
-import cabling from '../assets/images/cabling.jpg'
+import cabling from '../assets/images/network-support.jpg'
 import inspection from '../assets/images/servers.jpg'
 import netSupport from '../assets/images/network-support.jpg'
 import serverRoom from '../assets/images/server-room.jpg'
 import securityAccess from '../assets/images/server-room.jpg'
-import projectDelivery from '../assets/images/ai-automation.jpg'
+import projectDelivery from '../assets/images/datacenter.jpg'
 import webProducts from '../assets/images/cloud-platform.jpg'
-import aiAutomation from '../assets/images/ai-automation.jpg'
 import cloud from '../assets/images/cloud-platform.jpg'
+import dashboard from '../assets/images/dashboard.jpg'
 
 // Each offering: [title, description, [bullets]]
 export const services = [
@@ -126,7 +126,7 @@ export const services = [
     slug: 'artificial-intelligence', icon: 'BrainCircuit', short: 'AI Solutions', title: 'Artificial Intelligence (AI) Solutions',
     tagline: 'Transforming businesses with intelligent automation, AI innovation, and secure digital solutions.',
     intro: 'We help businesses explore and adopt AI to improve productivity, automate repetitive tasks, enhance decision-making, and create new digital opportunities, from AI-powered customer service and workflow automation to enterprise AI integration, data analytics, and AI security.',
-    images: [[aiAutomation, 'AI Automation, Analytics and Secure Adoption'], [cloud, 'AI-Ready Cloud Infrastructure']],
+    images: [[dashboard, 'AI Automation, Analytics and Secure Adoption'], [cloud, 'AI-Ready Cloud Infrastructure']],
     closing: 'Intelligent Solutions. Secure Innovation. Smarter Business.',
     cta: 'Have an AI use case, or an automation you want to explore?',
     offerings: [

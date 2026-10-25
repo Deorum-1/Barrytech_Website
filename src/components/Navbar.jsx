@@ -61,7 +61,9 @@ export default function Navbar() {
     const update = () => {
       frame = 0
       const navBottom = headerRef.current?.getBoundingClientRect().bottom ?? 80
-      setLight(trigger.getBoundingClientRect().top <= navBottom)
+      // Keep the floating bar contrasted against the section behind it:
+      // white over dark/blue headers, brand blue over light content.
+      setLight(trigger.getBoundingClientRect().top > navBottom)
     }
     const schedule = () => {
       if (!frame) frame = requestAnimationFrame(update)
@@ -96,7 +98,7 @@ export default function Navbar() {
       isActive
         ? light ? 'text-brand-900' : 'text-white'
         : light
-          ? 'text-slate-600 hover:bg-slate-100/80 hover:text-ink'
+          ? 'text-brand-700 hover:bg-brand-50 hover:text-brand-900'
           : 'text-slate-300 hover:bg-white/[0.07] hover:text-white'
     }`
 
@@ -107,7 +109,7 @@ export default function Navbar() {
           className={`relative flex items-center justify-between gap-3 rounded-full border px-2.5 py-2 backdrop-blur-xl transition-[background-color,border-color,box-shadow,color] duration-500 ease-out sm:px-4 ${
             light
               ? 'border-white/80 bg-white text-ink shadow-[0_10px_36px_-16px_rgba(7,27,48,0.45)] ring-1 ring-ink/[0.06]'
-              : 'border-white/10 bg-ink/95 text-white shadow-[0_18px_50px_-20px_rgba(0,0,0,0.9)] ring-1 ring-white/[0.04]'
+              : 'border-white/10 bg-brand-800/95 text-white shadow-[0_18px_50px_-20px_rgba(0,0,0,0.9)] ring-1 ring-white/[0.04]'
           }`}
         >
           <div className="flex min-w-0 items-center gap-3">
@@ -167,18 +169,18 @@ export default function Navbar() {
                   className={`relative rounded-3xl border p-2 backdrop-blur-xl ${
                     light
                       ? 'border-slate-200/90 bg-white shadow-[0_28px_70px_-30px_rgba(7,27,48,0.45)]'
-                      : 'border-white/10 bg-ink/95 shadow-[0_34px_80px_-24px_rgba(0,0,0,0.95)]'
+                      : 'border-white/10 bg-brand-800/95 shadow-[0_34px_80px_-24px_rgba(0,0,0,0.95)]'
                   }`}
                 >
                   <span
                     className={`absolute -top-[5px] left-1/2 h-2.5 w-2.5 -translate-x-1/2 rotate-45 border-l border-t ${
-                      light ? 'border-slate-200/90 bg-white' : 'border-white/10 bg-ink'
+                      light ? 'border-slate-200/90 bg-white' : 'border-white/10 bg-brand-800'
                     }`}
                     aria-hidden="true"
                   />
 
                   <div className="flex items-center justify-between gap-3 px-3 pb-2 pt-1.5">
-                    <p className={`text-[10px] font-bold uppercase tracking-[0.2em] ${light ? 'text-slate-500' : 'text-slate-400'}`}>
+                    <p className={`text-[10px] font-bold uppercase tracking-[0.2em] ${light ? 'text-brand-700' : 'text-slate-400'}`}>
                       What we do
                     </p>
                     <Link
@@ -210,10 +212,10 @@ export default function Navbar() {
                           <Icon name={service.icon} size={16} strokeWidth={1.8} aria-hidden="true" />
                         </span>
                         <span className="min-w-0 flex-1">
-                          <span className={`block truncate text-[12.5px] font-semibold ${light ? 'text-ink' : 'text-white'}`}>
+                          <span className={`block truncate text-[12.5px] font-semibold ${light ? 'text-brand-900' : 'text-white'}`}>
                             {service.short}
                           </span>
-                          <span className={`block truncate text-[10.5px] ${light ? 'text-slate-500' : 'text-slate-400'}`}>
+                          <span className={`block truncate text-[10.5px] ${light ? 'text-brand-700' : 'text-slate-400'}`}>
                             {serviceBlurbs[service.slug]}
                           </span>
                         </span>
@@ -233,7 +235,7 @@ export default function Navbar() {
                       light ? 'border-slate-100' : 'border-white/10'
                     }`}
                   >
-                    <p className={`text-[11px] ${light ? 'text-slate-500' : 'text-slate-400'}`}>
+                    <p className={`text-[11px] ${light ? 'text-brand-700' : 'text-slate-400'}`}>
                       Not sure where to start? We&rsquo;ll help you scope it.
                     </p>
                     <Link
@@ -277,7 +279,7 @@ export default function Navbar() {
                 open
                   ? light ? 'border-ink bg-ink text-white' : 'border-white bg-white text-ink'
                   : light
-                    ? 'border-slate-200/90 text-ink hover:border-slate-300 hover:bg-slate-100'
+                    ? 'border-brand-200 text-brand-800 hover:border-brand-300 hover:bg-brand-50'
                     : 'border-white/15 text-slate-200 hover:border-white/25 hover:bg-white/10 hover:text-white'
               }`}
             >
@@ -297,7 +299,7 @@ export default function Navbar() {
               className={`absolute inset-x-3 top-[calc(100%+8px)] max-h-[calc(100dvh-6rem)] origin-top overflow-y-auto rounded-3xl border p-2.5 shadow-2xl backdrop-blur-xl transition-colors duration-500 sm:inset-x-4 lg:hidden ${
                 light
                   ? 'border-slate-200 bg-white text-ink shadow-ink/15'
-                  : 'border-white/10 bg-ink/95 text-white shadow-black/50'
+                  : 'border-white/10 bg-brand-800/95 text-white shadow-black/50'
               }`}
             >
               <nav aria-label="Mobile navigation" className="flex flex-col gap-0.5">
@@ -310,7 +312,7 @@ export default function Navbar() {
                     className={({ isActive }) =>
                       `flex items-center justify-between rounded-2xl px-3.5 py-3 text-sm font-semibold transition-colors ${
                         light
-                          ? isActive ? 'bg-brand-50 text-brand-900' : 'text-slate-700 hover:bg-slate-100'
+                          ? isActive ? 'bg-brand-50 text-brand-900' : 'text-brand-700 hover:bg-brand-50'
                           : isActive ? 'bg-white/10 text-white' : 'text-slate-300 hover:bg-white/[0.06]'
                       }`
                     }
@@ -320,7 +322,7 @@ export default function Navbar() {
                         {label}
                         {isActive
                           ? <span className="h-1.5 w-1.5 rounded-full bg-hot" aria-hidden="true" />
-                          : <ChevronRight size={15} className={light ? 'text-slate-300' : 'text-slate-600'} aria-hidden="true" />}
+                          : <ChevronRight size={15} className={light ? 'text-brand-400' : 'text-slate-600'} aria-hidden="true" />}
                       </>
                     )}
                   </NavLink>
@@ -332,7 +334,7 @@ export default function Navbar() {
                   aria-expanded={servicesOpen}
                   aria-controls="mobile-services"
                   className={`mt-1 flex items-center justify-between rounded-2xl px-3.5 py-3 text-sm font-semibold transition-colors ${
-                    light ? 'text-slate-700 hover:bg-slate-100' : 'text-slate-300 hover:bg-white/[0.06]'
+                    light ? 'text-brand-700 hover:bg-brand-50' : 'text-slate-300 hover:bg-white/[0.06]'
                   }`}
                 >
                   Services
@@ -359,7 +361,7 @@ export default function Navbar() {
                         className={({ isActive }) =>
                           `flex items-center gap-2.5 rounded-xl px-3 py-2 text-[13px] transition-colors ${
                             light
-                              ? isActive ? 'bg-brand-50 font-semibold text-brand-900' : 'text-slate-600 hover:bg-slate-100 hover:text-ink'
+                              ? isActive ? 'bg-brand-50 font-semibold text-brand-900' : 'text-brand-700 hover:bg-brand-50 hover:text-brand-900'
                               : isActive ? 'bg-white/10 font-semibold text-white' : 'text-slate-400 hover:bg-white/[0.06] hover:text-white'
                           }`
                         }
@@ -391,7 +393,7 @@ export default function Navbar() {
                 <a
                   href={`mailto:${company.contact.email}`}
                   className={`flex items-center gap-3 rounded-2xl px-2.5 py-2 transition-colors ${
-                    light ? 'hover:bg-slate-100' : 'hover:bg-white/[0.06]'
+                    light ? 'hover:bg-brand-50' : 'hover:bg-white/[0.06]'
                   }`}
                 >
                   <span
@@ -402,10 +404,10 @@ export default function Navbar() {
                     <Mail size={14} aria-hidden="true" />
                   </span>
                   <span>
-                    <span className={`block text-[10px] font-bold uppercase tracking-[0.16em] ${light ? 'text-slate-500' : 'text-slate-400'}`}>
+                    <span className={`block text-[10px] font-bold uppercase tracking-[0.16em] ${light ? 'text-brand-700' : 'text-slate-400'}`}>
                       Email us
                     </span>
-                    <span className={`block text-[13px] font-medium ${light ? 'text-slate-700' : 'text-slate-200'}`}>
+                    <span className={`block text-[13px] font-medium ${light ? 'text-brand-800' : 'text-slate-200'}`}>
                       {company.contact.email}
                     </span>
                   </span>
@@ -425,7 +427,7 @@ export default function Navbar() {
                 />
               </Link>
 
-              <p className={`pb-1 pt-3 text-center text-[10px] font-bold uppercase tracking-[0.22em] ${light ? 'text-slate-500' : 'text-slate-400'}`}>
+              <p className={`pb-1 pt-3 text-center text-[10px] font-bold uppercase tracking-[0.22em] ${light ? 'text-brand-700' : 'text-slate-400'}`}>
                 Secure Digital Innovations
               </p>
             </motion.div>

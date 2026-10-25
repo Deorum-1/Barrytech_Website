@@ -14,7 +14,7 @@ import datacenter from '../assets/images/datacenter.jpg'
 import soc from '../assets/images/dashboard.jpg'
 import networkSupport from '../assets/images/network-support.jpg'
 import webProducts from '../assets/images/cloud-platform.jpg'
-import projectDelivery from '../assets/images/ai-automation.jpg'
+import projectDelivery from '../assets/images/datacenter.jpg'
 
 // The five key areas that enable digital success (our promise section)
 const keyAreas = [

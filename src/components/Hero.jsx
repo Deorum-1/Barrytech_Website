@@ -6,7 +6,7 @@ import soc from '../assets/images/dashboard.jpg'
 import datacenter from '../assets/images/datacenter.jpg'
 import dashboard from '../assets/images/dashboard.jpg'
 import webProducts from '../assets/images/cloud-platform.jpg'
-import aiAutomation from '../assets/images/ai-automation.jpg'
+import aiAutomation from '../assets/images/cloud-platform.jpg'
 
 const SLIDE_MAX_MS = 8000 // a video longer than this is cut off and the next slide starts
 const SLIDE_STATIC_MS = 5000 // used when there is no video (reduced motion or a failed video)
@@ -45,7 +45,7 @@ const slides = [
     title: 'Websites, apps, and platforms that perform.',
     text: 'Digital experiences built for speed, security, and results, from company websites and e-commerce to custom web applications.',
     cta: ['Explore web development', '/services/web-app-development'],
-    video: '/videos/hero-bg.mp4',
+    video: '/videos/hero-bg2.mp4',
     poster: webProducts,
   },
   {
@@ -54,7 +54,7 @@ const slides = [
     title: 'Smarter AI. Secure by design.',
     text: 'Practical AI assistants, automation, and analytics, with the governance to keep your data safe.',
     cta: ['See AI solutions', '/services/artificial-intelligence'],
-    video: '/videos/ai-solutions.mp4',
+    video: '/videos/video3.mp4',
     poster: aiAutomation,
   },
 ]
@@ -140,7 +140,7 @@ export default function Hero() {
 
   return (
     <section
-      className="relative isolate overflow-hidden bg-ink pt-[72px] text-white sm:pt-[80px]"
+      className="relative isolate min-h-[80vh] overflow-hidden bg-ink pt-[72px] text-white sm:pt-[80px]"
       aria-roledescription="carousel"
       aria-label="BarryTech highlights"
     >
@@ -173,8 +173,9 @@ export default function Hero() {
       {/* Gradient overlays */}
       <div className={`absolute inset-0 z-[3] ${centered ? 'bg-ink/65' : 'bg-gradient-to-r from-ink/85 via-ink/55 to-ink/20'}`} />
       <div className="absolute inset-0 z-[3] bg-gradient-to-t from-ink/70 via-transparent to-ink/35" />
+      {s.id === 'web-development' && <div className="absolute inset-0 z-[3] bg-brand/25" aria-hidden="true" />}
 
-      <div className="container-x relative z-[4] flex min-h-[600px] flex-col justify-center py-20 sm:min-h-[640px] sm:py-24">
+      <div className="container-x relative z-[4] flex min-h-[calc(80vh-72px)] flex-col justify-center py-20 sm:min-h-[calc(80vh-80px)] sm:py-24">
         <div className={`relative min-h-[350px] max-w-3xl sm:min-h-[330px] ${centered ? 'mx-auto' : ''}`}>
           <AnimatePresence mode="wait">
             <motion.div key={i} initial="initial" animate="animate" exit="exit" className={`max-w-3xl p-6 sm:p-8 ${centered ? 'mx-auto text-center' : ''}`}>
