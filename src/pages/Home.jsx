@@ -15,8 +15,8 @@ import soc from '../assets/images/cloud-platform.jpg'
 import networkSupport from '../assets/images/network-support.jpg'
 import webProducts from '../assets/images/dashboard.png'
 import projectDelivery from '../assets/images/product.jpg'
+import physicalSecurity from '../assets/images/physical.jpg'
 const aiSolutionsImage = 'https://www.openskykft.com/ai-neural-net.jpg'
-const physicalSecurityImage = 'https://i.pinimg.com/736x/30/1a/85/301a8524422b76d00fcd02af67367388.jpg'
 
 // The five key areas that enable digital success (our promise section)
 const keyAreas = [
@@ -35,7 +35,7 @@ const wants = [
   { tab: 'Cybersecurity', items: [['Protect your organization end to end', 'Next-generation firewalls, ZTNA, EDR/XDR, and DDoS protection.', 'cybersecurity', soc]] },
   { tab: 'IT infrastructure', items: [['Build solid infrastructure', 'Networks, servers, data centers, cloud, and virtualization.', 'it-infrastructure', datacenter]] },
   { tab: 'AI solutions', items: [['Put AI to work safely', 'Adopt practical AI assistants, automation, and analytics with secure governance.', 'artificial-intelligence', aiSolutionsImage]] },
-  { tab: 'Physical security', items: [['Protect facilities and access', 'Connect surveillance, access control, and security monitoring for safer facilities.', 'physical-security', physicalSecurityImage]] },
+  { tab: 'Physical security', items: [['Protect facilities and access', 'Connect surveillance, access control, and security monitoring for safer facilities.', 'physical-security', physicalSecurity]] },
 ]
 
 // Ribbon content: top row lists our services, bottom row lists the sub-services behind them

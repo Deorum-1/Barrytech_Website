@@ -27,7 +27,7 @@ const slides = [
   {
     id: 'cybersecurity',
     eyebrow: 'Cybersecurity · Threat response',
-    title: 'Protecting the digital future.',
+    title: 'Protecting your digital future.',
     text: 'From next-generation firewalls to a Security Operations Center, we help you detect, respond to, and recover from cyber threats.',
     cta: ['Explore cybersecurity', '/services/cybersecurity'],
     video: '/videos/video2.mp4',
