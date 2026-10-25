@@ -178,7 +178,7 @@ export default function Hero() {
       <div className="container-x relative z-[4] flex min-h-[calc(80vh-72px)] flex-col justify-center py-20 sm:min-h-[calc(80vh-80px)] sm:py-24">
         <div className={`relative min-h-[350px] max-w-3xl sm:min-h-[330px] ${centered ? 'mx-auto' : ''}`}>
           <AnimatePresence mode="wait">
-            <motion.div key={i} initial="initial" animate="animate" exit="exit" className={`max-w-3xl p-6 sm:p-8 ${centered ? 'mx-auto text-center' : ''}`}>
+            <motion.div key={i} initial="initial" animate="animate" exit="exit" className={`max-w-3xl p-3 sm:p-6 lg:p-8 ${centered ? 'mx-auto text-center' : ''}`}>
               {s.eyebrow && (
                 <motion.p
                   variants={copy}
@@ -192,21 +192,21 @@ export default function Hero() {
               <motion.h1
                 variants={copy}
                 custom={0.05}
-                className="mt-5 font-display text-4xl font-extrabold leading-[1.05] text-white drop-shadow-[0_2px_18px_rgba(0,0,0,0.45)] sm:text-6xl"
+                className="mt-5 font-display text-3xl font-extrabold leading-[1.05] text-white drop-shadow-[0_2px_18px_rgba(0,0,0,0.45)] sm:text-5xl lg:text-6xl"
               >
                 {s.title}
               </motion.h1>
               <motion.p
                 variants={copy}
                 custom={0.1}
-                className={`mt-6 max-w-xl text-lg text-slate-100 drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)] ${centered ? 'mx-auto' : ''}`}
+                className={`mt-5 max-w-xl text-base leading-relaxed text-slate-100 drop-shadow-[0_2px_12px_rgba(0,0,0,0.4)] sm:mt-6 sm:text-lg ${centered ? 'mx-auto' : ''}`}
               >
                 {s.text}
               </motion.p>
               <motion.div
                 variants={copy}
                 custom={0.15}
-                className={`mt-9 flex flex-wrap gap-4 ${centered ? 'justify-center' : ''}`}
+                className={`mt-7 flex flex-wrap gap-3 sm:mt-9 sm:gap-4 ${centered ? 'justify-center' : ''}`}
               >
                 <Link to={s.cta[1]} className="btn btn-red">{s.cta[0]} <ArrowRight size={16} /></Link>
                 <Link to="/contact" className="btn btn-ghost">Work with us</Link>

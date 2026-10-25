@@ -18,7 +18,7 @@ export default function Contact() {
   const [selectedServices, setSelectedServices] = useState([])
   const [sending, setSending] = useState(false)
   const [status, setStatus] = useState(null)
-  const field = 'mt-2 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-ink outline-none transition placeholder:text-slate-500 focus:border-brand focus:ring-2 focus:ring-brand/30'
+  const field = 'mt-2 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-base text-ink outline-none transition placeholder:text-slate-500 focus:border-brand focus:ring-2 focus:ring-brand/30 sm:text-sm'
 
   const toggleService = (slug) => {
     setStatus(null)
@@ -151,7 +151,10 @@ export default function Contact() {
               <span className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-brand-50 text-hot"><I size={22} /></span>
               <span className="min-w-0">
                 <span className="block text-sm text-slate-500">{label}</span>
-                <span className="mt-0.5 flex items-center gap-1.5 font-semibold text-ink group-hover:text-brand">{value}{external && <ArrowUpRight size={14} className="shrink-0 text-slate-400" />}</span>
+                <span className="mt-0.5 flex min-w-0 flex-wrap items-center gap-x-1.5 gap-y-0.5 font-semibold text-ink group-hover:text-brand">
+                  <span className="min-w-0 [overflow-wrap:anywhere]">{value}</span>
+                  {external && <ArrowUpRight size={14} className="shrink-0 text-slate-400" />}
+                </span>
               </span>
             </a>
           ))}

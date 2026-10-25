@@ -38,6 +38,8 @@ function ScrollToTop() {
 }
 
 export default function App() {
+  const { pathname } = useLocation()
+
   return (
     <MotionConfig reducedMotion="user">
       <ScrollToTop />
@@ -54,14 +56,17 @@ export default function App() {
         </Routes>
       </main>
       <Footer />
-      <Link
-        to="/contact#call-barrytech-form"
-        aria-label="Book your free assessment"
-        className="fixed bottom-5 right-4 z-[70] inline-flex items-center gap-2 rounded-full bg-hot px-4 py-3 text-sm font-bold text-white shadow-lg shadow-ink/20 transition hover:-translate-y-0.5 hover:bg-hot-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-hot focus-visible:ring-offset-2 sm:bottom-6 sm:right-6 sm:px-5"
-      >
-        <Send size={16} aria-hidden="true" />
-        Book your free assessment
-      </Link>
+      {pathname !== '/contact' && (
+        <Link
+          to="/contact#call-barrytech-form"
+          aria-label="Book your free assessment"
+          className="fixed bottom-4 right-3 z-40 inline-flex items-center gap-2 rounded-full bg-hot px-3 py-2.5 text-xs font-bold text-white shadow-lg shadow-ink/20 transition hover:-translate-y-0.5 hover:bg-hot-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-hot focus-visible:ring-offset-2 sm:bottom-6 sm:right-6 sm:px-5 sm:py-3 sm:text-sm"
+        >
+          <Send size={16} aria-hidden="true" />
+          <span className="sm:hidden">Free assessment</span>
+          <span className="hidden sm:inline">Book your free assessment</span>
+        </Link>
+      )}
     </MotionConfig>
   )
 }

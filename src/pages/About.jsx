@@ -39,7 +39,7 @@ export default function About() {
           <div className="mt-10 grid gap-6 md:grid-cols-2">
             {[[Target, 'Our mission', company.mission], [Telescope, 'Our vision', company.vision]].map(([I, t, d]) => (
               <Reveal key={t} className="h-full">
-                <div className="h-full rounded-3xl bg-white p-9 shadow-sm">
+                <div className="h-full rounded-3xl bg-white p-6 shadow-sm sm:p-9">
                   <I className="text-hot" size={32} />
                   <h3 className="mt-5 text-2xl font-bold">{t}</h3>
                   <p className="mt-3 text-lg">{d}</p>

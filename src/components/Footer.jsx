@@ -36,7 +36,7 @@ export default function Footer() {
         </div>
       )}
 
-      <div className="container-x grid gap-10 py-14 sm:grid-cols-2 md:grid-cols-4">
+      <div className="container-x grid gap-8 py-12 sm:grid-cols-2 sm:gap-10 sm:py-14 lg:grid-cols-4">
         <div>
           <span ><img src={logo} alt="BarryTech" width="931" height="268" className="h-10 w-auto" /></span>
           <p className="mt-5 max-w-xs text-sm leading-relaxed">{company.slogan}</p>
@@ -74,18 +74,18 @@ export default function Footer() {
           <h4 className="mb-4 text-sm font-semibold text-white">Get in touch</h4>
           <ul className="space-y-3 text-sm">
             <li>
-              <a href={`mailto:${contact.email}`} className="flex gap-2 transition hover:text-white">
-                <Mail size={16} className="mt-0.5 shrink-0 text-hot" /> {contact.email}
+              <a href={`mailto:${contact.email}`} className="flex min-w-0 items-start gap-2 transition hover:text-white">
+                <Mail size={16} className="mt-0.5 shrink-0 text-hot" /> <span className="min-w-0 [overflow-wrap:anywhere]">{contact.email}</span>
               </a>
             </li>
             <li>
-              <a href={`tel:${contact.phoneHref}`} className="flex gap-2 transition hover:text-white">
-                <Phone size={16} className="mt-0.5 shrink-0 text-hot" /> {contact.phone}
+              <a href={`tel:${contact.phoneHref}`} className="flex min-w-0 items-start gap-2 transition hover:text-white">
+                <Phone size={16} className="mt-0.5 shrink-0 text-hot" /> <span className="min-w-0 [overflow-wrap:anywhere]">{contact.phone}</span>
               </a>
             </li>
             <li>
-              <a href={contact.maps} target="_blank" rel="noopener noreferrer" className="flex gap-2 transition hover:text-white">
-                <MapPin size={16} className="mt-0.5 shrink-0 text-hot" /> {contact.address}
+              <a href={contact.maps} target="_blank" rel="noopener noreferrer" className="flex min-w-0 items-start gap-2 transition hover:text-white">
+                <MapPin size={16} className="mt-0.5 shrink-0 text-hot" /> <span className="min-w-0 [overflow-wrap:anywhere]">{contact.address}</span>
               </a>
             </li>
           </ul>
