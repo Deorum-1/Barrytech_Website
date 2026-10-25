@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
-import { ArrowRight, Pause, Play } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import soc from '../assets/images/soc.jpg'
 import datacenter from '../assets/images/datacenter.jpg'
 import dashboard from '../assets/images/dashboard.jpg'
@@ -103,15 +103,7 @@ function VideoBackground({ src, poster }) {
 
 export default function Hero() {
   const [i, setI] = useState(0)
-  const [paused, setPaused] = useState(false)
   const reducedMotion = useReducedMotion()
-  const autoplay = !paused && !reducedMotion
-
-  useEffect(() => {
-    if (!autoplay) return
-    const t = setInterval(() => setI((x) => (x + 1) % slides.length), 7000)
-    return () => clearInterval(t)
-  }, [autoplay, i])
 
   const s = slides[i]
   const centered = s.align === 'center'
@@ -201,33 +193,13 @@ export default function Hero() {
                 className="group/dot flex h-8 items-center"
               >
                 <span
-                  className={`relative block h-1.5 overflow-hidden rounded-full transition-all duration-500 ${
-                    n === i ? 'w-12 bg-white/25' : 'w-6 bg-white/40 group-hover/dot:bg-white/70'
+                  className={`block h-1.5 rounded-full transition-all duration-500 ${
+                    n === i ? 'w-12 bg-hot' : 'w-6 bg-white/40 group-hover/dot:bg-white/70'
                   }`}
-                >
-                  {n === i && (
-                    <motion.span
-                      key={`fill-${i}-${autoplay}`}
-                      className="absolute inset-y-0 left-0 bg-hot"
-                      initial={{ width: autoplay ? '0%' : '100%' }}
-                      animate={{ width: '100%' }}
-                      transition={{ duration: autoplay ? 7 : 0, ease: 'linear' }}
-                    />
-                  )}
-                </span>
+                />
               </button>
             ))}
           </div>
-          {!reducedMotion && (
-            <button
-              type="button"
-              onClick={() => setPaused(!paused)}
-              aria-label={paused ? 'Play slideshow' : 'Pause slideshow'}
-              className="grid h-9 w-9 place-items-center rounded-full border border-white/25 bg-white/10 text-white backdrop-blur transition hover:bg-white/20"
-            >
-              {paused ? <Play size={14} /> : <Pause size={14} />}
-            </button>
-          )}
           <span className="font-display text-xs font-semibold tracking-widest text-slate-300">
             {String(i + 1).padStart(2, '0')} / {String(slides.length).padStart(2, '0')}
           </span>

@@ -1,7 +1,6 @@
-import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useReducedMotion } from 'framer-motion'
-import { ArrowRight, Pause, Play } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import Icon from './Icon.jsx'
 import { services } from '../data/services.js'
 
@@ -85,7 +84,6 @@ function CardSet({ cards, clone = false }) {
 }
 
 export default function GoalMarquee({ goals }) {
-  const [paused, setPaused] = useState(false)
   const reduce = useReducedMotion()
 
   const cards = goals.flatMap((goal, goalIndex) =>
@@ -117,22 +115,6 @@ export default function GoalMarquee({ goals }) {
             </li>
           ))}
         </ul>
-
-        {!reduce && (
-          <div className="flex items-center gap-3">
-            <span className="hidden text-xs text-slate-500 lg:inline">Hover or focus to pause</span>
-            <button
-              type="button"
-              onClick={() => setPaused((value) => !value)}
-              aria-label={paused ? 'Resume card marquee' : 'Pause card marquee'}
-              title={paused ? 'Resume card marquee' : 'Pause card marquee'}
-              className="inline-flex min-h-9 items-center gap-1.5 rounded-full border border-brand-200 bg-white px-3.5 py-2 text-[11px] font-semibold text-brand-800 shadow-sm transition hover:border-brand-300 hover:text-brand"
-            >
-              {paused ? <Play size={12} aria-hidden="true" /> : <Pause size={12} aria-hidden="true" />}
-              {paused ? 'Play' : 'Pause'}
-            </button>
-          </div>
-        )}
       </div>
 
       {reduce ? (
@@ -142,11 +124,8 @@ export default function GoalMarquee({ goals }) {
           ))}
         </div>
       ) : (
-        <div className="group/marquee relative mt-8 px-5 sm:px-8 md:mt-6 md:overflow-hidden md:px-0 md:py-3">
-          <div
-            className="goal-track flex flex-col gap-4 md:ml-8 md:w-max md:animate-marquee-cards md:flex-row md:gap-0 group-hover/marquee:[animation-play-state:paused] group-focus-within/marquee:[animation-play-state:paused]"
-            style={paused ? { animationPlayState: 'paused' } : undefined}
-          >
+        <div className="relative mt-8 px-5 sm:px-8 md:mt-6 md:overflow-hidden md:px-0 md:py-3">
+          <div className="goal-track flex flex-col gap-4 md:ml-8 md:w-max md:animate-marquee-cards md:flex-row md:gap-0">
             <CardSet cards={cards} />
             {/* three repeats keep the loop seamless even with a short card list */}
             {[1, 2, 3].map((n) => <CardSet key={n} cards={cards} clone />)}
