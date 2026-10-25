@@ -35,7 +35,7 @@ const wants = [
 ]
 
 // Ribbon content: top row lists our services, bottom row lists the sub-services behind them
-const serviceRibbon = services.map((s) => s.short)
+const serviceRibbon = services.map((s) => s.slug === 'managed-it' ? 'Managed IT services' : s.short)
 const subServiceRibbon = services.flatMap((s) => s.offerings.slice(0, 4).map(([title]) => title))
 
 export default function Home() {

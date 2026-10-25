@@ -7,9 +7,9 @@ import datacenter from '../assets/images/datacenter.jpg'
 import webProducts from '../assets/images/dashboard.png'
 import aiAutomation from '../assets/images/cloud-platform.jpg'
 
-const SLIDE_MAX_MS = 8000 // a video longer than this is cut off and the next slide starts
+const SLIDE_MAX_MS = 5000 // every hero slide stays visible for the same duration
 const SLIDE_LOAD_TIMEOUT_MS = 15000 // allow larger videos time to load before falling back
-const SLIDE_STATIC_MS = 5000 // used when there is no video (reduced motion or a failed video)
+const SLIDE_STATIC_MS = SLIDE_MAX_MS // keep fallback slides on the same cadence
 
 const slides = [
   {
@@ -46,7 +46,6 @@ const slides = [
     text: 'Digital experiences built for speed, security, and results, from company websites and e-commerce to custom web applications.',
     cta: ['Explore web development', '/services/web-app-development'],
     video: '/videos/hero-bg2.mp4',
-    maxDurationMs: 22000,
     poster: webProducts,
   },
   {
@@ -70,6 +69,7 @@ const copy = {
 
 function VideoBackground({ src, maxDurationMs = SLIDE_MAX_MS, onEnded, onFail, onStart, onProgress }) {
   const ref = useRef(null)
+  const startedAt = useRef(null)
   const [ready, setReady] = useState(false)
 
   useEffect(() => {
@@ -85,19 +85,18 @@ function VideoBackground({ src, maxDurationMs = SLIDE_MAX_MS, onEnded, onFail, o
       transition={{ duration: 0.6, ease: 'easeInOut' }}
       onPlaying={() => {
         setReady(true)
+        startedAt.current = Date.now()
         onStart?.(src)
       }}
       onTimeUpdate={(e) => {
-        const v = e.currentTarget
-        if (!v.duration) return
-        // match the cap so the bar is full exactly when the cut-off hits
-        const total = Math.min(v.duration, maxDurationMs / 1000)
-        onProgress?.(src, Math.min(v.currentTime / total, 1))
+        if (startedAt.current == null) return
+        onProgress?.(src, Math.min((Date.now() - startedAt.current) / maxDurationMs, 1))
       }}
       onEnded={onEnded}
       onError={() => onFail?.(src)}
       className="absolute inset-0 z-[2] h-full w-full object-cover motion-reduce:hidden"
       autoPlay
+      loop
       muted
       playsInline
       preload="auto"
