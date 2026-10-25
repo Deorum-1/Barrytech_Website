@@ -11,10 +11,10 @@ import { services } from '../data/services.js'
 import { company } from '../data/company.js'
 // Used as the poster and the reduced-motion fallback for the feature band video
 import datacenter from '../assets/images/datacenter.jpg'
-import soc from '../assets/images/soc.jpg'
+import soc from '../assets/images/dashboard.jpg'
 import networkSupport from '../assets/images/network-support.jpg'
-import webProducts from '../assets/images/web-products.jpg'
-import projectDelivery from '../assets/images/project-delivery.jpg'
+import webProducts from '../assets/images/cloud-platform.jpg'
+import projectDelivery from '../assets/images/ai-automation.jpg'
 
 // The five key areas that enable digital success (our promise section)
 const keyAreas = [

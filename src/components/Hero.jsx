@@ -2,10 +2,10 @@ import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { ArrowRight } from 'lucide-react'
-import soc from '../assets/images/soc.jpg'
+import soc from '../assets/images/dashboard.jpg'
 import datacenter from '../assets/images/datacenter.jpg'
 import dashboard from '../assets/images/dashboard.jpg'
-import webProducts from '../assets/images/web-products.jpg'
+import webProducts from '../assets/images/cloud-platform.jpg'
 import aiAutomation from '../assets/images/ai-automation.jpg'
 
 const SLIDE_MAX_MS = 8000 // a video longer than this is cut off and the next slide starts

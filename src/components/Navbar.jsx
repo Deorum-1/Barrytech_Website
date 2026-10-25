@@ -61,7 +61,7 @@ export default function Navbar() {
     const update = () => {
       frame = 0
       const navBottom = headerRef.current?.getBoundingClientRect().bottom ?? 80
-      setLight(trigger.getBoundingClientRect().top > navBottom)
+      setLight(trigger.getBoundingClientRect().top <= navBottom)
     }
     const schedule = () => {
       if (!frame) frame = requestAnimationFrame(update)
@@ -81,7 +81,7 @@ export default function Navbar() {
     if (!open) return
     const onKeyDown = (event) => { if (event.key === 'Escape') close() }
     const onPointerDown = (event) => {
-      if (headerRef.current && !headerRef.current.contains(event.target)) setOpen(false)
+      if (headerRef.current && !headerRef.current.contains(event.target)) close()
     }
     document.addEventListener('keydown', onKeyDown)
     document.addEventListener('pointerdown', onPointerDown)

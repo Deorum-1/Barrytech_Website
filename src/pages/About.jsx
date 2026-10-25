@@ -3,7 +3,7 @@ import PageHeader from '../components/PageHeader.jsx'
 import Reveal from '../components/Reveal.jsx'
 import usePageMeta from '../hooks/usePageMeta.js'
 import { company } from '../data/company.js'
-import soc from '../assets/images/soc.jpg'
+import soc from '../assets/images/dashboard.jpg'
 
 export default function About() {
   usePageMeta(
@@ -24,7 +24,7 @@ export default function About() {
         <Reveal delay={0.1}>
           <img
             src={soc}
-            alt="Analysts monitoring security dashboards in a security operations center"
+            alt="Cybersecurity monitoring dashboard with infrastructure health and security analytics"
             loading="lazy"
             decoding="async"
             className="aspect-[4/3] w-full rounded-3xl object-cover shadow-xl"
