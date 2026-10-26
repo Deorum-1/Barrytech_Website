@@ -4,7 +4,8 @@ import PageHeader from '../components/PageHeader.jsx'
 import usePageMeta from '../hooks/usePageMeta.js'
 import { services } from '../data/services.js'
 import { company } from '../data/company.js'
-import { sendEmail } from '../lib/emailjs.js'
+import { sendAssessmentRequest } from '../lib/web3forms.js'
+import { sendSelectedServicesEmail } from '../lib/emailjs.js'
 
 const { contact } = company
 
@@ -35,9 +36,6 @@ export default function Assessment() {
     const data = new FormData(form)
     const name = String(data.get('name') ?? '').trim()
     const email = String(data.get('email') ?? '').trim()
-    const phone = String(data.get('phone') ?? '').trim()
-    const organization = String(data.get('organization') ?? '').trim()
-    const message = String(data.get('message') ?? '').trim()
     const honeypot = String(data.get('website') ?? '').trim()
     const chosenServices = services.filter((service) => selectedServices.includes(service.slug))
 
@@ -51,74 +49,50 @@ export default function Assessment() {
       return
     }
 
-    const serviceNames = chosenServices.map((service) => service.title)
-    const serviceGuide = chosenServices.map((service) => [
+    data.delete('service')
+    chosenServices.forEach((service) => data.append('service', service.short))
+
+    const serviceDetails = chosenServices.map((service) => [
       service.title,
       service.tagline,
       service.intro,
       'What we provide:',
-      ...service.offerings.map(([title, description]) => `• ${title}: ${description}`),
+      ...service.offerings.flatMap(([title, description, features = []]) => [
+        `${title}: ${description}`,
+        ...features.map((feature) => `  - ${feature}`),
+      ]),
       `Learn more: ${window.location.origin}/services/${service.slug}`,
     ].join('\n')).join('\n\n')
-    const notificationBody = [
-      'New Call BarryTech service request',
-      '',
-      `Name: ${name}`,
-      `Customer type: ${organizationType === 'organization' ? 'Organization' : 'Individual'}`,
-      ...(organizationType === 'organization' ? [`Organization: ${organization}`] : []),
-      `Phone: ${phone}`,
-      `Email: ${email}`,
-      `Services requested: ${serviceNames.join(', ')}`,
-      ...(message ? ['', 'Additional details:', message] : []),
-    ].join('\n')
-    const customerBody = [
-      `Hello ${name},`,
-      '',
-      'Thanks for contacting BarryTech. Here is information about the services you selected:',
-      '',
-      serviceGuide,
-      '',
-      `For questions or next steps, call ${contact.phone} or reply to this email.`,
-      '',
-      'BarryTech',
-    ].join('\n')
-
     setSending(true)
     setStatus(null)
-    let notificationDelivered = false
+    let requestDelivered = false
 
     try {
-      await sendEmail({
-        recipient: contact.email,
-        recipientName: 'BarryTech team',
-        subject: `Call BarryTech request: ${name}`,
-        body: notificationBody,
-        replyTo: email,
+      await sendAssessmentRequest(data)
+      requestDelivered = true
+      await sendSelectedServicesEmail({
+        name,
+        email,
+        serviceNames: chosenServices.map((service) => service.short),
+        serviceDetails,
+        replyTo: contact,
       })
-      notificationDelivered = true
-
-      // EmailJS allows one send request per second.
-      await new Promise((resolve) => window.setTimeout(resolve, 1100))
-
-      await sendEmail({
-        recipient: email,
-        recipientName: name,
-        subject: 'Your selected BarryTech services',
-        body: customerBody,
-        replyTo: contact.email,
-      })
-
-      setStatus({ type: 'success', message: `Thanks, ${name}. Your request is with BarryTech, and the selected service information has been emailed to you.` })
+      setStatus({ type: 'success', message: 'Thanks for reaching out. Your assessment request has been sent to BarryTech, and information about your selected services has been emailed to you.' })
       form.reset()
       setSelectedServices([])
       setOrganizationType('individual')
     } catch (error) {
       setStatus({
-        type: notificationDelivered ? 'partial' : 'error',
-        message: notificationDelivered
-          ? `BarryTech received your request, but we could not send the service information to ${email}. Please call ${contact.phone} and we will help you.`
+        type: requestDelivered ? 'partial' : 'error',
+        message: requestDelivered
+          ? `BarryTech received your request, but we could not email the service information to ${email}. Please call ${contact.phone} and we will help you.`
           : error.message,
       })
+      if (requestDelivered) {
+        form.reset()
+        setSelectedServices([])
+        setOrganizationType('individual')
+      }
     } finally {
       setSending(false)
     }
@@ -182,6 +156,7 @@ export default function Assessment() {
 
         <form id="assessment-form" onSubmit={submit} aria-labelledby="contact-form-title" className="relative scroll-mt-24 rounded-3xl bg-brand-50 p-6 sm:p-8 lg:col-span-3">
           <input name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="absolute -left-[10000px] h-px w-px overflow-hidden" />
+          <input type="checkbox" name="botcheck" tabIndex={-1} aria-hidden="true" className="hidden" />
           {status?.type === 'success' ? (
             <div className="py-10 text-center" role="status" aria-live="polite">
               <CheckCircle2 className="mx-auto text-brand" size={48} />
@@ -193,7 +168,7 @@ export default function Assessment() {
             <div className="grid gap-5 sm:grid-cols-2">
               <div className="sm:col-span-2">
                 <h2 id="contact-form-title" className="text-2xl font-bold text-ink">Book your free assessment</h2>
-                <p className="mt-2 text-sm text-slate-600">Tell us who you are and choose the services you want to explore. We’ll email the selected service information to you.</p>
+                <p className="mt-2 text-sm text-slate-600">Tell us who you are and choose the services you want to explore. BarryTech will receive your request, and we will email you details about the services you selected.</p>
               </div>
 
               {status && (
@@ -237,12 +212,12 @@ export default function Assessment() {
               <label className="text-sm font-semibold text-ink sm:col-span-2">
                 Email address <span className="text-hot" aria-hidden="true">*</span>
                 <input name="email" type="email" required autoComplete="email" className={field} placeholder="you@example.com" />
-                <span className="mt-1 block text-xs font-normal text-slate-500">We’ll send your selected service information here.</span>
+                  <span className="mt-1 block text-xs font-normal text-slate-500">We will use this address to follow up about your assessment.</span>
               </label>
 
               <fieldset className="sm:col-span-2" aria-describedby="service-selection-help">
                 <legend className="text-sm font-semibold text-ink">Choose service(s) <span className="text-hot" aria-hidden="true">*</span></legend>
-                <p id="service-selection-help" className="mt-1 text-xs text-slate-600">Choose one or more. We’ll send details for each one.</p>
+                <p id="service-selection-help" className="mt-1 text-xs text-slate-600">Choose one or more services you would like to discuss.</p>
                 <label className="mt-3 flex cursor-pointer items-center gap-3 rounded-xl border border-brand-200 bg-white px-4 py-3 text-sm font-semibold text-ink">
                   <input
                     type="checkbox"
@@ -275,10 +250,10 @@ export default function Assessment() {
 
               <div className="sm:col-span-2">
                 <button type="submit" disabled={sending} className="btn btn-red w-full justify-center disabled:cursor-wait disabled:opacity-70">
-                  <Send size={16} /> {sending ? 'Sending your request…' : 'Send me service information'}
+                  <Send size={16} /> {sending ? 'Sending your request…' : 'Book my free assessment'}
                 </button>
                 <p className="mt-3 text-center text-xs text-slate-500">
-                  EmailJS delivers your request to BarryTech and sends the selected service information to you. This site does not store submissions.
+                  Web3Forms sends your request to BarryTech. EmailJS emails the selected service information to you.
                 </p>
               </div>
             </div>

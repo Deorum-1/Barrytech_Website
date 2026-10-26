@@ -6,12 +6,9 @@ const emailConfig = {
   publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
 }
 
-export const isEmailDeliveryConfigured = () =>
-  Object.values(emailConfig).every(Boolean)
-
-export async function sendEmail({ recipient, recipientName, subject, body, replyTo }) {
-  if (!isEmailDeliveryConfigured()) {
-    throw new Error('Email delivery is not configured yet. Please contact BarryTech by phone.')
+export async function sendSelectedServicesEmail({ name, email, serviceNames, serviceDetails, replyTo }) {
+  if (!Object.values(emailConfig).every(Boolean)) {
+    throw new Error('The service information email is not configured yet.')
   }
 
   const response = await fetch(EMAILJS_SEND_URL, {
@@ -22,16 +19,16 @@ export async function sendEmail({ recipient, recipientName, subject, body, reply
       template_id: emailConfig.templateId,
       user_id: emailConfig.publicKey,
       template_params: {
-        to_email: recipient,
-        to_name: recipientName,
-        email_subject: subject,
-        email_body: body,
-        reply_to: replyTo,
+        to_email: email,
+        to_name: name,
+        email_subject: `Your BarryTech assessment: ${serviceNames.join(', ')}`,
+        email_body: serviceDetails,
+        reply_to: replyTo.email,
       },
     }),
   })
 
   if (!response.ok) {
-    throw new Error('We could not send the email. Please try again or contact BarryTech by phone.')
+    throw new Error('We received your assessment request, but could not email the service information.')
   }
 }
