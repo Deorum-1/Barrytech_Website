@@ -16,7 +16,7 @@ import networkSupport from '../assets/images/network-support.jpg'
 import webProducts from '../assets/images/dashboard.png'
 import projectDelivery from '../assets/images/product.jpg'
 import physicalSecurity from '../assets/images/physical.jpg'
-const aiSolutionsImage = 'https://www.openskykft.com/ai-neural-net.jpg'
+import aiSolutionsImage from '../assets/images/offerings/ai-integration.jpg'
 
 // The five key areas that enable digital success (our promise section)
 const keyAreas = [
