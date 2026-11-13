@@ -11,6 +11,8 @@ npm run build    # production build in dist/
 - Content lives in `src/data/` (company.js, services.js), so copy changes need no component edits.
 - Contact details, WhatsApp number, and map link live in `company.contact` and are used by the navbar, contact page, footer, and structured data.
 - Brand colors (from the logo) are defined in `tailwind.config.js` (`brand`, `hot`, `ink`).
+- Theme mode follows the system setting on first visit, can be changed with the sun/moon button in the navigation, and saves explicit choices in `localStorage`.
+- To test both themes, run `npm run dev`, use the navigation theme button, and reload to confirm the selection persists. Clear the `barrytech-theme` local storage key to test the system-preference first-visit behavior.
 - Page titles/descriptions are set per route with `src/hooks/usePageMeta.js`. Update the placeholder social preview at `public/og-image.png` when branding changes.
 - The free assessment form is submitted through Web3Forms to the inbox associated with its access key.
 

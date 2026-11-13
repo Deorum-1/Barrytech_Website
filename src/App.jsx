@@ -11,6 +11,7 @@ import ServiceDetail from './pages/ServiceDetail.jsx'
 import Contact from './pages/Contact.jsx'
 import Assessment from './pages/Assessment.jsx'
 import NotFound from './pages/NotFound.jsx'
+import ThemeProvider from './components/ThemeProvider.jsx'
 
 function ScrollToTop() {
   const { pathname, hash } = useLocation()
@@ -40,31 +41,33 @@ function ScrollToTop() {
 
 export default function App() {
   return (
-    <MotionConfig reducedMotion="user">
-      <ScrollToTop />
-      <a href="#main" className="skip-link">Skip to content</a>
-      <Navbar />
-      <main id="main" tabIndex={-1} className="outline-none">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/services" element={<Services />} />
-          <Route path="/services/:slug" element={<ServiceDetail />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/assessment" element={<Assessment />} />
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </main>
-      <Footer />
-      <Link
-        to="/assessment#assessment-form"
-        aria-label="Book your free assessment"
-        className="fixed bottom-4 right-3 z-40 inline-flex items-center gap-2 rounded-full bg-hot px-3 py-2.5 text-xs font-bold text-white shadow-lg shadow-ink/20 transition hover:-translate-y-0.5 hover:bg-hot-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-hot focus-visible:ring-offset-2 sm:bottom-6 sm:right-6 sm:px-5 sm:py-3 sm:text-sm"
-      >
-        <Send size={16} aria-hidden="true" />
-        <span className="sm:hidden">Free assessment</span>
-        <span className="hidden sm:inline">Book your free assessment</span>
-      </Link>
-    </MotionConfig>
+    <ThemeProvider>
+      <MotionConfig reducedMotion="user">
+        <ScrollToTop />
+        <a href="#main" className="skip-link dark:bg-slate-800 dark:text-white">Skip to content</a>
+        <Navbar />
+        <main id="main" tabIndex={-1} className="outline-none">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/services" element={<Services />} />
+            <Route path="/services/:slug" element={<ServiceDetail />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/assessment" element={<Assessment />} />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </main>
+        <Footer />
+        <Link
+          to="/assessment#assessment-form"
+          aria-label="Book your free assessment"
+          className="fixed bottom-4 right-3 z-40 inline-flex items-center gap-2 rounded-full bg-hot px-3 py-2.5 text-xs font-bold text-white shadow-lg shadow-ink/20 transition hover:-translate-y-0.5 hover:bg-hot-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-hot focus-visible:ring-offset-2 sm:bottom-6 sm:right-6 sm:px-5 sm:py-3 sm:text-sm"
+        >
+          <Send size={16} aria-hidden="true" />
+          <span className="sm:hidden">Free assessment</span>
+          <span className="hidden sm:inline">Book your free assessment</span>
+        </Link>
+      </MotionConfig>
+    </ThemeProvider>
   )
 }

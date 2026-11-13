@@ -135,11 +135,11 @@ export default function GoalMarquee({ goals }) {
             {[1, 2, 3].map((n) => <CardSet key={n} cards={cards} clone />)}
           </div>
           <span
-            className="pointer-events-none absolute inset-y-0 left-0 hidden w-20 bg-gradient-to-r from-brand-50 via-brand-50/80 to-transparent md:block"
+            className="goal-marquee-fade-left pointer-events-none absolute inset-y-0 left-0 hidden w-20 md:block"
             aria-hidden="true"
           />
           <span
-            className="pointer-events-none absolute inset-y-0 right-0 hidden w-20 bg-gradient-to-l from-brand-50 via-brand-50/80 to-transparent md:block"
+            className="goal-marquee-fade-right pointer-events-none absolute inset-y-0 right-0 hidden w-20 md:block"
             aria-hidden="true"
           />
         </div>

@@ -123,9 +123,13 @@ export default function Home() {
                     <Icon name={s.icon} size={26} />
                   </span>
                   <h3 className="text-xl font-bold leading-tight">{s.short}</h3>
+                  <p className="text-sm leading-relaxed text-slate-600 md:hidden">{s.tagline}</p>
+                  <span className="inline-flex items-center gap-2 text-sm font-semibold text-hot-600 md:hidden">
+                    Explore service <ArrowRight size={16} aria-hidden="true" />
+                  </span>
                 </div>
                 {/* back — what the service covers */}
-                <div className="flip-face flip-face-back relative flex flex-col bg-ink p-7 text-white md:absolute md:inset-0">
+                <div className="flip-face flip-face-back relative hidden flex-col bg-ink p-7 text-white md:absolute md:inset-0 md:flex">
                   <p className="text-xs font-bold uppercase tracking-[0.16em] text-hot-400">{s.short}</p>
                   <p className="mt-3 line-clamp-3 text-sm text-slate-300">{s.tagline}</p>
                   <span className="mt-auto inline-flex items-center gap-2 pt-6 text-sm font-semibold text-hot-400">

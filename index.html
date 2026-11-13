@@ -8,6 +8,24 @@
     <meta name="theme-color" content="#071b30" />
     <meta name="description" content="BarryTech: Secure Digital Innovations. IT infrastructure, cybersecurity, managed IT, physical security, software and AI solutions." />
     <title>BarryTech | Secure Digital Innovations</title>
+    <script>
+      (() => {
+        let theme;
+        try {
+          theme = localStorage.getItem('barrytech-theme');
+        } catch (error) {
+          console.error('Unable to read the saved theme preference.', error);
+        }
+        if (theme !== 'light' && theme !== 'dark') {
+          theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        const root = document.documentElement;
+        root.classList.toggle('dark', theme === 'dark');
+        root.style.colorScheme = theme;
+        document.querySelector('meta[name="theme-color"]').content =
+          theme === 'dark' ? '#071b30' : '#ffffff';
+      })();
+    </script>
 
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="BarryTech" />

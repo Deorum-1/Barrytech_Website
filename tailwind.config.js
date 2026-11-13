@@ -1,6 +1,7 @@
 /** Brand colors sampled from the BarryTech logo */
 export default {
   content: ['./index.html', './src/**/*.{js,jsx}'],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {

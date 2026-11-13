@@ -1,12 +1,13 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
-import { ArrowRight, ArrowUpRight, ChevronDown, ChevronRight, Mail, Menu, X } from 'lucide-react'
+import { ArrowRight, ArrowUpRight, ChevronDown, ChevronRight, Mail, Menu, Moon, Sun, X } from 'lucide-react'
 import logo from '../assets/logo.png'
 import logoOnLight from '../assets/logo-on-light.png'
 import Icon from './Icon.jsx'
 import { services } from '../data/services.js'
 import { company } from '../data/company.js'
+import { useTheme } from './ThemeProvider.jsx'
 
 const navLinks = [
   { to: '/', label: 'Home', end: true },
@@ -45,6 +46,8 @@ export default function Navbar() {
   const [light, setLight] = useState(false)
   const headerRef = useRef(null)
   const { pathname } = useLocation()
+  const { theme, toggleTheme } = useTheme()
+  const isDark = theme === 'dark'
   const reduce = useReducedMotion()
   const close = () => { setOpen(false); setServicesOpen(false) }
 
@@ -52,7 +55,7 @@ export default function Navbar() {
 
   useLayoutEffect(() => {
     const trigger = document.querySelector('[data-nav-switch]')
-    if (!trigger) {
+    if (!trigger || isDark) {
       setLight(false)
       return
     }
@@ -77,7 +80,7 @@ export default function Navbar() {
       window.removeEventListener('scroll', schedule)
       window.removeEventListener('resize', schedule)
     }
-  }, [pathname])
+  }, [pathname, isDark])
 
   useEffect(() => {
     if (!open) return
@@ -268,6 +271,23 @@ export default function Navbar() {
                 aria-hidden="true"
               />
             </Link>
+
+            <button
+              type="button"
+              onClick={toggleTheme}
+              aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+              aria-pressed={isDark}
+              title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+              className={`grid h-10 w-10 place-items-center rounded-full border transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-hot focus-visible:ring-offset-2 ${
+                light
+                  ? 'border-brand-200 text-brand-800 hover:border-brand-300 hover:bg-brand-50 focus-visible:ring-offset-white'
+                  : 'border-white/15 text-slate-200 hover:border-white/25 hover:bg-white/10 hover:text-white focus-visible:ring-offset-brand-800'
+              }`}
+            >
+              {isDark
+                ? <Sun size={18} aria-hidden="true" />
+                : <Moon size={18} aria-hidden="true" />}
+            </button>
 
             <button
               type="button"
