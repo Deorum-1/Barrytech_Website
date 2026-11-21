@@ -19,15 +19,6 @@ import { sendSelectedServicesEmail } from "../lib/emailjs.js";
 
 const { contact } = company;
 
-const escapeHtml = (value) =>
-  String(value).replace(/[&<>"']/g, (character) => ({
-    "&": "&amp;",
-    "<": "&lt;",
-    ">": "&gt;",
-    '"': "&quot;",
-    "'": "&#39;",
-  })[character]);
-
 export default function Assessment() {
   usePageMeta(
     "Book Your Free Assessment",
@@ -85,39 +76,25 @@ export default function Assessment() {
 
     const serviceDetails = chosenServices
       .map((service) => {
-        const offerings = service.offerings
-          .map(
-            ([title, description, features = []]) => `
-              <li style="margin: 0 0 14px;">
-                <strong>${escapeHtml(title)}:</strong> ${escapeHtml(description)}
-                ${
-                  features.length
-                    ? `<ul style="margin: 6px 0 0; padding-left: 20px;">${features
-                        .map(
-                          (feature) =>
-                            `<li style="margin: 0 0 4px;">${escapeHtml(feature)}</li>`,
-                        )
-                        .join("")}</ul>`
-                    : ""
-                }
-              </li>`,
-          )
-          .join("");
-        const serviceUrl = `${window.location.origin}/services/${service.slug}`;
-
-        return `
-          <div style="margin: 0 0 28px; padding: 20px; border: 1px solid #dbe3ee; border-radius: 12px;">
-            <h2 style="margin: 0 0 12px; padding: 12px 16px; border-left: 5px solid #e11d48; background: #f1f5f9; color: #172554; font-size: 20px; font-weight: 700;">
-              ${escapeHtml(service.title)}
-            </h2>
-            <p style="margin: 0 0 8px; color: #334155;"><strong>${escapeHtml(service.tagline)}</strong></p>
-            <p style="margin: 0 0 16px; color: #475569; line-height: 1.6;">${escapeHtml(service.intro)}</p>
-            <h3 style="margin: 0 0 10px; color: #172554; font-size: 16px;">What we provide</h3>
-            <ul style="margin: 0 0 16px; padding-left: 20px; color: #475569; line-height: 1.5;">${offerings}</ul>
-            <p style="margin: 0;"><a href="${escapeHtml(serviceUrl)}" style="color: #1d4ed8; font-weight: 600;">Learn more about ${escapeHtml(service.title)}</a></p>
-          </div>`;
+        const heading = service.title.toUpperCase();
+        return [
+          heading,
+          "=".repeat(Math.min(heading.length, 60)),
+          service.tagline,
+          service.intro,
+          "",
+          "WHAT WE PROVIDE",
+          ...service.offerings.flatMap(
+            ([title, description, features = []]) => [
+              `- ${title}: ${description}`,
+              ...features.map((feature) => `  - ${feature}`),
+            ],
+          ),
+          "",
+          `Learn more: ${window.location.origin}/services/${service.slug}`,
+        ].join("\n");
       })
-      .join("");
+      .join("\n\n----------------------------------------\n\n");
     setSending(true);
     setStatus(null);
 
@@ -141,7 +118,7 @@ export default function Assessment() {
         setStatus({
           type: "success",
           message:
-            "Web3Forms accepted your request for BarryTech, and EmailJS accepted the detailed service email for you.",
+            "Thanks for your request. Your selected service details have been emailed to you, and the BarryTech team will follow up soon.",
         });
         form.reset();
         setSelectedServices([]);

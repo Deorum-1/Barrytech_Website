@@ -18,7 +18,7 @@ npm run build    # production build in dist/
 
 ## Assessment form setup
 
-Create a Web3Forms access key for the `info@sai.com.ng` inbox. In EmailJS, set the template's **To Email** field to `{{to_email}}` so service details go to the visitor. Use `to_name`, `email_subject`, and `reply_to` in the template. Set the email body to HTML and insert `{{{email_body}}}` (triple braces) so the formatted service headings render bold and distinct. Then add these values to `.env.local`:
+Create a Web3Forms access key for the `info@sai.com.ng` inbox. In EmailJS, set the template's **To Email** field to `{{to_email}}` so service details go to the visitor. Use `to_name`, `email_subject`, `email_body`, and `reply_to` in the template, inserting `{{email_body}}` (double braces) into a plain-text email body. The service details are formatted as readable text, not HTML, so recipients won't see markup. Then add these values to `.env.local`:
 
 ```env
 VITE_WEB3FORMS_ACCESS_KEY=your_access_key
