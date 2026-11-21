@@ -3,7 +3,7 @@ const accessKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY
 
 export async function sendAssessmentRequest(formData) {
   if (!accessKey) {
-    throw new Error('Assessment requests are not configured yet. Please contact BarryTech by phone.')
+    throw new Error('Web3Forms is not configured. Add VITE_WEB3FORMS_ACCESS_KEY to the deployment environment; its access key must belong to the inbox that should receive assessment requests.')
   }
 
   const payload = new FormData()
@@ -17,10 +17,10 @@ export async function sendAssessmentRequest(formData) {
   try {
     result = await response.json()
   } catch {
-    throw new Error('We could not send your request. Please try again or contact BarryTech by phone.')
+    throw new Error(`Web3Forms returned an unreadable response (HTTP ${response.status}).`)
   }
 
   if (!response.ok || !result.success) {
-    throw new Error(result.message || 'We could not send your request. Please try again or contact BarryTech by phone.')
+    throw new Error(result.message || `Web3Forms could not send the assessment request (HTTP ${response.status}).`)
   }
 }
