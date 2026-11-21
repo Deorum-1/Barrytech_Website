@@ -15,10 +15,7 @@ import usePageMeta from "../hooks/usePageMeta.js";
 import { services } from "../data/services.js";
 import { company } from "../data/company.js";
 import { sendAssessmentRequest } from "../lib/web3forms.js";
-import {
-  sendAssessmentNotificationEmail,
-  sendSelectedServicesEmail,
-} from "../lib/emailjs.js";
+import { sendSelectedServicesEmail } from "../lib/emailjs.js";
 
 const { contact } = company;
 
@@ -99,7 +96,7 @@ export default function Assessment() {
 
     try {
       const serviceNames = chosenServices.map((service) => service.short);
-      const [web3FormsRequest, visitorEmail, ownerEmail] = await Promise.allSettled([
+      const [ownerRequest, visitorEmail] = await Promise.allSettled([
         sendAssessmentRequest(data),
         sendSelectedServicesEmail({
           name,
@@ -108,50 +105,28 @@ export default function Assessment() {
           serviceDetails,
           replyTo: contact,
         }),
-        sendAssessmentNotificationEmail({
-          name,
-          email,
-          phone: String(data.get("phone") ?? "").trim(),
-          customerType: String(data.get("customer_type") ?? ""),
-          organization: String(data.get("organization") ?? "").trim(),
-          message: String(data.get("message") ?? "").trim(),
-          serviceNames,
-          serviceDetails,
-          toEmail: contact.email,
-        }),
       ]);
 
-      const ownerDelivered = ownerEmail.status === "fulfilled";
+      const ownerDelivered = ownerRequest.status === "fulfilled";
       const visitorDelivered = visitorEmail.status === "fulfilled";
-      const allProvidersAccepted =
-        web3FormsRequest.status === "fulfilled" &&
-        visitorEmail.status === "fulfilled" &&
-        ownerEmail.status === "fulfilled";
 
       if (ownerDelivered && visitorDelivered) {
         setStatus({
-          type: allProvidersAccepted ? "success" : "partial",
-          message: [
-            "EmailJS accepted the visitor email and BarryTech notification.",
-            web3FormsRequest.status === "fulfilled"
-              ? "Web3Forms also accepted the assessment request."
-              : `Web3Forms failed: ${web3FormsRequest.reason.message}`,
-          ].join(" "),
+          type: "success",
+          message:
+            "Web3Forms accepted your request for BarryTech, and EmailJS accepted the detailed service email for you.",
         });
         form.reset();
         setSelectedServices([]);
         setOrganizationType("individual");
       } else {
         const deliveries = [
-          web3FormsRequest.status === "fulfilled"
-            ? "Web3Forms accepted the assessment request."
-            : `Web3Forms failed: ${web3FormsRequest.reason.message}`,
+          ownerRequest.status === "fulfilled"
+            ? "Web3Forms accepted the request for BarryTech."
+            : `Web3Forms failed: ${ownerRequest.reason.message}`,
           visitorEmail.status === "fulfilled"
             ? "EmailJS accepted the visitor email."
             : `The visitor email failed: ${visitorEmail.reason.message}`,
-          ownerEmail.status === "fulfilled"
-            ? "EmailJS accepted the BarryTech notification."
-            : `The BarryTech notification failed: ${ownerEmail.reason.message}`,
         ].filter(Boolean);
         const failureCount = Number(!ownerDelivered) + Number(!visitorDelivered);
         setStatus({
