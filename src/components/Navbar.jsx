@@ -3,7 +3,7 @@ import { Link, NavLink, useLocation } from 'react-router-dom'
 import { AnimatePresence, motion, useReducedMotion } from 'framer-motion'
 import { ArrowRight, ArrowUpRight, ChevronDown, ChevronRight, Mail, Menu, Moon, Sun, X } from 'lucide-react'
 import logo from '../assets/logo.png'
-import logoOnLight from '../assets/logo-on-light.png'
+import logoOnDark from '../assets/logo-on-dark.png'
 import Icon from './Icon.jsx'
 import { services } from '../data/services.js'
 import { company } from '../data/company.js'
@@ -124,11 +124,11 @@ export default function Navbar() {
             >
               <span>
                 <img
-                  src={light ? logoOnLight : logo}
+                  src={light ? logo : logoOnDark}
                   alt="BarryTech — Secure Digital Innovations"
-                  width="931"
-                  height="268"
-                  className="h-9 w-auto transition-transform duration-500 group-hover:scale-[1.02] sm:h-10"
+                  width="3011"
+                  height="1363"
+                  className="h-12 w-auto transition-transform duration-500 group-hover:scale-[1.02] sm:h-14"
                 />
               </span>
             </Link>

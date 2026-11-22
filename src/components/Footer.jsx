@@ -2,7 +2,7 @@ import { Link, useLocation } from 'react-router-dom'
 import { ArrowRight, ArrowUp, Mail, MapPin, MessageCircle, Phone } from 'lucide-react'
 import { services } from '../data/services.js'
 import { company } from '../data/company.js'
-import logo from '../assets/logo.png'
+import logoOnDark from '../assets/logo-on-dark.png'
 
 const { contact } = company
 
@@ -38,7 +38,7 @@ export default function Footer() {
 
       <div className="container-x grid gap-8 py-12 sm:grid-cols-2 sm:gap-10 sm:py-14 lg:grid-cols-4">
         <div>
-          <span ><img src={logo} alt="BarryTech" width="931" height="268" className="h-10 w-auto" /></span>
+          <img src={logoOnDark} alt="BarryTech" width="3011" height="1363" className="h-12 w-auto" />
           <p className="mt-5 max-w-xs text-sm leading-relaxed">{company.slogan}</p>
           <a
             href={`https://wa.me/${contact.whatsapp}`}
