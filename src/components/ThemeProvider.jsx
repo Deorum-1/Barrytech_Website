@@ -9,9 +9,18 @@ export function useTheme() {
 }
 
 export default function ThemeProvider({ children }) {
-  const [theme, setTheme] = useState(() => (
-    document.documentElement.classList.contains('dark') ? 'dark' : 'light'
-  ))
+  const [theme, setTheme] = useState(() => {
+    try {
+      const savedTheme = window.localStorage.getItem('barrytech-theme')
+      if (savedTheme === 'light' || savedTheme === 'dark') {
+        return savedTheme
+      }
+    } catch (error) {
+      console.error('Unable to read the saved theme preference.', error)
+    }
+
+    return 'dark'
+  })
 
   useEffect(() => {
     const root = document.documentElement
