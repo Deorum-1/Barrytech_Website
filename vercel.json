@@ -6,9 +6,25 @@
       "permanent": false
     },
     {
+      "source": "/webmail/",
+      "destination": "https://da36.host-ww.net/roundcube/",
+      "permanent": false
+    },
+    {
       "source": "/roundcube",
       "destination": "https://da36.host-ww.net/roundcube/",
       "permanent": false
+    },
+    {
+      "source": "/roundcube/",
+      "destination": "https://da36.host-ww.net/roundcube/",
+      "permanent": false
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
