@@ -20,6 +20,8 @@ npm run build    # production build in dist/
 
 Create a Web3Forms access key for the `info@sai.com.ng` inbox. In EmailJS, set the template's **To Email** field to `{{to_email}}` so service details go to the visitor. Use `to_name`, `email_subject`, `email_body`, and `reply_to` in the template, inserting `{{email_body}}` (double braces) into a plain-text email body. The service details are formatted as readable text, not HTML, so recipients won't see markup. Then add these values to `.env.local`:
 
+Configure the EmailJS template with `from_name` = `{{from_name}}`, `from_email` = `{{from_email}}`, and `reply_to` = `{{reply_to}}`. Set the template subject to `{{email_subject}}`. A plain-text body and an authenticated EmailJS sending service also reduce false spam classification. If the inbox domain is hosted outside EmailJS, add the provider's SPF and DKIM records and configure DMARC for the domain; this DNS setup may require access to the domain registrar or mail administrator.
+
 ```env
 VITE_WEB3FORMS_ACCESS_KEY=your_access_key
 VITE_EMAILJS_SERVICE_ID=your_service_id

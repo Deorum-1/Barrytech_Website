@@ -14,14 +14,16 @@ export async function sendSelectedServicesEmail({ name, email, serviceNames, ser
   return sendEmail({
     toEmail: email,
     toName: name,
-    subject: `Your BarryTech assessment: ${serviceNames.join(', ')}`,
+    subject: `BarryTech service information: ${serviceNames.join(', ')}`,
     body: serviceDetails,
     replyTo: replyTo?.email,
     purpose: 'selected service details',
+    senderName: replyTo?.name || 'BarryTech',
+    senderEmail: replyTo?.email,
   })
 }
 
-async function sendEmail({ toEmail, toName, subject, body, replyTo, purpose }) {
+async function sendEmail({ toEmail, toName, subject, body, replyTo, purpose, senderName, senderEmail }) {
   const response = await fetch(EMAILJS_SEND_URL, {
     method: 'POST',
     headers: {
@@ -35,6 +37,8 @@ async function sendEmail({ toEmail, toName, subject, body, replyTo, purpose }) {
       template_params: {
         to_email: toEmail,
         to_name: toName,
+        from_name: senderName,
+        from_email: senderEmail,
         email_subject: subject,
         email_body: body,
         reply_to: replyTo,

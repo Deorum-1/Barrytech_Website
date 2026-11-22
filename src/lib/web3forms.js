@@ -8,9 +8,25 @@ export async function sendAssessmentRequest(formData) {
 
   const payload = new FormData()
   for (const [name, value] of formData.entries()) payload.append(name, value)
+
+  const name = String(formData.get('name') ?? '').trim()
+  const email = String(formData.get('email') ?? '').trim()
+  const customerType = String(formData.get('customer_type') ?? 'individual').trim()
+  const organization = String(formData.get('organization') ?? '').trim()
+
   payload.set('access_key', accessKey)
-  payload.set('subject', 'New BarryTech free assessment request')
-  payload.set('from_name', 'BarryTech Website')
+  payload.set(
+    'subject',
+    organization
+      ? `Assessment request - ${organization} (${name})`
+      : `Assessment request - ${name || 'Individual'}`,
+  )
+  payload.set('from_name', name || 'BarryTech website visitor')
+  payload.set('replyto', email)
+  payload.set('reply_to', email)
+  payload.set('sender_name', name || 'BarryTech website visitor')
+  payload.set('sender_email', email)
+  payload.set('customer_type', customerType)
 
   const response = await fetch(WEB3FORMS_SUBMIT_URL, { method: 'POST', body: payload })
   let result
