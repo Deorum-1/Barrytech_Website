@@ -2,22 +2,13 @@
   "redirects": [
     {
       "source": "/webmail",
-      "destination": "/roundcube/",
+      "destination": "https://da36.host-ww.net/roundcube/",
       "permanent": false
-    }
-  ],
-  "rewrites": [
+    },
     {
       "source": "/roundcube",
-      "destination": "https://da36.host-ww.net/roundcube/"
-    },
-    {
-      "source": "/roundcube/:path*",
-      "destination": "https://da36.host-ww.net/roundcube/:path*"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
+      "destination": "https://da36.host-ww.net/roundcube/",
+      "permanent": false
     }
   ]
 }
